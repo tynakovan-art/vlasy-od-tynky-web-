@@ -131,9 +131,8 @@ export default function Site() {
             <a href="#kontakt" className="hover:opacity-70">Kontakt</a>
             <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border rounded-xl px-3 py-1.5 bg-white/70 backdrop-blur"><Instagram className="h-4 w-4" /> IG</a>
             <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border rounded-xl px-3 py-1.5 bg-white/70 backdrop-blur"><Facebook className="h-4 w-4" /> FB</a>
-  <a href="#o-mne" className="hover:opacity-70">O&nbsp;mně</a>
-  
-</nav>        
+            <a href="#o-mne" className="hover:opacity-70">O&nbsp;mně</a>
+         </nav>        
         </div>
       </header>
 
