@@ -131,7 +131,9 @@ export default function Site() {
             <a href="#kontakt" className="hover:opacity-70">Kontakt</a>
             <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border rounded-xl px-3 py-1.5 bg-white/70 backdrop-blur"><Instagram className="h-4 w-4" /> IG</a>
             <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border rounded-xl px-3 py-1.5 bg-white/70 backdrop-blur"><Facebook className="h-4 w-4" /> FB</a>
-          </nav>
+  <a href="#o-mne" className="hover:opacity-70">O&nbsp;mně</a>
+  
+</nav>        
         </div>
       </header>
 
@@ -180,7 +182,33 @@ export default function Site() {
           </div>
         </div>
       </section>
-
+      
+{/* O mně */}
+<section id="o-mne" className="relative z-10">
+  <div className="mx-auto max-w-6xl px-6 py-12 md:py-16 grid md:grid-cols-3 gap-8 items-center">
+    <div className="md:col-span-2">
+      <h2 className="text-2xl md:text-3xl font-semibold">O mně</h2>
+      <p className="mt-4 text-slate-700 leading-relaxed">
+        Jmenuji se <strong>Kristýna Hálová Vávrová</strong>, jsem maminka malého chlapečka a věnuji se práci, která mě baví. 
+        Vlasy jsou pro mě vášní a mým cílem je, aby každý zákazník odcházel spokojený a s účesem, který mu opravdu sedí.
+        Nabízím dámské, pánské i dětské kadeřnické služby a vždy kladu důraz na individuální přístup a příjemnou atmosféru.
+      </p>
+    </div>
+    <div className="md:justify-self-end">
+      <div className="rounded-[1.5rem] border bg-white/70 backdrop-blur p-6 shadow-md text-center">
+        <div className="text-sm text-slate-600">Objednávky přes sítě nebo telefon</div>
+        <a
+          href={`tel:${PHONE_RAW}`}
+          className="mt-3 inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
+          style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+        >
+          📞 Zavolat {PHONE_DISPLAY}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+      
       {/* Ceník */}
       <section id="cenik" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16">
@@ -231,11 +259,11 @@ export default function Site() {
               <div className="font-medium">Doplňkové služby</div>
               <ul className="mt-3 text-sm text-slate-700 space-y-4">
                 <li>
-                  <div className="flex justify-between"><span>B.Pur hloubkové čištění</span><span>230 Kč</span></div>
+                  <div className="flex justify-between"><span>B.Pur hloubkové čištění</span><span>+230 Kč</span></div>
                   <div className="text-xs text-slate-500">Detox vlasů a pokožky, ideální jako doplněk ke střihu.</div>
                 </li>
                 <li>
-                  <div className="flex justify-between"><span>Ki-Power Veg rekonstrukce</span><span>260 Kč</span></div>
+                  <div className="flex justify-between"><span>Ki-Power Veg rekonstrukce</span><span>+260 Kč</span></div>
                   <div className="text-xs text-slate-500">Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů.</div>
                 </li>
               </ul>
