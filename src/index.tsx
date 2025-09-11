@@ -459,7 +459,7 @@ export default function Site() {
               name: "Vlasy od Týnky",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "Zalužánská 1272",
+                streetAddress: "Zalužanská 1272",
                 addressLocality: "Mladá Boleslav",
                 addressCountry: "CZ",
               },
