@@ -274,3 +274,117 @@ export default function Site() {
     </>
   );
 }
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
+
+function SmartImage({
+  srcs,
+  alt,
+  className,
+  fallback,
+}: {
+  srcs: string[];
+  alt: string;
+  className?: string;
+  fallback: JSX.Element;
+}) {
+  const [i, setI] = useState(0);
+  if (i < srcs.length) {
+    return (
+      <img
+        src={srcs[i]}
+        alt={alt}
+        className={className}
+        onError={() => setI((v) => v + 1)}
+      />
+    );
+  }
+  return fallback;
+}
+
+export default function Site() {
+  const LOGO_MAIN = ["/logo-siluety.png"];
+  const LOGO_TEXT = ["/logo-text.png"];
+  const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
+  const FB_URL = "https://www.facebook.com/vlasyodtynky/";
+  const MAP_URL =
+    "https://www.google.com/maps/search/?api=1&query=Zalužánská+1272,+Mladá+Boleslav";
+  const PHONE_RAW = "725882820";
+  const PHONE_DISPLAY = "725 882 820";
+
+  useEffect(() => {
+    document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white text-slate-800">
+      {/* Kontakt */}
+      <section id="kontakt" className="relative z-10">
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <h2 className="text-2xl md:text-3xl font-semibold">Kontakt</h2>
+          <div className="mt-4 flex flex-col gap-3 text-slate-700">
+            <div className="flex items-start gap-3">
+              <MapPin className="h-5 w-5 mt-0.5" />
+              <div>
+                <a
+                  href={MAP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium hover:underline"
+                >
+                  Zalužánská 1272
+                </a>
+                <div>Mladá Boleslav</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Clock className="h-5 w-5 mt-0.5" />
+              <div>
+                <div className="font-medium">Otevírací doba</div>
+                <div className="text-sm">Pondělí — 9:00–16:00</div>
+                <div className="text-sm">Středa — 9:00–16:00</div>
+                <div className="text-sm">Pátek — 9:00–16:00</div>
+                <div className="text-sm">Ostatní dny a pozdější časy po domluvě</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Phone className="h-5 w-5 mt-0.5" />
+              <div>
+                <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">
+                  {PHONE_DISPLAY}
+                </a>
+                <div className="text-xs text-slate-500">Volejte nebo napište zprávu.</div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href={IG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
+            >
+              <Instagram className="h-4 w-4" /> Instagram
+            </a>
+            <a
+              href={FB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
+            >
+              <Facebook className="h-4 w-4" /> Facebook
+            </a>
+            <a
+              href={`tel:${PHONE_RAW}`}
+              className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
+              style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+            >
+              <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
