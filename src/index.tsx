@@ -155,8 +155,7 @@ export default function Site() {
               </span>
             </motion.h1>
             <p className="mt-5 text-slate-600 md:text-lg max-w-prose">
-              Jsem Týnka – kadeřnice s jemným, pečlivým přístupem. Stříhám dámské, pánské i dětské vlasy, barvím,
-              melíruji a tvořím účesy, ve kterých se budete cítit sebevědomě a přirozeně.
+              Precizní střihy, barvení i melír v příjemné atmosféře. Objednejte se a dopřejte vlasům péči, kterou si zaslouží.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <a
@@ -224,16 +223,45 @@ export default function Site() {
         </div>
       </section>
 
+      {/* Promo – říjnové akce */}
+      <section aria-label="Říjnové akce" className="relative z-10">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="rounded-2xl border bg-white/70 backdrop-blur p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3" style={{boxShadow:'0 6px 24px rgba(0,0,0,0.06)'}}>
+            <div className="text-slate-800">
+              <span className="text-sm md:text-base font-medium">Říjnové akce ✨</span>
+              <div className="text-xs md:text-sm text-slate-600">V říjnu připravuji slevy na vybrané služby. Sledujte Instagram/Facebook, detaily brzy zveřejním.</div>
+            </div>
+            <div className="flex gap-2">
+              <a href="#cenik" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">Mrknout na ceník</a>
+              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>Sledovat novinky</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* O mně */}
       <section id="o-mne" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16 grid md:grid-cols-3 gap-8 items-center">
           <div className="md:col-span-2">
             <h2 className="text-2xl md:text-3xl font-semibold">O mně</h2>
             <p className="mt-4 text-slate-700 leading-relaxed">
-              Jmenuji se <strong>Kristýna Hálová Vávrová</strong>, jsem maminka malého chlapečka a věnuji se práci, která mě baví.
-              Vlasy jsou pro mě vášní a mým cílem je, aby každý zákazník odcházel spokojený a s účesem, který mu opravdu sedí.
-              Nabízím dámské, pánské i dětské kadeřnické služby a vždy kladu důraz na individuální přístup a příjemnou atmosféru.
+              Jmenuji se <strong>Kristýna Hálová Vávrová</strong>. Vlasy jsou pro mě vášní a mým cílem je, aby každý zákazník odcházel spokojený a s účesem, který mu opravdu sedí. Nabízím dámské, pánské i dětské kadeřnické služby a vždy kladu důraz na individuální přístup a příjemnou atmosféru.
             </p>
+          </div>
+          <div className="md:justify-self-end">
+            <div className="rounded-[1.5rem] border bg-white/70 backdrop-blur p-6 shadow-md text-center">
+              <div className="text-sm text-slate-600">Objednávky přes sítě nebo telefon</div>
+              <a
+                href={`tel:${PHONE_RAW}`}
+                className="mt-3 inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
+                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+              >
+                📞 Zavolat {PHONE_DISPLAY}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
           </div>
           <div className="md:justify-self-end">
             <div className="rounded-[1.5rem] border bg-white/70 backdrop-blur p-6 shadow-md text-center">
