@@ -5,6 +5,7 @@ import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-reac
 /**
  * Vlasy od Týnky – jednostránkový web (TSX)
  * - Hero se sloganem (bez duplicitního představení)
+ * - Karta vpravo (logo + IG/FB/Zavolat)
  * - Promo banner (říjnové akce)
  * - Sekce O mně (jediné místo s představením)
  * - Ceník (otevřený), doplňkové služby se symboly "+"
@@ -47,14 +48,14 @@ export default function Site() {
     "/logo-siluety .png",
     "/logo%20siluety.png",
     "/logo%20siluety .png",
-    "/logo\u00a0siluety.png",
+    "/logo siluety.png", // varianta s obyč. mezerou
   ];
   const LOGO_TEXT = [
     "/logo-text.png",
     "/logo text .png",
     "/logo%20text%20.png",
     "/logo%20text.png",
-    "/logo\u00a0text.png",
+    "/logo text.png", // varianta s obyč. mezerou
   ];
   const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
   const FB_URL = "https://www.facebook.com/vlasyodtynky/";
@@ -90,8 +91,9 @@ export default function Site() {
       { name: "tel link present", pass: !!document.querySelector('a[href^="tel:"]') },
       { name: "IG link present", pass: !!document.querySelector(`a[href='${IG_URL}']`) },
       { name: "FB link present", pass: !!document.querySelector(`a[href='${FB_URL}']`) },
+      { name: "hero call btn", pass: !!document.querySelector('#hero a[href^="tel:"]') },
     ];
-    tests.forEach(t => console.assert(t.pass, `Test fail: ${t.name}`));
+    tests.forEach((t) => console.assert(t.pass, `Test fail: ${t.name}`));
   }, []);
 
   return (
@@ -144,6 +146,7 @@ export default function Site() {
         {/* Hero */}
         <section id="hero" className="relative z-10">
           <div className="mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
+            {/* Levý sloupec – slogan + CTA */}
             <div>
               <motion.h1
                 initial={{ opacity: 0, y: 10 }}
@@ -168,11 +171,11 @@ export default function Site() {
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
-                  href={`tel:${PHONE_RAW}`}
+                  href="#kontakt"
                   className="rounded-2xl px-5 py-3 text-white shadow-md text-sm font-medium"
                   style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
                 >
-                  📞 Zavolat {PHONE_DISPLAY}
+                  📞 Kontakt
                 </a>
                 <a
                   href="#cenik"
@@ -182,13 +185,67 @@ export default function Site() {
                 </a>
               </div>
             </div>
+
+            {/* Pravý sloupec – karta s logem a tlačítky (jako na screenu) */}
+            <div className="md:justify-self-end">
+              <div className="relative">
+                <div
+                  className="absolute -inset-6 rounded-[2rem] opacity-25 blur-2xl"
+                  style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+                />
+                <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center">
+                  <SmartImage
+                    srcs={LOGO_MAIN}
+                    alt="Vlasy od Týnky – logo se siluetami"
+                    className="mx-auto mb-4 h-16 w-auto object-contain"
+                    fallback={
+                      <div
+                        className="h-16 w-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-white"
+                        style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+                      >
+                        <Scissors className="h-8 w-8" />
+                      </div>
+                    }
+                  />
+                  <div className="text-2xl font-semibold">Vlasy od Týnky</div>
+                  <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
+                  <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
+
+                  <div className="mt-5 flex flex-col gap-2">
+                    <a
+                      href={IG_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
+                    >
+                      <Instagram className="h-4 w-4" /> Napsat na Instagramu
+                    </a>
+                    <a
+                      href={FB_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
+                      style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+                    >
+                      <Facebook className="h-4 w-4" /> Napsat na Facebooku
+                    </a>
+                    <a
+                      href={`tel:${PHONE_RAW}`}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
+                    >
+                      <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Promo – říjnové akce */}
         <section aria-label="Říjnové akce" className="relative z-10">
           <div className="mx-auto max-w-6xl px-6">
-            <div className="rounded-2xl border bg-white/70 backdrop-blur p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3" style={{boxShadow:'0 6px 24px rgba(0,0,0,0.06)'}}>
+            <div className="rounded-2xl border bg-white/70 backdrop-blur p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3" style={{ boxShadow: "0 6px 24px rgba(0,0,0,0.06)" }}>
               <div className="text-slate-800">
                 <span className="text-sm md:text-base font-medium">Říjnové akce ✨</span>
                 <div className="text-xs md:text-sm text-slate-600">V říjnu připravuji slevy na vybrané služby. Sledujte Instagram/Facebook, detaily brzy zveřejním.</div>
@@ -210,17 +267,14 @@ export default function Site() {
                 Jmenuji se <strong>Kristýna Hálová Vávrová</strong>. Vlasy jsou pro mě vášní a mým cílem je, aby každý zákazník odcházel spokojený a s účesem, který mu opravdu sedí. Nabízím dámské, pánské i dětské kadeřnické služby a vždy kladu důraz na individuální přístup a příjemnou atmosféru.
               </p>
             </div>
-            <div className="md:justify-self-end">
-              <div className="rounded-[1.5rem] border bg-white/70 backdrop-blur p-6 shadow-md text-center">
-                <div className="text-sm text-slate-600">Objednávky přes sítě nebo telefon</div>
-                <a
-                  href={`tel:${PHONE_RAW}`}
-                  className="mt-3 inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
-                  style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
-                >
-                  📞 Zavolat {PHONE_DISPLAY}
-                </a>
-              </div>
+            <div className="md:justify-self-end text-center md:text-right">
+              <a
+                href={`tel:${PHONE_RAW}`}
+                className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
+                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+              >
+                📞 Zavolat {PHONE_DISPLAY}
+              </a>
             </div>
           </div>
         </section>
