@@ -503,7 +503,7 @@ export default function Site() {
 
           {/* Pravý sloupec – VĚTŠÍ karta s vodoznakem textového loga */}
           <div className="md:justify-self-end w-full">
-            <div className="relative max-w-md ml-auto">
+            <div className="relative max-w-lg ml-auto">
               <div
                 className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
                 style={{
