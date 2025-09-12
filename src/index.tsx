@@ -4,8 +4,8 @@ import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-reac
 
 /** Jednostránkový web – Vlasy od Týnky
  * - Navbar (logo vlevo, odkazy vpravo)
- * - Hero s logem v pozadí (vodoznak)
- * - Akce • Služby • O mně (Echosline) • Ceník • Kontakt (2 sloupce + logo) • Footer
+ * - Hero (bez vodoznaku)
+ * - Akce • Služby • O mně (Echosline) • Ceník (s vodoznakem) • Kontakt (2 sloupce + textové logo) • Footer
  * - Ošetřeno proti React #130: do JSX nepředáváme objekty jako děti
  */
 
@@ -85,22 +85,8 @@ export default function Site() {
         </div>
       </header>
 
-      {/* HERO s logem v pozadí */}
-      <section id="hero" className="relative z-10 overflow-hidden">
-        {/* Logo v pozadí (vodoznak) */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-          <SmartImage
-            srcs={LOGO_MAIN}
-            alt="Vlasy od Týnky – logo v pozadí"
-            className="max-w-[70%] md:max-w-[40%] h-auto"
-            fallback={
-              <div className="text-6xl font-bold text-slate-200">
-                Vlasy od Týnky
-              </div>
-            }
-          />
-        </div>
-
+      {/* HERO */}
+      <section id="hero" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
           {/* Levý sloupec */}
           <div>
@@ -304,9 +290,23 @@ export default function Site() {
         </div>
       </section>
 
-      {/* CENÍK */}
-      <section id="cenik" className="relative z-10">
-        <div className="mx-auto max-w-6xl px-6 py-16">
+      {/* CENÍK – s vodoznakem logo v pozadí */}
+      <section id="cenik" className="relative z-10 overflow-hidden">
+        {/* Logo v pozadí (vodoznak) */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10">
+          <SmartImage
+            srcs={LOGO_MAIN}
+            alt="Vlasy od Týnky – logo v pozadí ceníku"
+            className="max-w-[75%] md:max-w-[45%] h-auto"
+            fallback={
+              <div className="text-6xl font-bold text-slate-200">
+                Vlasy od Týnky
+              </div>
+            }
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-6xl px-6 py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">Ceník</h2>
           <div className="mt-6 overflow-hidden rounded-2xl border bg-white/70">
             {/* Střih & styling */}
@@ -420,7 +420,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* KONTAKT – dvousloupcově s logem vpravo */}
+      {/* KONTAKT – dvousloupcově s textovým logem vpravo */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
           {/* Levý sloupec */}
@@ -492,7 +492,7 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s logem (vyplní prázdné místo) */}
+          {/* Pravý sloupec – karta s TEXTOVÝM logem */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto">
               <div
@@ -504,18 +504,18 @@ export default function Site() {
               />
               <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center">
                 <SmartImage
-                  srcs={LOGO_MAIN}
-                  alt="Vlasy od Týnky – logo se siluetami"
-                  className="mx-auto mb-4 h-20 w-auto object-contain"
+                  srcs={LOGO_TEXT}
+                  alt="Vlasy od Týnky – textové logo"
+                  className="mx-auto mb-4 h-12 w-auto object-contain"
                   fallback={
                     <div
-                      className="h-20 w-20 mx-auto mb-4 rounded-2xl flex items-center justify-center text-white"
+                      className="h-12 w-28 mx-auto mb-4 rounded-xl flex items-center justify-center text-white font-semibold"
                       style={{
                         background:
                           "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
                       }}
                     >
-                      <Scissors className="h-9 w-9" />
+                      Vlasy od Týnky
                     </div>
                   }
                 />
