@@ -5,8 +5,7 @@ import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-reac
 /** Jednostránkový web – Vlasy od Týnky
  * - Navbar (logo vlevo, odkazy vpravo)
  * - Hero (bez vodoznaku)
- * - Akce • Služby • O mně (Echosline) • Ceník (s vodoznakem) • Kontakt (2 sloupce + textové logo) • Footer
- * - Ošetřeno proti React #130: do JSX nepředáváme objekty jako děti
+ * - Akce • Služby • O mně (Echosline) • Ceník (vodoznak UVNITŘ karty) • Kontakt (vpravo karta s vodoznakem textového loga) • Footer
  */
 
 function SmartImage({
@@ -290,137 +289,146 @@ export default function Site() {
         </div>
       </section>
 
-      {/* CENÍK – s vodoznakem logo v pozadí */}
-      <section id="cenik" className="relative z-10 overflow-hidden">
-        {/* Logo v pozadí (vodoznak) */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10">
-          <SmartImage
-            srcs={LOGO_MAIN}
-            alt="Vlasy od Týnky – logo v pozadí ceníku"
-            className="max-w-[75%] md:max-w-[45%] h-auto"
-            fallback={
-              <div className="text-6xl font-bold text-slate-200">
-                Vlasy od Týnky
-              </div>
-            }
-          />
-        </div>
-
+      {/* CENÍK – vodoznak uvnitř karty */}
+      <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">Ceník</h2>
-          <div className="mt-6 overflow-hidden rounded-2xl border bg-white/70">
-            {/* Střih & styling */}
-            <div className="p-6 border-b">
-              <div className="font-medium text-lg">✂️ Střih &amp; styling</div>
-              <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>Dámský střih</span>
-                    <span className="font-semibold">od 650 Kč</span>
+
+          {/* Karta ceníku je RELATIVE a uvnitř má ABSOLUTNÍ vodoznak */}
+          <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
+            {/* Vodoznak uvnitř karty */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+              style={{ zIndex: 0 }}
+            >
+              <SmartImage
+                srcs={LOGO_MAIN}
+                alt="Vlasy od Týnky – vodoznak v kartě ceníku"
+                className="max-w-[80%] md:max-w-[50%] h-auto"
+                fallback={
+                  <div className="text-6xl font-bold text-slate-200">
+                    Vlasy od Týnky
                   </div>
-                  <div className="text-xs text-slate-500">
-                    Konzultace, mytí vlasů, střih, foukaná a styling.
-                  </div>
-                </li>
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>Pánský střih</span>
-                    <span className="font-semibold">od 350 Kč</span>
-                  </div>
-                  <div className="text-xs text-slate-500">
-                    Střih nůžkami i strojkem, suché i mokré vlasy.
-                  </div>
-                </li>
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>Dětský střih (do 12 let)</span>
-                    <span className="font-semibold">od 250 Kč</span>
-                  </div>
-                  <div className="text-xs text-slate-500">
-                    Rychlý střih přizpůsobený dětem.
-                  </div>
-                </li>
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>Foukaná / styling bez střihu</span>
-                    <span className="font-semibold">od 400 Kč</span>
-                  </div>
-                </li>
-              </ul>
+                }
+              />
             </div>
 
-            {/* Barvení & melír */}
-            <div className="p-6 border-b">
-              <div className="font-medium text-lg">🎨 Barvení &amp; melír</div>
-              <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>Barvení / tónování</span>
-                    <span className="font-semibold">od 1 350 Kč</span>
-                  </div>
-                  <div className="text-xs text-slate-500">
-                    Kompletní barvení nebo tónování vlasů, včetně střihu,
-                    foukané a stylingu.
-                  </div>
-                </li>
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>Melír klasický</span>
-                    <span className="font-semibold">od 1 850 Kč</span>
-                  </div>
-                  <div className="text-xs text-slate-500">
-                    Melírování pramenů, střih, foukaná a styling.
-                  </div>
-                </li>
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>Mikromelír + tónování</span>
-                    <span className="font-semibold">od 2 050 Kč</span>
-                  </div>
-                  <div className="text-xs text-slate-500">
-                    Jemné prosvětlení s doladěním odstínu, střih, foukaná a
-                    styling.
-                  </div>
-                </li>
-              </ul>
-            </div>
+            {/* Obsah ceníku nad vodoznakem */}
+            <div className="relative" style={{ zIndex: 1 }}>
+              {/* Střih & styling */}
+              <div className="p-6 border-b">
+                <div className="font-medium text-lg">✂️ Střih &amp; styling</div>
+                <ul className="mt-3 text-sm text-slate-700 space-y-4">
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>Dámský střih</span>
+                      <span className="font-semibold">od 650 Kč</span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Konzultace, mytí vlasů, střih, foukaná a styling.
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>Pánský střih</span>
+                      <span className="font-semibold">od 350 Kč</span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Střih nůžkami i strojkem, suché i mokré vlasy.
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>Dětský střih (do 12 let)</span>
+                      <span className="font-semibold">od 250 Kč</span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Rychlý střih přizpůsobený dětem.
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>Foukaná / styling bez střihu</span>
+                      <span className="font-semibold">od 400 Kč</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
 
-            {/* Péče & regenerace */}
-            <div className="p-6">
-              <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
-              <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>B.Pur hloubkové čištění</span>
-                    <span className="font-semibold">+230 Kč</span>
-                  </div>
-                  <div className="text-xs text-slate-500">
-                    Detox vlasů a pokožky, ideální jako doplněk ke střihu.
-                  </div>
-                </li>
-                <li>
-                  <div className="flex justify-between font-medium">
-                    <span>Ki-Power Veg rekonstrukce</span>
-                    <span className="font-semibold">+260 Kč</span>
-                  </div>
-                  <div className="text-xs text-slate-500">
-                    Intenzivní výživa po barvení a melíru, obnovuje strukturu a
-                    sílu vlasů.
-                  </div>
-                </li>
-              </ul>
-            </div>
+              {/* Barvení & melír */}
+              <div className="p-6 border-b">
+                <div className="font-medium text-lg">🎨 Barvení &amp; melír</div>
+                <ul className="mt-3 text-sm text-slate-700 space-y-4">
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>Barvení / tónování</span>
+                      <span className="font-semibold">od 1 350 Kč</span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Kompletní barvení nebo tónování vlasů, včetně střihu,
+                      foukané a stylingu.
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>Melír klasický</span>
+                      <span className="font-semibold">od 1 850 Kč</span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Melírování pramenů, střih, foukaná a styling.
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>Mikromelír + tónování</span>
+                      <span className="font-semibold">od 2 050 Kč</span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Jemné prosvětlení s doladěním odstínu, střih, foukaná a
+                      styling.
+                    </div>
+                  </li>
+                </ul>
+              </div>
 
-            <div className="p-4 text-xs text-slate-500 border-t">
-              Uvedené ceny jsou orientační. Konečná cena záleží na délce a
-              hustotě vlasů a spotřebě materiálu. Vše vždy předem domluvíme na
-              místě nebo ve zprávě.
+              {/* Péče & regenerace */}
+              <div className="p-6">
+                <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
+                <ul className="mt-3 text-sm text-slate-700 space-y-4">
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>B.Pur hloubkové čištění</span>
+                      <span className="font-semibold">+230 Kč</span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Detox vlasů a pokožky, ideální jako doplněk ke střihu.
+                    </div>
+                  </li>
+                  <li>
+                    <div className="flex justify-between font-medium">
+                      <span>Ki-Power Veg rekonstrukce</span>
+                      <span className="font-semibold">+260 Kč</span>
+                    </div>
+                    <div className="text-xs text-slate-500">
+                      Intenzivní výživa po barvení a melíru, obnovuje strukturu a
+                      sílu vlasů.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-4 text-xs text-slate-500 border-t">
+                Uvedené ceny jsou orientační. Konečná cena záleží na délce a
+                hustotě vlasů a spotřebě materiálu. Vše vždy předem domluvíme na
+                místě nebo ve zprávě.
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* KONTAKT – dvousloupcově s textovým logem vpravo */}
+      {/* KONTAKT – dvousloupcově, vpravo karta s vodoznakem TEXTOVÉHO loga */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
           {/* Levý sloupec */}
@@ -492,7 +500,7 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s TEXTOVÝM logem */}
+          {/* Pravý sloupec – karta s VODOZNAKEM TEXTOVÉHO LOGA */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto">
               <div
@@ -502,26 +510,31 @@ export default function Site() {
                     "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
                 }}
               />
-              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center">
-                <SmartImage
-                  srcs={LOGO_TEXT}
-                  alt="Vlasy od Týnky – textové logo"
-                  className="mx-auto mb-4 h-12 w-auto object-contain"
-                  fallback={
-                    <div
-                      className="h-12 w-28 mx-auto mb-4 rounded-xl flex items-center justify-center text-white font-semibold"
-                      style={{
-                        background:
-                          "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                      }}
-                    >
-                      Vlasy od Týnky
-                    </div>
-                  }
-                />
-                <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
-                <div className="mt-1 text-sm text-slate-600">
-                  Těším se na vás v salonu na Zalužánské.
+              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
+                {/* Vodoznak textového loga uvnitř karty */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+                  style={{ zIndex: 0 }}
+                >
+                  <SmartImage
+                    srcs={LOGO_TEXT}
+                    alt="Vlasy od Týnky – vodoznak textového loga"
+                    className="max-w-[70%] md:max-w-[60%] h-auto"
+                    fallback={
+                      <div className="text-4xl font-bold text-slate-200">
+                        Vlasy od Týnky
+                      </div>
+                    }
+                  />
+                </div>
+
+                {/* Přední obsah */}
+                <div className="relative" style={{ zIndex: 1 }}>
+                  <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
+                  <div className="mt-1 text-sm text-slate-600">
+                    Těším se na vás v salonu na Zalužánské.
+                  </div>
                 </div>
               </div>
             </div>
