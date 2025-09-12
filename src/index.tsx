@@ -299,7 +299,7 @@ export default function Site() {
             {/* Vodoznak uvnitř karty */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15"
               style={{ zIndex: 0 }}
             >
               <SmartImage
