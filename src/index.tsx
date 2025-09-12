@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/** Jednostránkový web – Vlasy od Týnky
+/** Vlasy od Týnky – jednostránkový web (React + Tailwind)
  * - Navbar (logo vlevo, odkazy vpravo)
- * - Hero (bez vodoznaku)
- * - Akce • Služby • O mně (Echosline) • Ceník (vodoznak UVNITŘ karty) • Kontakt (pravá karta větší + vodoznak textového loga) • Footer
- * - Ošetřeno proti React #130: do JSX nepředáváme objekty jako děti
+ * - Hero (glow okolo karty, velké logo, CTA Zavolat)
+ * - Akce • Služby • O mně • Ceník (vodoznak uvnitř karty) • Kontakt (pravá karta vyšší + vodoznak textového loga)
+ * - Footer s IG/FB/telefonem
  */
 
 function SmartImage({
@@ -35,9 +35,8 @@ function SmartImage({
 }
 
 export default function Site() {
-  // Konst
-  const LOGO_MAIN = ["/logo-siluety.png"]; // siluety (PNG v /public)
-  const LOGO_TEXT = ["/logo-text.png"];    // textové logo (PNG v /public)
+  const LOGO_MAIN = ["/logo-siluety.png"]; // do /public
+  const LOGO_TEXT = ["/logo-text.png"];    // do /public
   const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
   const FB_URL = "https://www.facebook.com/vlasyodtynky/";
   const MAP_URL =
@@ -54,7 +53,6 @@ export default function Site() {
       {/* NAVBAR */}
       <header className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b">
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          {/* Logo + název */}
           <a href="#hero" className="flex items-center gap-3">
             <SmartImage
               srcs={LOGO_MAIN}
@@ -63,10 +61,7 @@ export default function Site() {
               fallback={
                 <div
                   className="h-9 w-9 rounded-xl flex items-center justify-center text-white"
-                  style={{
-                    background:
-                      "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                  }}
+                  style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
                 >
                   <Scissors className="h-5 w-5" />
                 </div>
@@ -74,8 +69,6 @@ export default function Site() {
             />
             <span className="font-semibold">Vlasy od Týnky</span>
           </a>
-
-          {/* Menu */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#o-mne" className="hover:opacity-70">O mně</a>
             <a href="#sluzby" className="hover:opacity-70">Služby</a>
@@ -100,8 +93,7 @@ export default function Site() {
               <span
                 className="block"
                 style={{
-                  background:
-                    "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
+                  background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
                   WebkitBackgroundClip: "text",
                   color: "transparent",
                 }}
@@ -110,17 +102,13 @@ export default function Site() {
               </span>
             </motion.h1>
             <p className="mt-5 text-slate-600 md:text-lg max-w-prose">
-              Precizní střihy, barvení i melír v příjemné atmosféře. Objednejte
-              se a dopřejte vlasům péči, kterou si zaslouží.
+              Precizní střihy, barvení i melír v příjemné atmosféře. Objednejte se a dopřejte vlasům péči, kterou si zaslouží.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <a
                 href={`tel:${PHONE_RAW}`}
                 className="rounded-2xl px-5 py-3 text-white shadow-md text-sm font-medium"
-                style={{
-                  background:
-                    "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                }}
+                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
               >
                 📞 Zavolat {PHONE_DISPLAY}
               </a>
@@ -132,13 +120,17 @@ export default function Site() {
               </a>
             </div>
             <div className="mt-3 text-xs text-slate-500 flex items-center gap-2">
-              <span>🌟</span>
-              <span>Individuální přístup • Příjemné prostředí</span>
+              <span>🌟</span><span>Individuální přístup • Příjemné prostředí</span>
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s logem a tlačítky */}
+          {/* Pravý sloupec – karta s glow + logem a CTA */}
           <div className="md:justify-self-end relative">
+            {/* glow okolo karty */}
+            <div
+              className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
+              style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+            />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center">
               <SmartImage
                 srcs={LOGO_MAIN}
@@ -147,47 +139,23 @@ export default function Site() {
                 fallback={
                   <div
                     className="h-16 w-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-white"
-                    style={{
-                      background:
-                        "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                    }}
+                    style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
                   >
                     <Scissors className="h-8 w-8" />
                   </div>
                 }
               />
               <div className="text-2xl font-semibold">Vlasy od Týnky</div>
-              <div className="mt-1 text-sm text-slate-500">
-                kadeřnictví · Mladá Boleslav
-              </div>
-              <div className="mt-4 text-sm text-slate-600">
-                Objednávky přes sociální sítě nebo telefon.
-              </div>
+              <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
+              <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
               <div className="mt-5 flex flex-col gap-2">
-                <a
-                  href={IG_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
-                >
+                <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
                   <Instagram className="h-4 w-4" /> Napsat na Instagramu
                 </a>
-                <a
-                  href={FB_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
-                >
+                <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
                   <Facebook className="h-4 w-4" /> Napsat na Facebooku
                 </a>
-                <a
-                  href={`tel:${PHONE_RAW}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
-                  style={{
-                    background:
-                      "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                  }}
-                >
+                <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                   <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
                 </a>
               </div>
@@ -199,36 +167,14 @@ export default function Site() {
       {/* AKCE */}
       <section aria-label="Akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
-          <div
-            className="rounded-2xl border bg-white/70 backdrop-blur p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
-            style={{ boxShadow: "0 6px 24px rgba(0,0,0,0.06)" }}
-          >
+          <div className="rounded-2xl border bg-white/70 backdrop-blur p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3" style={{ boxShadow: "0 6px 24px rgba(0,0,0,0.06)" }}>
             <div className="text-slate-800">
-              <span className="text-sm md:text-base font-medium">
-                Říjnové akce ✨
-              </span>
-              <div className="text-xs md:text-sm text-slate-600">
-                V říjnu připravuji slevy na vybrané služby. Sledujte
-                Instagram/Facebook, detaily brzy zveřejním.
-              </div>
+              <span className="text-sm md:text-base font-medium">Říjnové akce ✨</span>
+              <div className="text-xs md:text-sm text-slate-600">V říjnu připravuji slevy na vybrané služby. Sledujte Instagram/Facebook, detaily brzy zveřejním.</div>
             </div>
             <div className="flex gap-2">
-              <a
-                href="#cenik"
-                className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
-              >
-                Mrknout na ceník
-              </a>
-              <a
-                href={IG_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
-                style={{
-                  background:
-                    "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                }}
-              >
+              <a href="#cenik" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">Mrknout na ceník</a>
+              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                 Sledovat novinky
               </a>
             </div>
@@ -243,31 +189,19 @@ export default function Site() {
           <div className="mt-6 grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Střihy</div>
-              <p className="mt-2 text-sm text-slate-600">
-                Dámský, pánský i dětský střih. Vždy s konzultací, mytím, foukanou
-                a stylingem podle potřeby.
-              </p>
+              <p className="mt-2 text-sm text-slate-600">Dámský, pánský i dětský střih. Vždy s konzultací, mytím, foukanou a stylingem podle potřeby.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Barvení a tónování</div>
-              <p className="mt-2 text-sm text-slate-600">
-                Jemné i výrazné změny. Tónování slouží k doladění odstínu a
-                neutralizaci nežádoucích tónů.
-              </p>
+              <p className="mt-2 text-sm text-slate-600">Jemné i výrazné změny. Tónování slouží k doladění odstínu a neutralizaci nežádoucích tónů.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Melír / Mikromelír</div>
-              <p className="mt-2 text-sm text-slate-600">
-                Prosvětlení a struktura účesu pomocí jemných pramínků. Přirozený,
-                vzdušný výsledek.
-              </p>
+              <p className="mt-2 text-sm text-slate-600">Prosvětlení a struktura účesu pomocí jemných pramínků. Přirozený, vzdušný výsledek.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Vlasová péče</div>
-              <p className="mt-2 text-sm text-slate-600">
-                Hloubkové čištění pokožky a péče po barvení/melíru pro sílu a lesk
-                vlasů.
-              </p>
+              <p className="mt-2 text-sm text-slate-600">Hloubkové čištění pokožky a péče po barvení/melíru pro sílu a lesk vlasů.</p>
             </div>
           </div>
         </div>
@@ -277,15 +211,12 @@ export default function Site() {
       <section id="o-mne" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">O mně</h2>
-        <p className="mt-4 text-slate-700 leading-relaxed">
-            Jmenuji se Kristýna Hálová Vávrová. Vlasy jsou pro mě vášní a mým
-            cílem je, aby každý zákazník odcházel spokojený a s účesem, který mu
-            opravdu sedí. Nabízím dámské, pánské i dětské kadeřnické služby a
-            vždy kladu důraz na individuální přístup a příjemnou atmosféru.
+          <p className="mt-4 text-slate-700 leading-relaxed">
+            Jmenuji se Kristýna Hálová Vávrová. Vlasy jsou pro mě vášní a mým cílem je, aby každý zákazník odcházel spokojený a s účesem, který mu opravdu sedí.
+            Nabízím dámské, pánské i dětské kadeřnické služby a vždy kladu důraz na individuální přístup a příjemnou atmosféru.
           </p>
           <p className="mt-2 text-sm text-slate-500">
-            Pracuji s <strong>Echosline</strong> – profesionální italskou
-            vlasovou kosmetikou zaměřenou na šetrné složení a skvělé výsledky.
+            Pracuji s <strong>Echosline</strong> – profesionální italskou vlasovou kosmetikou zaměřenou na šetrné složení a skvělé výsledky.
           </p>
         </div>
       </section>
@@ -295,27 +226,18 @@ export default function Site() {
         <div className="relative mx-auto max-w-6xl px-6 py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">Ceník</h2>
 
-          {/* Karta ceníku je RELATIVE a uvnitř má ABSOLUTNÍ vodoznak */}
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
-            {/* Vodoznak uvnitř karty */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
-              style={{ zIndex: 0 }}
-            >
+            {/* vodoznak uvnitř karty */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10" style={{ zIndex: 0 }}>
               <SmartImage
                 srcs={LOGO_MAIN}
                 alt="Vlasy od Týnky – vodoznak v kartě ceníku"
                 className="max-w-[80%] md:max-w-[50%] h-auto"
-                fallback={
-                  <div className="text-6xl font-bold text-slate-200">
-                    Vlasy od Týnky
-                  </div>
-                }
+                fallback={<div className="text-6xl font-bold text-slate-200">Vlasy od Týnky</div>}
               />
             </div>
 
-            {/* Obsah ceníku nad vodoznakem */}
+            {/* obsah karty */}
             <div className="relative" style={{ zIndex: 1 }}>
               {/* Střih & styling */}
               <div className="p-6 border-b">
@@ -323,35 +245,25 @@ export default function Site() {
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Dámský střih</span>
-                      <span className="font-semibold">od 650 Kč</span>
+                      <span>Dámský střih</span><span className="font-semibold">od 650 Kč</span>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Konzultace, mytí vlasů, střih, foukaná a styling.
-                    </div>
+                    <div className="text-xs text-slate-500">Konzultace, mytí vlasů, střih, foukaná a styling.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Pánský střih</span>
-                      <span className="font-semibold">od 350 Kč</span>
+                      <span>Pánský střih</span><span className="font-semibold">od 350 Kč</span>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Střih nůžkami i strojkem, suché i mokré vlasy.
-                    </div>
+                    <div className="text-xs text-slate-500">Střih nůžkami i strojkem, suché i mokré vlasy.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Dětský střih (do 12 let)</span>
-                      <span className="font-semibold">od 250 Kč</span>
+                      <span>Dětský střih (do 12 let)</span><span className="font-semibold">od 250 Kč</span>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Rychlý střih přizpůsobený dětem.
-                    </div>
+                    <div className="text-xs text-slate-500">Rychlý střih přizpůsobený dětem.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Foukaná / styling bez střihu</span>
-                      <span className="font-semibold">od 400 Kč</span>
+                      <span>Foukaná / styling bez střihu</span><span className="font-semibold">od 400 Kč</span>
                     </div>
                   </li>
                 </ul>
@@ -363,32 +275,21 @@ export default function Site() {
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Barvení / tónování</span>
-                      <span className="font-semibold">od 1 350 Kč</span>
+                      <span>Barvení / tónování</span><span className="font-semibold">od 1 350 Kč</span>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Kompletní barvení nebo tónování vlasů, včetně střihu,
-                      foukané a stylingu.
-                    </div>
+                    <div className="text-xs text-slate-500">Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Melír klasický</span>
-                      <span className="font-semibold">od 1 850 Kč</span>
+                      <span>Melír klasický</span><span className="font-semibold">od 1 850 Kč</span>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Melírování pramenů, střih, foukaná a styling.
-                    </div>
+                    <div className="text-xs text-slate-500">Melírování pramenů, střih, foukaná a styling.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Mikromelír + tónování</span>
-                      <span className="font-semibold">od 2 050 Kč</span>
+                      <span>Mikromelír + tónování</span><span className="font-semibold">od 2 050 Kč</span>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Jemné prosvětlení s doladěním odstínu, střih, foukaná a
-                      styling.
-                    </div>
+                    <div className="text-xs text-slate-500">Jemné prosvětlení s doladěním odstínu, střih, foukaná a styling.</div>
                   </li>
                 </ul>
               </div>
@@ -399,37 +300,28 @@ export default function Site() {
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>B.Pur hloubkové čištění</span>
-                      <span className="font-semibold">+230 Kč</span>
+                      <span>B.Pur hloubkové čištění</span><span className="font-semibold">+230 Kč</span>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Detox vlasů a pokožky, ideální jako doplněk ke střihu.
-                    </div>
+                    <div className="text-xs text-slate-500">Detox vlasů a pokožky, ideální jako doplněk ke střihu.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Ki-Power Veg rekonstrukce</span>
-                      <span className="font-semibold">+260 Kč</span>
+                      <span>Ki-Power Veg rekonstrukce</span><span className="font-semibold">+260 Kč</span>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      Intenzivní výživa po barvení a melíru, obnovuje strukturu a
-                      sílu vlasů.
-                    </div>
+                    <div className="text-xs text-slate-500">Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů.</div>
                   </li>
                 </ul>
               </div>
 
               <div className="p-4 text-xs text-slate-500 border-t">
-                Uvedené ceny jsou orientační. Konečná cena záleží na délce a
-                hustotě vlasů a spotřebě materiálu. Vše vždy předem domluvíme na
-                místě nebo ve zprávě.
+                Uvedené ceny jsou orientační. Konečná cena záleží na délce a hustotě vlasů a spotřebě materiálu. Vše vždy předem domluvíme na místě nebo ve zprávě.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* KONTAKT – dvousloupcově, pravá karta VĚTŠÍ s vodoznakem TEXTOVÉHO loga */}
+      {/* KONTAKT – pravá karta vyšší + vodoznak textového loga */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
           {/* Levý sloupec */}
@@ -439,14 +331,7 @@ export default function Site() {
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5" />
                 <div>
-                  <a
-                    href={MAP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium hover:underline"
-                  >
-                    Zalužánská 1272
-                  </a>
+                  <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">Zalužánská 1272</a>
                   <div>Mladá Boleslav</div>
                 </div>
               </div>
@@ -454,88 +339,47 @@ export default function Site() {
                 <Clock className="h-5 w-5 mt-0.5" />
                 <div>
                   <div className="font-medium">Otevírací doba</div>
-                  <div className="text-sm">
-                    Po–St–Pá 9:00–16:00 • jiné časy po domluvě
-                  </div>
+                  <div className="text-sm">Po–St–Pá 9:00–16:00 • jiné časy po domluvě</div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone className="h-5 w-5 mt-0.5" />
                 <div>
-                  <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">
-                    {PHONE_DISPLAY}
-                  </a>
-                  <div className="text-xs text-slate-500">
-                    Volejte nebo napište zprávu.
-                  </div>
+                  <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">{PHONE_DISPLAY}</a>
+                  <div className="text-xs text-slate-500">Volejte nebo napište zprávu.</div>
                 </div>
               </div>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href={IG_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
-              >
+              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
                 <Instagram className="h-4 w-4" /> Instagram
               </a>
-              <a
-                href={FB_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
-              >
+              <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
                 <Facebook className="h-4 w-4" /> Facebook
               </a>
-              <a
-                href={`tel:${PHONE_RAW}`}
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
-                style={{
-                  background:
-                    "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                }}
-              >
+              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                 <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
               </a>
             </div>
           </div>
 
-          {/* Pravý sloupec – VĚTŠÍ karta s vodoznakem textového loga */}
+          {/* Pravý sloupec – větší karta s vodoznakem textového loga */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto">
-              <div
-                className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
-                style={{
-                  background:
-                    "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                }}
-              />
+              <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }} />
               <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-20 px-12 shadow-xl text-center overflow-hidden">
-                {/* Vodoznak textového loga */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
-                >
+                {/* vodoznak textového loga */}
+                <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10">
                   <SmartImage
                     srcs={LOGO_TEXT}
                     alt="Vlasy od Týnky – vodoznak textového loga"
                     className="max-w-[85%] md:max-w-[70%] h-auto"
-                    fallback={
-                      <div className="text-4xl font-bold text-slate-200">
-                        Vlasy od Týnky
-                      </div>
-                    }
+                    fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
                   />
                 </div>
-
                 <div className="relative z-10">
-                  <div className="text-lg font-semibold">
-                    Děkuji za návštěvu 💜
-                  </div>
-                  <div className="mt-2 text-sm text-slate-600">
-                    Těším se na vás v salonu na Zalužánské.
-                  </div>
+                  <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
+                  <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na Zalužánské.</div>
                 </div>
               </div>
             </div>
@@ -552,14 +396,7 @@ export default function Site() {
               alt="Vlasy od Týnky – textové logo"
               className="h-5 w-auto object-contain"
               fallback={
-                <div
-                  className="h-6 w-28 rounded-xl flex items-center justify-center font-semibold"
-                  style={{
-                    background:
-                      "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                    color: "white",
-                  }}
-                >
+                <div className="h-6 w-28 rounded-xl flex items-center justify-center font-semibold" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)", color: "white" }}>
                   Vlasy od Týnky
                 </div>
               }
@@ -567,26 +404,13 @@ export default function Site() {
             <span>© {new Date().getFullYear()} Vlasy od Týnky</span>
           </div>
           <div className="flex items-center gap-4">
-            <a
-              href={IG_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 hover:opacity-70"
-            >
+            <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
               <Instagram className="h-4 w-4" /> Instagram
             </a>
-            <a
-              href={FB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 hover:opacity-70"
-            >
+            <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
               <Facebook className="h-4 w-4" /> Facebook
             </a>
-            <a
-              href={`tel:${PHONE_RAW}`}
-              className="inline-flex items-center gap-2 hover:opacity-70"
-            >
+            <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 hover:opacity-70">
               <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
             </a>
           </div>
