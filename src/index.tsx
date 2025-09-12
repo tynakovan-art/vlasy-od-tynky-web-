@@ -503,7 +503,7 @@ export default function Site() {
 
           {/* Pravý sloupec – VĚTŠÍ karta s vodoznakem textového loga */}
           <div className="md:justify-self-end w-full">
-            <div className="relative max-w-lg ml-auto">
+            <div className="relative max-w-md ml-auto">
               <div
                 className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
                 style={{
@@ -511,7 +511,7 @@ export default function Site() {
                     "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
                 }}
               />
-              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-12 shadow-xl text-center overflow-hidden">
+              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-20 px-12 shadow-xl text-center overflow-hidden">
                 {/* Vodoznak textového loga */}
                 <div
                   aria-hidden
