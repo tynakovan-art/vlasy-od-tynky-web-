@@ -2,13 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/** Vlasy od Týnky – jednostránkový web (React + Tailwind)
- * - Navbar (logo vlevo, odkazy vpravo)
- * - Hero (glow okolo karty, velké logo, CTA Zavolat)
- * - Akce • Služby • O mně • Ceník (vodoznak uvnitř karty) • Kontakt (pravá karta vyšší + vodoznak textového loga)
- * - Footer s IG/FB/telefonem
- */
-
 function SmartImage({
   srcs,
   alt,
@@ -35,8 +28,8 @@ function SmartImage({
 }
 
 export default function Site() {
-  const LOGO_MAIN = ["/logo-siluety.png"]; // do /public
-  const LOGO_TEXT = ["/logo-text.png"];    // do /public
+  const LOGO_MAIN = ["/logo-siluety.png"];
+  const LOGO_TEXT = ["/logo-text.png"];
   const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
   const FB_URL = "https://www.facebook.com/vlasyodtynky/";
   const MAP_URL =
@@ -132,10 +125,11 @@ export default function Site() {
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center">
+              {/* ↓↓↓ TADY je oprava: mix-blend-multiply + jemná maska na okraj */}
               <SmartImage
                 srcs={LOGO_MAIN}
                 alt="Vlasy od Týnky – logo se siluetami"
-                className="mx-auto mb-2 h-32 w-auto object-contain"
+                className="mx-auto mb-2 h-32 w-auto object-contain mix-blend-multiply"
                 fallback={
                   <div
                     className="h-16 w-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-white"
@@ -145,6 +139,18 @@ export default function Site() {
                   </div>
                 }
               />
+              <div
+                aria-hidden
+                className="sr-only"
+                // rezerva pro případ, že by skrz export bylo potřeba ještě zjemnit kraje:
+                style={{
+                  WebkitMaskImage:
+                    "radial-gradient(90% 90% at 50% 50%, rgba(0,0,0,1) 96%, rgba(0,0,0,0) 100%)",
+                  maskImage:
+                    "radial-gradient(90% 90% at 50% 50%, rgba(0,0,0,1) 96%, rgba(0,0,0,0) 100%)",
+                }}
+              />
+              {/* ↑↑↑ */}
               <div className="text-2xl font-semibold">Vlasy od Týnky</div>
               <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
               <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
@@ -221,98 +227,54 @@ export default function Site() {
         </div>
       </section>
 
-      {/* CENÍK – vodoznak uvnitř karty */}
+      {/* CENÍK (beze změn – vodoznak s maskou už máme) */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">Ceník</h2>
-
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
-            {/* vodoznak uvnitř karty */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10" style={{ zIndex: 0 }}>
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+              style={{
+                zIndex: 0,
+                WebkitMaskImage:
+                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                maskImage:
+                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+              }}
+            >
               <SmartImage
                 srcs={LOGO_MAIN}
                 alt="Vlasy od Týnky – vodoznak v kartě ceníku"
-                className="max-w-[80%] md:max-w-[50%] h-auto"
+                className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
                 fallback={<div className="text-6xl font-bold text-slate-200">Vlasy od Týnky</div>}
               />
             </div>
-
-            {/* obsah karty */}
             <div className="relative" style={{ zIndex: 1 }}>
-              {/* Střih & styling */}
               <div className="p-6 border-b">
                 <div className="font-medium text-lg">✂️ Střih &amp; styling</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Dámský střih</span><span className="font-semibold">od 650 Kč</span>
-                    </div>
-                    <div className="text-xs text-slate-500">Konzultace, mytí vlasů, střih, foukaná a styling.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Pánský střih</span><span className="font-semibold">od 350 Kč</span>
-                    </div>
-                    <div className="text-xs text-slate-500">Střih nůžkami i strojkem, suché i mokré vlasy.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Dětský střih (do 12 let)</span><span className="font-semibold">od 250 Kč</span>
-                    </div>
-                    <div className="text-xs text-slate-500">Rychlý střih přizpůsobený dětem.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Foukaná / styling bez střihu</span><span className="font-semibold">od 400 Kč</span>
-                    </div>
-                  </li>
+                  <li><div className="flex justify-between font-medium"><span>Dámský střih</span><span className="font-semibold">od 650 Kč</span></div><div className="text-xs text-slate-500">Konzultace, mytí vlasů, střih, foukaná a styling.</div></li>
+                  <li><div className="flex justify-between font-medium"><span>Pánský střih</span><span className="font-semibold">od 350 Kč</span></div><div className="text-xs text-slate-500">Střih nůžkami i strojkem, suché i mokré vlasy.</div></li>
+                  <li><div className="flex justify-between font-medium"><span>Dětský střih (do 12 let)</span><span className="font-semibold">od 250 Kč</span></div><div className="text-xs text-slate-500">Rychlý střih přizpůsobený dětem.</div></li>
+                  <li><div className="flex justify-between font-medium"><span>Foukaná / styling bez střihu</span><span className="font-semibold">od 400 Kč</span></div></li>
                 </ul>
               </div>
-
-              {/* Barvení & melír */}
               <div className="p-6 border-b">
                 <div className="font-medium text-lg">🎨 Barvení &amp; melír</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Barvení / tónování</span><span className="font-semibold">od 1 350 Kč</span>
-                    </div>
-                    <div className="text-xs text-slate-500">Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Melír klasický</span><span className="font-semibold">od 1 850 Kč</span>
-                    </div>
-                    <div className="text-xs text-slate-500">Melírování pramenů, střih, foukaná a styling.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Mikromelír + tónování</span><span className="font-semibold">od 2 050 Kč</span>
-                    </div>
-                    <div className="text-xs text-slate-500">Jemné prosvětlení s doladěním odstínu, střih, foukaná a styling.</div>
-                  </li>
+                  <li><div className="flex justify-between font-medium"><span>Barvení / tónování</span><span className="font-semibold">od 1 350 Kč</span></div><div className="text-xs text-slate-500">Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu.</div></li>
+                  <li><div className="flex justify-between font-medium"><span>Melír klasický</span><span className="font-semibold">od 1 850 Kč</span></div><div className="text-xs text-slate-500">Melírování pramenů, střih, foukaná a styling.</div></li>
+                  <li><div className="flex justify-between font-medium"><span>Mikromelír + tónování</span><span className="font-semibold">od 2 050 Kč</span></div><div className="text-xs text-slate-500">Jemné prosvětlení s doladěním odstínu, střih, foukaná a styling.</div></li>
                 </ul>
               </div>
-
-              {/* Péče & regenerace */}
               <div className="p-6">
                 <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>B.Pur hloubkové čištění</span><span className="font-semibold">+230 Kč</span>
-                    </div>
-                    <div className="text-xs text-slate-500">Detox vlasů a pokožky, ideální jako doplněk ke střihu.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Ki-Power Veg rekonstrukce</span><span className="font-semibold">+260 Kč</span>
-                    </div>
-                    <div className="text-xs text-slate-500">Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů.</div>
-                  </li>
+                  <li><div className="flex justify-between font-medium"><span>B.Pur hloubkové čištění</span><span className="font-semibold">+230 Kč</span></div><div className="text-xs text-slate-500">Detox vlasů a pokožky, ideální jako doplněk ke střihu.</div></li>
+                  <li><div className="flex justify-between font-medium"><span>Ki-Power Veg rekonstrukce</span><span className="font-semibold">+260 Kč</span></div><div className="text-xs text-slate-500">Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů.</div></li>
                 </ul>
               </div>
-
               <div className="p-4 text-xs text-slate-500 border-t">
                 Uvedené ceny jsou orientační. Konečná cena záleží na délce a hustotě vlasů a spotřebě materiálu. Vše vždy předem domluvíme na místě nebo ve zprávě.
               </div>
@@ -321,10 +283,9 @@ export default function Site() {
         </div>
       </section>
 
-      {/* KONTAKT – pravá karta vyšší + vodoznak textového loga */}
+      {/* KONTAKT */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
-          {/* Levý sloupec */}
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold">Kontakt</h2>
             <div className="mt-4 flex flex-col gap-3 text-slate-700">
@@ -363,17 +324,24 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – větší karta s vodoznakem textového loga */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto">
               <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }} />
               <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-20 px-12 shadow-xl text-center overflow-hidden">
-                {/* vodoznak textového loga */}
-                <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+                  style={{
+                    WebkitMaskImage:
+                      "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                    maskImage:
+                      "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                  }}
+                >
                   <SmartImage
                     srcs={LOGO_TEXT}
                     alt="Vlasy od Týnky – vodoznak textového loga"
-                    className="max-w-[85%] md:max-w-[70%] h-auto"
+                    className="max-w-[85%] md:max-w-[70%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
                     fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
                   />
                 </div>
