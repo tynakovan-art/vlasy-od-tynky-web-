@@ -5,7 +5,8 @@ import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-reac
 /** Jednostránkový web – Vlasy od Týnky
  * - Navbar (logo vlevo, odkazy vpravo)
  * - Hero (bez vodoznaku)
- * - Akce • Služby • O mně (Echosline) • Ceník (vodoznak UVNITŘ karty) • Kontakt (vpravo karta s vodoznakem textového loga) • Footer
+ * - Akce • Služby • O mně (Echosline) • Ceník (vodoznak UVNITŘ karty) • Kontakt (pravá karta větší + vodoznak textového loga) • Footer
+ * - Ošetřeno proti React #130: do JSX nepředáváme objekty jako děti
  */
 
 function SmartImage({
@@ -276,7 +277,7 @@ export default function Site() {
       <section id="o-mne" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">O mně</h2>
-          <p className="mt-4 text-slate-700 leading-relaxed">
+        <p className="mt-4 text-slate-700 leading-relaxed">
             Jmenuji se Kristýna Hálová Vávrová. Vlasy jsou pro mě vášní a mým
             cílem je, aby každý zákazník odcházel spokojený a s účesem, který mu
             opravdu sedí. Nabízím dámské, pánské i dětské kadeřnické služby a
@@ -299,7 +300,7 @@ export default function Site() {
             {/* Vodoznak uvnitř karty */}
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15"
+              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
               style={{ zIndex: 0 }}
             >
               <SmartImage
@@ -428,7 +429,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* KONTAKT – dvousloupcově, vpravo karta s vodoznakem TEXTOVÉHO loga */}
+      {/* KONTAKT – dvousloupcově, pravá karta VĚTŠÍ s vodoznakem TEXTOVÉHO loga */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
           {/* Levý sloupec */}
@@ -500,7 +501,7 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s VODOZNAKEM TEXTOVÉHO LOGA */}
+          {/* Pravý sloupec – VĚTŠÍ karta s vodoznakem textového loga */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto">
               <div
@@ -510,17 +511,16 @@ export default function Site() {
                     "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
                 }}
               />
-              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
-                {/* Vodoznak textového loga uvnitř karty */}
+              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-12 shadow-xl text-center overflow-hidden">
+                {/* Vodoznak textového loga */}
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
-                  style={{ zIndex: 0 }}
                 >
                   <SmartImage
                     srcs={LOGO_TEXT}
                     alt="Vlasy od Týnky – vodoznak textového loga"
-                    className="max-w-[70%] md:max-w-[60%] h-auto"
+                    className="max-w-[85%] md:max-w-[70%] h-auto"
                     fallback={
                       <div className="text-4xl font-bold text-slate-200">
                         Vlasy od Týnky
@@ -529,10 +529,11 @@ export default function Site() {
                   />
                 </div>
 
-                {/* Přední obsah */}
-                <div className="relative" style={{ zIndex: 1 }}>
-                  <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
-                  <div className="mt-1 text-sm text-slate-600">
+                <div className="relative z-10">
+                  <div className="text-lg font-semibold">
+                    Děkuji za návštěvu 💜
+                  </div>
+                  <div className="mt-2 text-sm text-slate-600">
                     Těším se na vás v salonu na Zalužánské.
                   </div>
                 </div>
