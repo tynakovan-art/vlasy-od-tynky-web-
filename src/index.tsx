@@ -30,9 +30,9 @@ function SmartImage({
 
 export default function Site() {
   /* Cesty k souborům v /public */
-  const LOGO_MAIN = ["/logo-siluety.png"];                  // siluety (standardní)
+  const LOGO_MAIN = ["/logo-siluety.png"];                        // siluety (standardní)
   const LOGO_MAIN_TRANSPARENT = ["/logo-siluety-transparent.png"]; // siluety s průhledným pozadím (pouze v HERO)
-  const LOGO_TEXT = ["/logo-text.png"];                    // textové logo
+  const LOGO_TEXT = ["/logo-text.png"];                           // textové logo
 
   /* Odkazy a kontakty */
   const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
@@ -168,27 +168,27 @@ export default function Site() {
         </div>
       </section>
 
-      {/* AKCE – Otevírací akce říjen */}
+      {/* AKCE – Otevírací akce říjen (větší název) */}
       <section aria-label="Akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div
-            className="rounded-[2rem] border bg-white/70 backdrop-blur p-8 md:p-10flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+            className="rounded-2xl border bg-white/70 backdrop-blur p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
             style={{ boxShadow: "0 6px 24px rgba(0,0,0,0.06)" }}
           >
             <div className="text-slate-800">
-              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold text-white"
-                   style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
+              <div
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm md:text-lg font-semibold text-white"
+                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+              >
                 🎉 Otevírací akce říjen
               </div>
-              <div className="mt-3 text-base md:text-lg font-medium">
+              <div className="mt-3 text-sm md:text-base font-medium">
                 Po celý říjen nabízím <span className="font-bold">20% slevu</span> na všechny služby pro nové klienty.
               </div>
               <div className="text-xs md:text-sm text-slate-600">
                 Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
               </div>
-              <div className="mt-2 text-xs md:text-sm text-slate-600">
-                📍 Zalužanská 1272, Mladá Boleslav
-              </div>
+              <div className="mt-2 text-xs md:text-sm text-slate-600">📍 Zalužánská 1272, Mladá Boleslav</div>
             </div>
             <div className="flex gap-2">
               <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
@@ -256,7 +256,7 @@ export default function Site() {
         <div className="relative mx-auto max-w-6xl px-6 py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">Ceník</h2>
 
-        <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
+          <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
             {/* Vodoznak uvnitř karty */}
             <div
               aria-hidden
@@ -372,7 +372,7 @@ export default function Site() {
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5" />
                 <div>
-                  <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">Zalužanská 1272</a>
+                  <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">Zalužánská 1272</a>
                   <div>Mladá Boleslav</div>
                 </div>
               </div>
@@ -434,7 +434,7 @@ export default function Site() {
 
                 <div className="relative z-10">
                   <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
-                  <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na Zalužanské.</div>
+                  <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na Zalužánské.</div>
                 </div>
               </div>
             </div>
