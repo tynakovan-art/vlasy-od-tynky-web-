@@ -172,7 +172,7 @@ export default function Site() {
       <section aria-label="Akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div
-            className="rounded-2xl border bg-white/70 backdrop-blur p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+            className="rounded-[2rem] border bg-white/70 backdrop-blur p-8 md:p-10flex flex-col md:flex-row md:items-center md:justify-between gap-4"
             style={{ boxShadow: "0 6px 24px rgba(0,0,0,0.06)" }}
           >
             <div className="text-slate-800">
@@ -180,7 +180,7 @@ export default function Site() {
                    style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                 🎉 Otevírací akce říjen
               </div>
-              <div className="mt-3 text-sm md:text-base font-medium">
+              <div className="mt-3 text-base md:text-lg font-medium">
                 Po celý říjen nabízím <span className="font-bold">20% slevu</span> na všechny služby pro nové klienty.
               </div>
               <div className="text-xs md:text-sm text-slate-600">
