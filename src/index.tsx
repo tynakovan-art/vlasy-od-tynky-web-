@@ -31,7 +31,7 @@ function SmartImage({
 export default function Site() {
   /* Cesty k souborům v /public */
   const LOGO_MAIN = ["/logo-siluety.png"];                        // siluety (standardní)
-  const LOGO_MAIN_TRANSPARENT = ["/logo-siluety-transparent.png"]; // siluety s průhledným pozadím (pouze v HERO)
+  const LOGO_MAIN_TRANSPARENT = ["/logo-siluety-transparent.png"]; // siluety s průhledným pozadím (jen v HERO)
   const LOGO_TEXT = ["/logo-text.png"];                           // textové logo
 
   /* Odkazy a kontakty */
@@ -137,7 +137,7 @@ export default function Site() {
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
               <SmartImage
-                srcs={LOGO_MAIN_TRANSPARENT} // ← používáme průhledné logo jen v hero
+                srcs={LOGO_MAIN_TRANSPARENT}
                 alt="Vlasy od Týnky – logo se siluetami (transparentní)"
                 className="mx-auto mb-2 h-32 w-auto object-contain"
                 fallback={
@@ -251,11 +251,29 @@ export default function Site() {
         </div>
       </section>
 
-      {/* CENÍK – vodoznak uvnitř karty (měkké okraje) */}
+      {/* CENÍK – s bannerem a štítkem + vodoznak uvnitř karty */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
-          <h2 className="text-2xl md:text-3xl font-semibold">Ceník</h2>
+          {/* Banner nad ceníkem */}
+          <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
+            <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen! 🎉</p>
+            <p className="text-xs md:text-sm opacity-90">
+              Platí na všechny služby pro nové klienty. Ceny níže jsou standardní, sleva se odečte při platbě.
+            </p>
+          </div>
 
+          {/* Nadpis ceníku se štítkem */}
+          <div className="flex items-center gap-3 mb-2">
+            <h2 className="text-2xl font-bold">Ceník</h2>
+            <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
+              –20 % říjen • nové klientky
+            </span>
+          </div>
+          <p className="text-xs text-neutral-500 mb-4">
+            Akce –20 % pro nové klienty platí do 31. 10. 2025. Nelze kombinovat s jinými slevami.
+          </p>
+
+          {/* Karta ceníku */}
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
             {/* Vodoznak uvnitř karty */}
             <div
@@ -277,7 +295,7 @@ export default function Site() {
               />
             </div>
 
-            {/* Obsah ceníku */}
+            {/* Obsah ceníku nad vodoznakem */}
             <div className="relative" style={{ zIndex: 1 }}>
               {/* Střih & styling */}
               <div className="p-6 border-b">
