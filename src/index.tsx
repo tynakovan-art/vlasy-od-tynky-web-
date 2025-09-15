@@ -45,6 +45,20 @@ export default function Site() {
     document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
   }, []);
 
+  /* Pomocné UI – dvojice cen: původní (přeškrtnutá) + sleva */
+  const PriceStrike = ({
+    oldLabel, // např. "od 650 Kč" nebo "+230 Kč"
+    newLabel, // např. "od 520 Kč" nebo "+184 Kč"
+  }: {
+    oldLabel: string;
+    newLabel: string;
+  }) => (
+    <div className="flex items-baseline gap-2">
+      <span className="text-sm text-slate-400 line-through">{oldLabel}</span>
+      <span className="font-semibold text-pink-600">{newLabel}</span>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-white text-slate-800">
       {/* NAVBAR */}
@@ -251,7 +265,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* CENÍK – s bannerem a štítkem + vodoznak uvnitř karty */}
+      {/* CENÍK – s bannerem a štítkem + vodoznak uvnitř karty (AKČNÍ CENY) */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
           {/* Banner nad ceníkem */}
@@ -303,25 +317,29 @@ export default function Site() {
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Dámský střih</span><span className="font-semibold">od 650 Kč</span>
+                      <span>Dámský střih</span>
+                      <PriceStrike oldLabel="od 650 Kč" newLabel="od 520 Kč" />
                     </div>
                     <div className="text-xs text-slate-500">Konzultace, mytí vlasů, střih, foukaná a styling.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Pánský střih</span><span className="font-semibold">od 350 Kč</span>
+                      <span>Pánský střih</span>
+                      <PriceStrike oldLabel="od 350 Kč" newLabel="od 280 Kč" />
                     </div>
                     <div className="text-xs text-slate-500">Střih nůžkami i strojkem, suché i mokré vlasy.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Dětský střih (do 12 let)</span><span className="font-semibold">od 250 Kč</span>
+                      <span>Dětský střih (do 12 let)</span>
+                      <PriceStrike oldLabel="od 250 Kč" newLabel="od 200 Kč" />
                     </div>
                     <div className="text-xs text-slate-500">Rychlý střih přizpůsobený dětem.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Foukaná / styling bez střihu</span><span className="font-semibold">od 400 Kč</span>
+                      <span>Foukaná / styling bez střihu</span>
+                      <PriceStrike oldLabel="od 400 Kč" newLabel="od 320 Kč" />
                     </div>
                   </li>
                 </ul>
@@ -333,19 +351,22 @@ export default function Site() {
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Barvení / tónování</span><span className="font-semibold">od 1 350 Kč</span>
+                      <span>Barvení / tónování</span>
+                      <PriceStrike oldLabel="od 1 350 Kč" newLabel="od 1 080 Kč" />
                     </div>
                     <div className="text-xs text-slate-500">Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Melír klasický</span><span className="font-semibold">od 1 850 Kč</span>
+                      <span>Melír klasický</span>
+                      <PriceStrike oldLabel="od 1 850 Kč" newLabel="od 1 480 Kč" />
                     </div>
                     <div className="text-xs text-slate-500">Melírování pramenů, střih, foukaná a styling.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Mikromelír + tónování</span><span className="font-semibold">od 2 050 Kč</span>
+                      <span>Mikromelír + tónování</span>
+                      <PriceStrike oldLabel="od 2 050 Kč" newLabel="od 1 640 Kč" />
                     </div>
                     <div className="text-xs text-slate-500">Jemné prosvětlení s doladěním odstínu, střih, foukaná a styling.</div>
                   </li>
@@ -358,13 +379,15 @@ export default function Site() {
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>B.Pur hloubkové čištění</span><span className="font-semibold">+230 Kč</span>
+                      <span>B.Pur hloubkové čištění</span>
+                      <PriceStrike oldLabel="+230 Kč" newLabel="+184 Kč" />
                     </div>
                     <div className="text-xs text-slate-500">Detox vlasů a pokožky, ideální jako doplněk ke střihu.</div>
                   </li>
                   <li>
                     <div className="flex justify-between font-medium">
-                      <span>Ki-Power Veg rekonstrukce</span><span className="font-semibold">+260 Kč</span>
+                      <span>Ki-Power Veg rekonstrukce</span>
+                      <PriceStrike oldLabel="+260 Kč" newLabel="+208 Kč" />
                     </div>
                     <div className="text-xs text-slate-500">Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů.</div>
                   </li>
