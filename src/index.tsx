@@ -460,35 +460,37 @@ export default function Site() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER – logo uprostřed, větší */}
       <footer className="relative z-10 border-t bg-white/60 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-6 py-8 text-sm text-slate-600 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+        <div className="mx-auto max-w-6xl px-6 py-10 text-slate-600">
+          <div className="flex flex-col items-center gap-4 text-center">
             <SmartImage
               srcs={LOGO_TEXT}
               alt="Vlasy od Týnky – textové logo"
-              className="h-10 md:h-14 object-contain"
+              className="h-12 md:h-16 w-auto object-contain"
               fallback={
                 <div
-                  className="h-6 w-28 rounded-xl flex items-center justify-center font-semibold"
-                  style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)", color: "white" }}
+                  className="h-12 md:h-16 px-6 rounded-2xl flex items-center justify-center font-semibold text-white"
+                  style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
                 >
                   Vlasy od Týnky
                 </div>
               }
             />
-            <span>© {new Date().getFullYear()} Vlasy od Týnky</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
-              <Instagram className="h-4 w-4" /> Instagram
-            </a>
-            <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
-              <Facebook className="h-4 w-4" /> Facebook
-            </a>
-            <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 hover:opacity-70">
-              <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
-            </a>
+            <div className="flex items-center gap-4 text-sm">
+              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
+                <Instagram className="h-4 w-4" /> Instagram
+              </a>
+              <span className="opacity-40">•</span>
+              <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
+                <Facebook className="h-4 w-4" /> Facebook
+              </a>
+              <span className="opacity-40">•</span>
+              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 hover:opacity-70">
+                <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
+              </a>
+            </div>
+            <div className="text-xs text-slate-500">© {new Date().getFullYear()} Vlasy od Týnky</div>
           </div>
         </div>
       </footer>
