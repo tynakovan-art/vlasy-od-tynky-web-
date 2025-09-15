@@ -272,8 +272,7 @@ export default function Site() {
           <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
             <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen! 🎉</p>
             <p className="text-xs md:text-sm opacity-90">
-              Platí na všechny služby pro nové klienty. Ceny níže jsou standardní, sleva se odečte při platbě.
-            </p>
+              Platí na všechny služby pro nové klienty. Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí pro nové klienty po celý říjen 2025.            </p>
           </div>
 
           {/* Nadpis ceníku se štítkem */}
