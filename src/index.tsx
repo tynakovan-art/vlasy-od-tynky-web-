@@ -266,7 +266,7 @@ export default function Site() {
           <div className="flex items-center gap-3 mb-2">
             <h2 className="text-2xl font-bold">Ceník</h2>
             <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
-              –20 % říjen • nové klientky
+              –20 % říjen • nové klienty
             </span>
           </div>
           <p className="text-xs text-neutral-500 mb-4">
