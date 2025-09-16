@@ -29,10 +29,10 @@ function SmartImage({
 }
 
 export default function Site() {
-  /* Cesty k souborům v /public */
-  const LOGO_MAIN = ["/logo-siluety.png"];                        // siluety (standardní)
-  const LOGO_MAIN_TRANSPARENT = ["/logo-siluety-transparent.png"]; // siluety s průhledným pozadím (jen v HERO)
-  const LOGO_TEXT = ["/logo-text.png"];                           // textové logo
+  /* Cesty k souborům v /public (SEO-názvy) */
+  const LOGO_MAIN = ["/kadernictvi-mlada-boleslav-logo.png"];
+  const LOGO_MAIN_TRANSPARENT = ["/kadernictvi-mlada-boleslav-logo-transparent.png"];
+  const LOGO_TEXT = ["/vlasy-od-tynky-text-logo.png"];
 
   /* Adresa – sjednocená */
   const ADDRESS_LINE1 = "Zalužanská 1272";
@@ -49,10 +49,10 @@ export default function Site() {
   const PHONE_DISPLAY = "725 882 820";
 
   useEffect(() => {
-    document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
+    document.title = "Kadeřnictví Vlasy od Týnky – Mladá Boleslav";
   }, []);
 
-  /* Pomocná komponenta pro akční ceny: přeškrtnutá původní + zvýrazněná akční */
+  /* Pomocná komponenta pro akční ceny */
   const PriceStrike = ({
     oldLabel,
     newLabel,
@@ -75,7 +75,7 @@ export default function Site() {
           <a href="#hero" className="flex items-center gap-3">
             <SmartImage
               srcs={LOGO_MAIN}
-              alt="Vlasy od Týnky – logo se siluetami"
+              alt="Vlasy od Týnky – kadeřnictví Mladá Boleslav, logo se siluetami"
               className="h-9 w-auto object-contain"
               fallback={
                 <div
@@ -104,7 +104,7 @@ export default function Site() {
         <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
           {/* Levý sloupec */}
           <div>
-            {/* === NOVÉ: badge s datem otevření === */}
+            {/* Badge s datem otevření */}
             <div
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white mb-4"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
@@ -118,7 +118,7 @@ export default function Site() {
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-semibold leading-tight"
             >
-              Krásné vlasy,
+              Kadeřnictví Vlasy od Týnky
               <span
                 className="block"
                 style={{
@@ -127,9 +127,10 @@ export default function Site() {
                   color: "transparent",
                 }}
               >
-                které si zamilujete
+                Mladá Boleslav
               </span>
             </motion.h1>
+
             <p className="mt-5 text-slate-600 md:text-lg max-w-prose">
               Precizní střihy, barvení i melír v příjemné atmosféře.
               Objednejte se a dopřejte vlasům péči, kterou si zaslouží.
@@ -159,7 +160,6 @@ export default function Site() {
 
           {/* Pravý sloupec – karta s glow + PRŮHLEDNÝM logem a CTA */}
           <div className="md:justify-self-end relative">
-            {/* fialový glow okolo */}
             <div
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
@@ -167,7 +167,7 @@ export default function Site() {
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
               <SmartImage
                 srcs={LOGO_MAIN_TRANSPARENT}
-                alt="Vlasy od Týnky – logo se siluetami (transparentní)"
+                alt="Vlasy od Týnky – moderní logo kadeřnictví Mladá Boleslav"
                 className="mx-auto mb-2 h-32 w-auto object-contain"
                 fallback={
                   <div
@@ -237,7 +237,7 @@ export default function Site() {
       {/* SLUŽBY */}
       <section id="sluzby" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-12">
-          <h2 className="text-2xl md:text-3xl font-semibold">S čím vám pomohu</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold">Kadeřnické služby v Mladé Boleslavi</h2>
           <div className="mt-6 grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Střihy</div>
@@ -282,10 +282,9 @@ export default function Site() {
         </div>
       </section>
 
-      {/* CENÍK – s bannerem a štítkem + vodoznak uvnitř karty (AKČNÍ CENY) */}
+      {/* CENÍK */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
-          {/* Banner nad ceníkem – přeškrtnuté ceny */}
           <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
             <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen! 🎉</p>
             <p className="text-xs md:text-sm opacity-90">
@@ -293,9 +292,8 @@ export default function Site() {
             </p>
           </div>
 
-          {/* Nadpis ceníku se štítkem */}
           <div className="flex items-center gap-3 mb-2">
-            <h2 className="text-2xl font-bold">Ceník</h2>
+            <h2 className="text-2xl font-bold">Ceník kadeřnictví Vlasy od Týnky Mladá Boleslav</h2>
             <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
               –20 % říjen • noví klienti
             </span>
@@ -305,9 +303,7 @@ export default function Site() {
             zvýrazněné částky jsou akční ceny po slevě.
           </p>
 
-          {/* Karta ceníku */}
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
-            {/* Vodoznak uvnitř karty */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
@@ -321,13 +317,12 @@ export default function Site() {
             >
               <SmartImage
                 srcs={LOGO_MAIN}
-                alt="Vlasy od Týnky – vodoznak v kartě ceníku"
+                alt="Vlasy od Týnky – vodoznak loga v kartě ceníku"
                 className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
                 fallback={<div className="text-6xl font-bold text-slate-200">Vlasy od Týnky</div>}
               />
             </div>
 
-            {/* Obsah ceníku nad vodoznakem */}
             <div className="relative" style={{ zIndex: 1 }}>
               {/* Střih & styling */}
               <div className="p-6 border-b">
@@ -421,12 +416,12 @@ export default function Site() {
         </div>
       </section>
 
-      {/* KONTAKT – dvousloupcově, pravá karta s vodoznakem textového loga */}
+      {/* KONTAKT */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
           {/* Levý sloupec */}
           <div>
-            <h2 className="text-2xl md:text-3xl font-semibold">Kontakt</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold">Kontakt a adresa kadeřnictví</h2>
             <div className="mt-4 flex flex-col gap-3 text-slate-700">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5" />
@@ -442,7 +437,6 @@ export default function Site() {
                   <div>{ADDRESS_CITY} – {ADDRESS_DISTRICT}</div>
                   <div>Okres Mladá Boleslav</div>
                   <div>{ADDRESS_COUNTRY}</div>
-                  {/* === NOVÉ: řádek s datem otevření === */}
                   <div className="mt-1 text-xs text-pink-600 font-medium">
                     🚪 Otevírám od 1.&nbsp;10.&nbsp;2025
                   </div>
@@ -487,7 +481,6 @@ export default function Site() {
                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
               />
               <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-20 px-12 shadow-xl text-center overflow-hidden">
-                {/* Vodoznak textového loga */}
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
@@ -500,7 +493,7 @@ export default function Site() {
                 >
                   <SmartImage
                     srcs={LOGO_TEXT}
-                    alt="Vlasy od Týnky – vodoznak textového loga"
+                    alt="Vlasy od Týnky – textové logo kadeřnictví"
                     className="max-w-[85%] md:max-w-[70%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
                     fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
                   />
@@ -516,13 +509,13 @@ export default function Site() {
         </div>
       </section>
 
-      {/* FOOTER – logo uprostřed, větší */}
+      {/* FOOTER */}
       <footer className="relative z-10 border-t bg-white/60 backdrop-blur">
         <div className="mx-auto max-w-6xl px-6 py-10 text-slate-600">
           <div className="flex flex-col items-center gap-4 text-center">
             <SmartImage
               srcs={LOGO_TEXT}
-              alt="Vlasy od Týnky – textové logo"
+              alt="Vlasy od Týnky – textové logo kadeřnictví Mladá Boleslav"
               className="h-12 md:h-16 w-auto object-contain"
               fallback={
                 <div
