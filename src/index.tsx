@@ -104,6 +104,14 @@ export default function Site() {
         <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
           {/* Levý sloupec */}
           <div>
+            {/* === NOVÉ: badge s datem otevření === */}
+            <div
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white mb-4"
+              style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+            >
+              🚪 Otevírám <strong className="font-semibold">od 1.&nbsp;10.&nbsp;2025</strong>
+            </div>
+
             <motion.h1
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -434,6 +442,10 @@ export default function Site() {
                   <div>{ADDRESS_CITY} – {ADDRESS_DISTRICT}</div>
                   <div>Okres Mladá Boleslav</div>
                   <div>{ADDRESS_COUNTRY}</div>
+                  {/* === NOVÉ: řádek s datem otevření === */}
+                  <div className="mt-1 text-xs text-pink-600 font-medium">
+                    🚪 Otevírám od 1.&nbsp;10.&nbsp;2025
+                  </div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
