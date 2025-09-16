@@ -1,8 +1,10 @@
+// src/index.tsx
 import React, { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/* Obrázek s fallbackem (zkouší srcs postupně) */
+/* ---------- Obrázek s fallbackem (zkouší srcs postupně) ---------- */
 function SmartImage({
   srcs,
   alt,
@@ -28,13 +30,14 @@ function SmartImage({
   return fallback;
 }
 
-export default function Site() {
-  /* Cesty k souborům v /public (SEO-názvy) */
-  const LOGO_MAIN = ["/kadernictvi-mlada-boleslav-logo.png"];
-  const LOGO_MAIN_TRANSPARENT = ["/kadernictvi-mlada-boleslav-logo-transparent.png"];
-  const LOGO_TEXT = ["/vlasy-od-tynky-text-logo.png"];
+/* ============================= STRÁNKA ============================= */
+function Site() {
+  /* Cesty k souborům v /public */
+  const LOGO_MAIN = ["/logo-siluety.png"]; // klasické siluety
+  const LOGO_MAIN_TRANSPARENT = ["/logo-siluety-transparent.png"]; // průhledné siluety (HERO)
+  const LOGO_TEXT = ["/logo-text.png"]; // textové logo
 
-  /* Adresa – sjednocená */
+  /* Adresa */
   const ADDRESS_LINE1 = "Zalužanská 1272";
   const ADDRESS_CITY = "293 01 Mladá Boleslav";
   const ADDRESS_DISTRICT = "Mladá Boleslav III";
@@ -49,7 +52,7 @@ export default function Site() {
   const PHONE_DISPLAY = "725 882 820";
 
   useEffect(() => {
-    document.title = "Kadeřnictví Vlasy od Týnky – Mladá Boleslav";
+    document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
   }, []);
 
   /* Pomocná komponenta pro akční ceny */
@@ -71,11 +74,10 @@ export default function Site() {
       {/* NAVBAR */}
       <header className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b">
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          {/* Logo + název */}
           <a href="#hero" className="flex items-center gap-3">
             <SmartImage
               srcs={LOGO_MAIN}
-              alt="Vlasy od Týnky – kadeřnictví Mladá Boleslav, logo se siluetami"
+              alt="Vlasy od Týnky – logo se siluetami"
               className="h-9 w-auto object-contain"
               fallback={
                 <div
@@ -89,7 +91,6 @@ export default function Site() {
             <span className="font-semibold">Vlasy od Týnky</span>
           </a>
 
-          {/* Menu */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#o-mne" className="hover:opacity-70">O mně</a>
             <a href="#sluzby" className="hover:opacity-70">Služby</a>
@@ -104,7 +105,7 @@ export default function Site() {
         <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
           {/* Levý sloupec */}
           <div>
-            {/* Badge s datem otevření */}
+            {/* badge – datum otevření */}
             <div
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white mb-4"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
@@ -118,7 +119,7 @@ export default function Site() {
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-semibold leading-tight"
             >
-              Kadeřnictví Vlasy od Týnky
+              Krásné vlasy,
               <span
                 className="block"
                 style={{
@@ -127,7 +128,7 @@ export default function Site() {
                   color: "transparent",
                 }}
               >
-                Mladá Boleslav
+                které si zamilujete
               </span>
             </motion.h1>
 
@@ -158,7 +159,7 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s glow + PRŮHLEDNÝM logem a CTA */}
+          {/* Pravý sloupec – karta s průhledným logem */}
           <div className="md:justify-self-end relative">
             <div
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
@@ -167,8 +168,8 @@ export default function Site() {
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
               <SmartImage
                 srcs={LOGO_MAIN_TRANSPARENT}
-                alt="Vlasy od Týnky – moderní logo kadeřnictví Mladá Boleslav"
-                className="mx-auto mb-2 h-32 w-auto object-contain"
+                alt="Vlasy od Týnky – logo se siluetami (transparentní)"
+                className="mx-auto mb-4 h-32 w-auto object-contain"
                 fallback={
                   <div
                     className="h-16 w-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-white"
@@ -178,9 +179,13 @@ export default function Site() {
                   </div>
                 }
               />
+
               <div className="text-2xl font-semibold">Vlasy od Týnky</div>
               <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
-              <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
+              <div className="mt-4 text-sm text-slate-600">
+                Objednávky přes sociální sítě nebo telefon.
+              </div>
+
               <div className="mt-5 flex flex-col gap-2">
                 <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
                   <Instagram className="h-4 w-4" /> Napsat na Instagramu
@@ -197,7 +202,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* AKCE – Otevírací akce říjen */}
+      {/* AKCE */}
       <section aria-label="Akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div
@@ -237,7 +242,7 @@ export default function Site() {
       {/* SLUŽBY */}
       <section id="sluzby" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-12">
-          <h2 className="text-2xl md:text-3xl font-semibold">Kadeřnické služby v Mladé Boleslavi</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold">S čím vám pomohu</h2>
           <div className="mt-6 grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Střihy</div>
@@ -293,7 +298,7 @@ export default function Site() {
           </div>
 
           <div className="flex items-center gap-3 mb-2">
-            <h2 className="text-2xl font-bold">Ceník kadeřnictví Vlasy od Týnky Mladá Boleslav</h2>
+            <h2 className="text-2xl font-bold">Ceník</h2>
             <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
               –20 % říjen • noví klienti
             </span>
@@ -304,6 +309,7 @@ export default function Site() {
           </p>
 
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
+            {/* vodoznak */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
@@ -317,14 +323,14 @@ export default function Site() {
             >
               <SmartImage
                 srcs={LOGO_MAIN}
-                alt="Vlasy od Týnky – vodoznak loga v kartě ceníku"
+                alt="Vlasy od Týnky – vodoznak v kartě ceníku"
                 className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
                 fallback={<div className="text-6xl font-bold text-slate-200">Vlasy od Týnky</div>}
               />
             </div>
 
+            {/* obsah ceníku */}
             <div className="relative" style={{ zIndex: 1 }}>
-              {/* Střih & styling */}
               <div className="p-6 border-b">
                 <div className="font-medium text-lg">✂️ Střih &amp; styling</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -358,7 +364,6 @@ export default function Site() {
                 </ul>
               </div>
 
-              {/* Barvení & melír */}
               <div className="p-6 border-b">
                 <div className="font-medium text-lg">🎨 Barvení &amp; melír</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -386,7 +391,6 @@ export default function Site() {
                 </ul>
               </div>
 
-              {/* Péče & regenerace */}
               <div className="p-6">
                 <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -419,27 +423,19 @@ export default function Site() {
       {/* KONTAKT */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
-          {/* Levý sloupec */}
           <div>
-            <h2 className="text-2xl md:text-3xl font-semibold">Kontakt a adresa kadeřnictví</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold">Kontakt</h2>
             <div className="mt-4 flex flex-col gap-3 text-slate-700">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5" />
                 <div>
-                  <a
-                    href={MAP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium hover:underline"
-                  >
+                  <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
                     {ADDRESS_LINE1}
                   </a>
                   <div>{ADDRESS_CITY} – {ADDRESS_DISTRICT}</div>
                   <div>Okres Mladá Boleslav</div>
                   <div>{ADDRESS_COUNTRY}</div>
-                  <div className="mt-1 text-xs text-pink-600 font-medium">
-                    🚪 Otevírám od 1.&nbsp;10.&nbsp;2025
-                  </div>
+                  <div className="mt-1 text-xs text-pink-600 font-medium">🚪 Otevírám od 1.&nbsp;10.&nbsp;2025</div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -452,9 +448,7 @@ export default function Site() {
               <div className="flex items-start gap-3">
                 <Phone className="h-5 w-5 mt-0.5" />
                 <div>
-                  <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">
-                    {PHONE_DISPLAY}
-                  </a>
+                  <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">{PHONE_DISPLAY}</a>
                   <div className="text-xs text-slate-500">Volejte nebo napište zprávu.</div>
                 </div>
               </div>
@@ -473,7 +467,7 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravá – větší karta s vodoznakem textového loga */}
+          {/* pravá karta s vodoznakem textového loga */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto">
               <div
@@ -493,7 +487,7 @@ export default function Site() {
                 >
                   <SmartImage
                     srcs={LOGO_TEXT}
-                    alt="Vlasy od Týnky – textové logo kadeřnictví"
+                    alt="Vlasy od Týnky – vodoznak textového loga"
                     className="max-w-[85%] md:max-w-[70%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
                     fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
                   />
@@ -515,7 +509,7 @@ export default function Site() {
           <div className="flex flex-col items-center gap-4 text-center">
             <SmartImage
               srcs={LOGO_TEXT}
-              alt="Vlasy od Týnky – textové logo kadeřnictví Mladá Boleslav"
+              alt="Vlasy od Týnky – textové logo"
               className="h-12 md:h-16 w-auto object-contain"
               fallback={
                 <div
@@ -546,3 +540,10 @@ export default function Site() {
     </div>
   );
 }
+
+/* bootstrap (pokud main.tsx už dělá mount, tenhle export stačí) */
+export default Site;
+
+// Pokud chceš mount přímo z tohoto souboru, odkomentuj:
+// const root = createRoot(document.getElementById("root")!);
+// root.render(<Site />);
