@@ -512,7 +512,7 @@ export default function Site() {
             <SmartImage
               srcs={LOGO_TEXT}
               alt="Vlasy od Týnky – textové logo"
-              className="h-20 md:h-28 w-auto object-contain"
+              className="h-32 md:h-40 w-auto object-contain"
               fallback={
                 <div
                   className="h-16 md:h-20 px-6 rounded-2xl flex items-center justify-center font-semibold text-white"
