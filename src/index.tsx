@@ -506,8 +506,7 @@ export default function Site() {
       {/* PODĚKOVÁNÍ – samostatný blok pod kontakty */}
       <section aria-label="Poděkování" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 pb-12">
-          <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-16 px-10 shadow-xl text-center overflow-hidden">
-            <div
+          <div className="relative max-w-sm mx-auto rounded-[2rem] border bg-white/70 backdrop-blur py-12 px-8 shadow-xl text-center overflow-hidden">            <div
               aria-hidden
               className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
               style={{
