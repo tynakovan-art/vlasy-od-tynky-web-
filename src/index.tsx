@@ -517,7 +517,7 @@ export default function Site() {
         {/* Vodoznak */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
           style={{
             WebkitMaskImage:
               "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
@@ -528,7 +528,7 @@ export default function Site() {
           <SmartImage
             srcs={LOGO_TEXT}
             alt="Vlasy od Týnky – vodoznak textového loga"
-            className="max-w-[70%] h-auto scale-100 blur-[1px] select-none pointer-events-none"
+            className="max-w-[70%] h-auto scale-100 blur-[0,5px] select-none pointer-events-none"
             fallback={<div className="text-3xl font-bold text-slate-200">Vlasy od Týnky</div>}
           />
         </div>
