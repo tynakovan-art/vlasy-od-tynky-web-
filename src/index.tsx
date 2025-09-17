@@ -292,7 +292,7 @@ export default function Site() {
           {/* H2 + štítek */}
           <div className="flex items-center gap-3 mb-2">
             <h2 className="text-2xl md:text-3xl font-semibold">
-              Ceník kadeřnictví Vlasy od Týnky Mladá Boleslav
+              Ceník
             </h2>
             <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
               –20 % říjen
