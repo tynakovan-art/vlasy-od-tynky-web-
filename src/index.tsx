@@ -101,7 +101,7 @@ export default function Site() {
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white mb-4"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             >
-              🚪 Otevírám <strong className="font-semibold">od 1.&nbsp;10.&nbsp;2025</strong>
+              🚪 Otevírám <strong className="font-semibold">1.&nbsp;10.&nbsp;2025</strong>
             </div>
 
             {/* H1 na 3 řádky (SEO) */}
@@ -436,7 +436,7 @@ export default function Site() {
                   <div>Okres Mladá Boleslav</div>
                   <div>{ADDRESS_COUNTRY}</div>
                   <div className="mt-1 text-xs text-pink-600 font-medium">
-                    🚪 Otevírám od 1.&nbsp;10.&nbsp;2025
+                    🚪 Otevírám 1.&nbsp;10.&nbsp;2025
                   </div>
                 </div>
               </div>
