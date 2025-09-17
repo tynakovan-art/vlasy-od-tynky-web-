@@ -520,7 +520,7 @@ export default function Site() {
               <SmartImage
                 srcs={LOGO_TEXT}
                 alt="Vlasy od Týnky – vodoznak textového loga"
-                className="max-w-[85%] md:max-w-[70%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
+                className="max-w-[60%] md:max-w-[40%] h-auto scale-90 blur-[1.5px] select-none pointer-events-none"
                 fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
               />
             </div>
