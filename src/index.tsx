@@ -29,10 +29,10 @@ function SmartImage({
 }
 
 export default function Site() {
-  /* Cesty k souborům v /public */
-  const LOGO_MAIN = ["/kadernictvi-mlada-boleslav-logo.png"];       // siluety (standardní)
-  const LOGO_MAIN_TRANSPARENT = ["/logo-siluety-transparent.png"];   // siluety s průhledným pozadím (použijeme v HERO)
-  const LOGO_TEXT = ["/vlasy-od-tynky-text-logo.png"];               // textové logo
+  /* Cesty k souborům v /public (POZOR na nové názvy) */
+  const LOGO_MAIN = ["/kadernictvi-mlada-boleslav-logo.png"];   // siluety (standardní)
+  const LOGO_MAIN_TRANSPARENT = ["/logo-siluety-transparent.png"]; // siluety s průhledným pozadím (jen v HERO)
+  const LOGO_TEXT = ["/vlasy-od-tynky-text-logo.png"];           // textové logo
 
   /* Adresa – sjednocená */
   const ADDRESS_LINE1 = "Zalužanská 1272";
@@ -112,7 +112,7 @@ export default function Site() {
               🚪 Otevírám <strong className="font-semibold">od 1.&nbsp;10.&nbsp;2025</strong>
             </div>
 
-            {/* H1 na 3 řádky */}
+            {/* SEO H1 na tři řádky */}
             <motion.h1
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -200,7 +200,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* AKCE – Otevírací akce říjen */}
+      {/* AKCE – Otevírací akce říjen (pro všechny zákazníky) */}
       <section aria-label="Akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div
@@ -215,7 +215,7 @@ export default function Site() {
                 🎉 Otevírací akce říjen
               </div>
               <div className="mt-3 text-sm md:text-base font-medium">
-                Po celý říjen nabízím <span className="font-bold">20% slevu</span> na všechny služby pro nové klienty.
+                Po celý říjen nabízím <span className="font-bold">20% slevu</span> na všechny služby <u>pro všechny zákazníky</u>.
               </div>
               <div className="text-xs md:text-sm text-slate-600">
                 Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
@@ -240,7 +240,9 @@ export default function Site() {
       {/* SLUŽBY */}
       <section id="sluzby" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-12">
-          <h2 className="text-2xl md:text-3xl font-semibold">Kadeřnické služby v Mladé Boleslavi</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold">
+            Kadeřnické služby v&nbsp;Mladé Boleslavi
+          </h2>
           <div className="mt-6 grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Střihy</div>
@@ -292,19 +294,21 @@ export default function Site() {
           <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
             <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen! 🎉</p>
             <p className="text-xs md:text-sm opacity-90">
-              Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí pro nové klienty po celý říjen 2025.
+              Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí po celý říjen 2025.
             </p>
           </div>
 
-          {/* Nadpis ceníku */}
+          {/* Nadpis ceníku se štítkem */}
           <div className="flex items-center gap-3 mb-2">
-            <h2 className="text-2xl font-bold">Ceník</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold">
+              Ceník kadeřnictví Vlasy od Týnky Mladá Boleslav
+            </h2>
             <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
-              –20 % říjen • noví klienti
+              –20 % říjen
             </span>
           </div>
           <p className="text-xs text-neutral-500 mb-4">
-            Akce –20 % pro nové klienty platí do 31. 10. 2025. Přeškrtnuté částky jsou původní ceny,
+            Akční ceny platí do 31. 10. 2025. Přeškrtnuté částky jsou původní ceny,
             zvýrazněné částky jsou akční ceny po slevě.
           </p>
 
@@ -424,7 +428,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* KONTAKT – dvousloupcově, pravá karta s vodoznakem textového loga */}
+      {/* KONTAKT */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
           {/* Levý sloupec */}
@@ -525,33 +529,14 @@ export default function Site() {
             <SmartImage
               srcs={LOGO_TEXT}
               alt="Vlasy od Týnky – textové logo"
-              className="h-12 md:h-16 w-auto object-contain"
+              className="h-16 md:h-20 w-auto object-contain"  /* zvětšeno */
               fallback={
                 <div
-                  className="h-12 md:h-16 px-6 rounded-2xl flex items-center justify-center font-semibold text-white"
+                  className="h-16 md:h-20 px-6 rounded-2xl flex items-center justify-center font-semibold text-white"
                   style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
                 >
                   Vlasy od Týnky
                 </div>
               }
             />
-            <div className="flex items-center gap-4 text-sm">
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
-                <Instagram className="h-4 w-4" /> Instagram
-              </a>
-              <span className="opacity-40">•</span>
-              <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
-                <Facebook className="h-4 w-4" /> Facebook
-              </a>
-              <span className="opacity-40">•</span>
-              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 hover:opacity-70">
-                <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
-              </a>
-            </div>
-            <div className="text-xs text-slate-500">© {new Date().getFullYear()} Vlasy od Týnky</div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
+            <div className="flex
