@@ -503,33 +503,47 @@ export default function Site() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ – samostatný blok pod kontakty */}
-      <section aria-label="Poděkování" className="relative z-10">
-        <div className="mx-auto max-w-6xl px-6 pb-12">
-          <div className="relative max-w-sm mx-auto rounded-[2rem] border bg-white/70 backdrop-blur py-12 px-8 shadow-xl text-center overflow-hidden">            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
-              style={{
-                WebkitMaskImage:
-                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-                maskImage:
-                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-              }}
-            >
-              <SmartImage
-                srcs={LOGO_TEXT}
-                alt="Vlasy od Týnky – vodoznak textového loga"
-                className="max-w-[60%] md:max-w-[40%] h-auto scale-90 blur-[1.5px] select-none pointer-events-none"
-                fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
-              />
-            </div>
-            <div className="relative z-10">
-              <div className="text-lg md:text-xl font-semibold">Děkuji za návštěvu 💜</div>
-              <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na {ADDRESS_LINE1}, {ADDRESS_CITY}.</div>
-            </div>
+     {/* PODĚKOVÁNÍ */}
+<section className="relative z-10">
+  <div className="mx-auto max-w-6xl px-6 py-16">
+    <div className="relative max-w-sm mx-auto">
+      {/* Glow efekt */}
+      <div
+        className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
+        style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+      />
+      {/* Užší karta */}
+      <div className="relative max-w-sm mx-auto rounded-[2rem] border bg-white/70 backdrop-blur py-12 px-8 shadow-xl text-center overflow-hidden">
+        {/* Vodoznak */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+          style={{
+            WebkitMaskImage:
+              "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+            maskImage:
+              "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+          }}
+        >
+          <SmartImage
+            srcs={LOGO_TEXT}
+            alt="Vlasy od Týnky – vodoznak textového loga"
+            className="max-w-[70%] h-auto scale-100 blur-[1px] select-none pointer-events-none"
+            fallback={<div className="text-3xl font-bold text-slate-200">Vlasy od Týnky</div>}
+          />
+        </div>
+
+        {/* Text poděkování */}
+        <div className="relative z-10">
+          <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
+          <div className="mt-2 text-sm text-slate-600">
+            Těším se na vás v salonu na {ADDRESS_LINE1}.
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* FOOTER – logo uprostřed, VĚTŠÍ */}
       <footer className="relative z-10 border-t bg-white/60 backdrop-blur">
