@@ -515,7 +515,7 @@ export default function Site() {
               className="h-32 md:h-40 w-auto object-contain"
               fallback={
                 <div
-                  className="h-16 md:h-20 px-6 rounded-2xl flex items-center justify-center font-semibold text-white"
+                  className="h-32 md:h-40 px-6 rounded-2xl flex items-center justify-center font-semibold text-white"
                   style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
                 >
                   Vlasy od Týnky
