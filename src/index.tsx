@@ -513,7 +513,7 @@ export default function Site() {
         style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
       />
       {/* Užší karta */}
-      <div className="relative max-w-sm mx-auto rounded-[2rem] border bg-white/70 backdrop-blur py-12 px-8 shadow-xl text-center overflow-hidden">
+      <div className="relative max-w-sm mx-auto rounded-[2rem] border bg-white/70 backdrop-blur py-16 px-8 shadow-xl text-center overflow-hidden">
         {/* Vodoznak */}
         <div
           aria-hidden
