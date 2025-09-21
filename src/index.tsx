@@ -42,8 +42,8 @@ export default function Site() {
     `https://www.google.com/maps?q=${MAP_QUERY}&output=embed`;
 
   /* LOGA (jen dva soubory z /public) */
-  const LOGO_TEXT_OR_TRANSPARENT = ["/kadeřnictví - logo bez .png"];
-  const LOGO_SILUETY = ["/Mladá Boleslav - logo.png"];
+  const kadeřnictví - logo bez .png = ["/kadeřnictví - logo bez .png"];
+  const Mladá Boleslav - logo.png= ["/Mladá Boleslav - logo.png"];
 
   useEffect(() => {
     document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
