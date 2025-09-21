@@ -56,7 +56,7 @@ export default function Site() {
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
           <a href="#hero" className="flex items-center gap-3">
             <SmartImage
-              srcs={LOGO_SILUETY}
+              srcs={Mladá Boleslav - logo.png}
               className="h-9 w-auto object-contain"
               fallback={
                 <div
@@ -137,7 +137,7 @@ export default function Site() {
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
               <SmartImage
-                srcs={LOGO_TEXT_OR_TRANSPARENT}
+                srcs={kadeřnictví - logo bez .png}
                 className="mx-auto mb-2 h-32 w-auto object-contain"
                 fallback={
                   <div
@@ -281,7 +281,7 @@ export default function Site() {
               }}
             >
               <SmartImage
-                srcs={LOGO_SILUETY}
+                srcs={Mladá Boleslav - logo.png}
                 className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.2px] select-none pointer-events-none"
               />
             </div>
@@ -442,7 +442,7 @@ export default function Site() {
                   }}
                 >
                   <SmartImage
-                    srcs={LOGO_TEXT_OR_TRANSPARENT}
+                    srcs={kadeřnictví - logo bez .png}
                     className="max-w-[75%] md:max-w-[60%] h-auto scale-110 blur-[1.2px] select-none pointer-events-none"
                   />
                 </div>
@@ -462,7 +462,7 @@ export default function Site() {
         <div className="mx-auto max-w-6xl px-6 py-10 text-slate-600">
           <div className="flex flex-col items-center gap-4 text-center">
             <SmartImage
-              srcs={LOGO_TEXT_OR_TRANSPARENT}
+              srcs={kadeřnictví - logo bez .png}
               className="h-16 md:h-20 w-auto object-contain" /* větší */
               fallback={
                 <div
