@@ -1,42 +1,94 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/* ZÁKLADNÍ KONFIG */
-const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
-const FB_URL = "https://www.facebook.com/vlasyodtynky/";
-const PHONE_RAW = "725882820";
-const PHONE_DISPLAY = "725 882 820";
-
-const ADDRESS_LINE1 = "Zalužanská 1272";
-const ADDRESS_CITY = "293 01 Mladá Boleslav";
-const ADDRESS_DISTRICT = "Mladá Boleslav III";
-const MAP_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(
-  `${ADDRESS_LINE1}, ${ADDRESS_CITY}`
-)}&hl=cs&output=embed`;
-
-const PriceStrike = ({ oldLabel, newLabel }: { oldLabel: string; newLabel: string }) => (
-  <div className="flex items-baseline gap-2">
-    <span className="text-sm text-slate-400 line-through">{oldLabel}</span>
-    <span className="font-semibold text-pink-600">{newLabel}</span>
-  </div>
-);
+/* Obrázek s fallbackem (zkouší srcs postupně) */
+function SmartImage({
+  srcs,
+  alt,
+  className,
+  fallback,
+}: {
+  srcs: string[];
+  alt?: string;
+  className?: string;
+  fallback: JSX.Element;
+}) {
+  const [i, setI] = useState(0);
+  if (i < srcs.length) {
+    return (
+      <img
+        src={srcs[i]}
+        alt={alt ?? ""}
+        className={className}
+        onError={() => setI((v) => v + 1)}
+        loading="lazy"
+      />
+    );
+  }
+  return fallback;
+}
 
 export default function Site() {
+  /* Cesty k souborům v /public */
+  const LOGO_SILUETY = ["/logo-siluety.png"]; // navbar + vodoznak v ceníku
+  const LOGO_TEXT = ["/logo-text.png"];       // hero + footer + vodoznak „Poděkování“
+
+  /* Adresa */
+  const ADDRESS_LINE1 = "Zalužanská 1272";
+  const ADDRESS_CITY = "293 01 Mladá Boleslav";
+  const ADDRESS_DISTRICT = "Mladá Boleslav III";
+  const ADDRESS_COUNTRY = "Česko";
+
+  /* Kontakty */
+  const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
+  const FB_URL = "https://www.facebook.com/vlasyodtynky/";
+  const MAP_QUERY = encodeURIComponent(`${ADDRESS_LINE1}, ${ADDRESS_CITY}`);
+  const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
+  const PHONE_RAW = "725882820";
+  const PHONE_DISPLAY = "725 882 820";
+
   useEffect(() => {
     document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
   }, []);
+
+  /* Pomocná komponenta pro akční ceny */
+  const PriceStrike = ({
+    oldLabel,
+    newLabel,
+  }: {
+    oldLabel: string;
+    newLabel: string;
+  }) => (
+    <div className="flex items-baseline gap-2">
+      <span className="text-sm text-slate-400 line-through">{oldLabel}</span>
+      <span className="font-semibold text-pink-600">{newLabel}</span>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
       {/* NAVBAR */}
       <header className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b">
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+          {/* Logo + název */}
           <a href="#hero" className="flex items-center gap-3">
-            <img src="/logo-siluety.png" className="h-9 w-auto object-contain" />
+            <SmartImage
+              srcs={LOGO_SILUETY}
+              className="h-9 w-auto object-contain"
+              fallback={
+                <div
+                  className="h-9 w-9 rounded-xl flex items-center justify-center text-white"
+                  style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+                >
+                  <Scissors className="h-5 w-5" />
+                </div>
+              }
+            />
             <span className="font-semibold">Vlasy od Týnky</span>
           </a>
 
+          {/* Menu */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#o-mne" className="hover:opacity-70">O mně</a>
             <a href="#sluzby" className="hover:opacity-70">Služby</a>
@@ -49,7 +101,7 @@ export default function Site() {
       {/* HERO */}
       <section id="hero" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
-          {/* Levá strana */}
+          {/* Levý sloupec */}
           <div>
             {/* Badge s datem otevření */}
             <div
@@ -65,7 +117,8 @@ export default function Site() {
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-semibold leading-tight"
             >
-              <span className="block">Kadeřnictví</span>
+              Kadeřnictví
+              <span className="block">Vlasy od Týnky</span>
               <span
                 className="block"
                 style={{
@@ -74,11 +127,9 @@ export default function Site() {
                   color: "transparent",
                 }}
               >
-                Vlasy od Týnky
+                Mladá Boleslav
               </span>
-              <span className="block">Mladá Boleslav</span>
             </motion.h1>
-
             <p className="mt-5 text-slate-600 md:text-lg max-w-prose">
               Precizní střihy, barvení i melír v příjemné atmosféře.
               Objednejte se a dopřejte vlasům péči, kterou si zaslouží.
@@ -106,28 +157,28 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravá karta s logem */}
+          {/* Pravý sloupec – karta s LOGO-TEXT */}
           <div className="md:justify-self-end relative">
             <div
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
-              <img src="/logo-siluety.png" className="mx-auto mb-2 h-32 w-auto object-contain" />
+              <SmartImage
+                srcs={LOGO_TEXT}
+                className="mx-auto mb-2 h-32 w-auto object-contain"
+                fallback={
+                  <div
+                    className="h-16 w-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-white"
+                    style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+                  >
+                    <Scissors className="h-8 w-8" />
+                  </div>
+                }
+              />
               <div className="text-2xl font-semibold">Vlasy od Týnky</div>
               <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
               <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
-              <div className="mt-5 flex flex-col gap-2">
-                <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
-                  <Instagram className="h-4 w-4" /> Napsat na Instagramu
-                </a>
-                <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
-                  <Facebook className="h-4 w-4" /> Napsat na Facebooku
-                </a>
-                <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
-                  <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -145,10 +196,10 @@ export default function Site() {
                 className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm md:text-lg font-semibold text-white"
                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
               >
-                🎉 Otevírací akce říjen — pro všechny zákazníky
+                🎉 Otevírací akce říjen
               </div>
               <div className="mt-3 text-sm md:text-base font-medium">
-                Po celý říjen nabízím <span className="font-bold">20% slevu</span> na všechny služby.
+                Po celý říjen nabízím <span className="font-bold">20% slevu</span> na všechny služby <strong>pro všechny zákazníky</strong>.
               </div>
               <div className="text-xs md:text-sm text-slate-600">
                 Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
@@ -223,20 +274,18 @@ export default function Site() {
         <div className="relative mx-auto max-w-6xl px-6 py-16">
           {/* Banner nad ceníkem */}
           <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
-            <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen!</p>
+            <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen! 🎉</p>
             <p className="text-xs md:text-sm opacity-90">
-              Zvýhodněné ceny platí pro všechny zákazníky po celý říjen 2025.
+              Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí pro všechny zákazníky po celý říjen 2025.
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold">Ceník</h2>
-          <p className="text-xs text-neutral-500 mb-4">
-            Přeškrtnuté částky jsou původní ceny, zvýrazněné částky jsou akční ceny po slevě.
-          </p>
+          {/* Nadpis ceníku */}
+          <h2 className="text-2xl font-bold mb-4">Ceník</h2>
 
-          {/* Karta ceníku s vodoznakem */}
+          {/* Karta ceníku */}
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
-            {/* vodoznak uvnitř */}
+            {/* Vodoznak uvnitř karty (siluety) */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
@@ -248,9 +297,14 @@ export default function Site() {
                   "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
               }}
             >
-              <img src="/logo-siluety.png" className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none" />
+              <SmartImage
+                srcs={LOGO_SILUETY}
+                className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
+                fallback={<div className="text-6xl font-bold text-slate-200">Vlasy od Týnky</div>}
+              />
             </div>
 
+            {/* Obsah ceníku nad vodoznakem */}
             <div className="relative" style={{ zIndex: 1 }}>
               {/* Střih & styling */}
               <div className="p-6 border-b">
@@ -344,18 +398,27 @@ export default function Site() {
         </div>
       </section>
 
-      {/* KONTAKT (vpravo mapa) */}
+      {/* KONTAKT + MAPA */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
-          {/* Levá strana */}
+          {/* Levý sloupec – info */}
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold">Kontakt</h2>
             <div className="mt-4 flex flex-col gap-3 text-slate-700">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5" />
                 <div>
-                  <div className="font-medium">{ADDRESS_LINE1}</div>
+                  <a
+                    href={MAP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium hover:underline"
+                  >
+                    {ADDRESS_LINE1}
+                  </a>
                   <div>{ADDRESS_CITY} – {ADDRESS_DISTRICT}</div>
+                  <div>Okres Mladá Boleslav</div>
+                  <div>{ADDRESS_COUNTRY}</div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -389,7 +452,7 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravá strana – MAPA */}
+          {/* Pravý sloupec – interaktivní mapa */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto w-full">
               <div
@@ -397,33 +460,34 @@ export default function Site() {
                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
               />
               <div className="relative rounded-[2rem] border bg-white overflow-hidden shadow-xl">
-                <div className="aspect-[4/3] w-full">
-                  <iframe
-                    src={MAP_EMBED}
-                    className="h-full w-full border-0"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
+                <iframe
+                  title="Mapa – Vlasy od Týnky"
+                  className="w-full h-[360px]"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps?q=${MAP_QUERY}&hl=cs&z=16&output=embed`}
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ – užší karta pod kontakty */}
+      {/* PODĚKOVÁNÍ – užší karta, trochu vyšší, sytější vodoznak LOGO_TEXT */}
       <section aria-label="Poděkování" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 pb-16">
-          <div className="mx-auto max-w-md relative">
+          <div className="relative max-w-md mx-auto">
             <div
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-24 px-10 shadow-xl text-center overflow-hidden">
-              {/* vodoznak textového loga (lehce sytější) */}
+              {/* Sytější vodoznak */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15"
+                className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
                 style={{
                   WebkitMaskImage:
                     "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
@@ -431,25 +495,38 @@ export default function Site() {
                     "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
                 }}
               >
-                <img src="/logo-text.png" className="max-w-[70%] h-auto scale-110 blur-[1.2px] select-none pointer-events-none" />
+                <SmartImage
+                  srcs={LOGO_TEXT}
+                  className="max-w-[85%] md:max-w-[70%] h-auto scale-110 blur-[1.2px] select-none pointer-events-none"
+                  fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
+                />
               </div>
 
               <div className="relative z-10">
                 <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
-                <div className="mt-2 text-sm text-slate-600">
-                  Těším se na vás v salonu na {ADDRESS_LINE1}.
-                </div>
+                <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na {ADDRESS_LINE1}.</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER – textové logo větší */}
       <footer className="relative z-10 border-t bg-white/60 backdrop-blur">
         <div className="mx-auto max-w-6xl px-6 py-10 text-slate-600">
           <div className="flex flex-col items-center gap-4 text-center">
-            <img src="/logo-text.png" className="h-24 md:h-28 w-auto object-contain" />
+            <SmartImage
+              srcs={LOGO_TEXT}
+              className="h-16 md:h-20 w-auto object-contain"
+              fallback={
+                <div
+                  className="h-16 md:h-20 px-6 rounded-2xl flex items-center justify-center font-semibold text-white"
+                  style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+                >
+                  Vlasy od Týnky
+                </div>
+              }
+            />
             <div className="flex items-center gap-4 text-sm">
               <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
                 <Instagram className="h-4 w-4" /> Instagram
