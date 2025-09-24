@@ -142,15 +142,15 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s logem + CTA (původní velikost) */}
+          {/* Pravý sloupec – karta s logem + CTA (původní velikost karty, menší logo) */}
           <div className="md:justify-self-end relative">
             <div
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
-              {/* V HERO používáme logo-text.png */}
-              <SmartImage srcs={LOGO_TEXT} className="mx-auto mb-2 h-32 w-auto object-contain" />
+              {/* V HERO používáme logo-text.png – menší h-28 */}
+              <SmartImage srcs={LOGO_TEXT} className="mx-auto mb-2 h-28 w-auto object-contain" />
               <div className="text-2xl font-semibold">Vlasy od Týnky</div>
               <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
               <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
@@ -392,7 +392,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* KONTAKT + MAPA VPRAVO */}
+      {/* KONTAKT + MAPA */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
           {/* Levý sloupec */}
@@ -462,7 +462,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ – užší karta, menší (ještě menší) logo uvnitř */}
+      {/* PODĚKOVÁNÍ */}
       <section className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 pb-16">
           <div className="relative max-w-[560px] mx-auto">
@@ -471,7 +471,6 @@ export default function Site() {
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-24 px-10 shadow-xl text-center overflow-hidden">
-              {/* Vodoznak LOGO_TEXT – trošku sytější a MENŠÍ, aby se vešel */}
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
