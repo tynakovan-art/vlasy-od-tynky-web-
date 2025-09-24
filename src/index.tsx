@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/* Jednoduché obrázky s fallbackem */
+/* Obrázek s fallbackem */
 function SmartImage({
   srcs,
   className,
@@ -26,11 +26,11 @@ function SmartImage({
 }
 
 export default function Site() {
-  // Cesty na obrázky v /public
+  // Cesty obrázků v /public
   const LOGO_SILUETY = ["/logo-siluety.png"];
   const LOGO_TEXT = ["/logo-text.png"];
 
-  // Základní údaje
+  // Údaje
   const ADDRESS_LINE1 = "Zalužanská 1272";
   const ADDRESS_CITY = "293 01 Mladá Boleslav";
   const ADDRESS_DISTRICT = "Mladá Boleslav III";
@@ -148,7 +148,6 @@ export default function Site() {
 
           {/* Pravý sloupec – karta s logem (původní velikost) */}
           <div className="md:justify-self-end relative">
-            {/* glow */}
             <div
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
@@ -185,7 +184,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* Otevírací akce – BANÉR NAD SLUŽBAMI */}
+      {/* Otevírací akce – BANÉR NAD SLUŽBAMI (beze změn) */}
       <section aria-label="Otevírací akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div
@@ -273,6 +272,14 @@ export default function Site() {
       {/* CENÍK */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
+          {/* >>> NOVÝ BANÉR NAD CENÍKEM <<< */}
+          <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
+            <p className="text-lg font-semibold">🎉 Otevírací sleva –20&nbsp;% celý říjen! 🎉</p>
+            <p className="text-xs md:text-sm opacity-90">
+              Původní ceny jsou přeškrtnuté. Zvýhodněné ceny platí <strong>pro všechny zákazníky</strong> po celý říjen 2025.
+            </p>
+          </div>
+
           {/* Nadpis ceníku se štítkem (–20% červeně) */}
           <div className="flex items-center gap-3 mb-2">
             <h2 className="text-2xl md:text-3xl font-bold">Ceník</h2>
@@ -465,7 +472,7 @@ export default function Site() {
           </div>
         </div>
 
-        {/* Poděkovací karta (užší) s menším vodoznakem LOGO_TEXT */}
+        {/* Poděkovací karta – vodoznak o KOUSEK menší */}
         <div className="mx-auto max-w-6xl px-6 pb-10">
           <div className="relative max-w-md mx-auto">
             <div
@@ -473,7 +480,6 @@ export default function Site() {
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-20 px-10 shadow-xl text-center overflow-hidden">
-              {/* menší, sytější vodoznak */}
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.14]"
@@ -486,7 +492,7 @@ export default function Site() {
               >
                 <SmartImage
                   srcs={LOGO_TEXT}
-                  className="max-w-[60%] md:max-w-[55%] h-auto blur-[0.8px] select-none pointer-events-none"
+                  className="max-w-[48%] md:max-w-[44%] h-auto blur-[0.8px] select-none pointer-events-none"
                   fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
                 />
               </div>
