@@ -5,33 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Vlasy od Týnky – kadeřnictví Mladá Boleslav</title>
-    <meta name="description" content="Kadeřnictví Vlasy od Týnky – střih, barvení, melír a péče v příjemné atmosféře. Zalužanská 1272, 293 01 Mladá Boleslav. Akce −20 % celý říjen." />
+    <meta
+      name="description"
+      content="Střih, barvení, melír a péče v příjemné atmosféře. Vlasy od Týnky – Zalužanská 1272, 293 01 Mladá Boleslav. Akce –20 % pro všechny klienty v říjnu 2025."
+    />
 
-    <!-- Icons -->
+    <!-- Favicon + platform ikony -->
     <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
 
-    <!-- Open Graph -->
+    <!-- PWA / Android -->
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#b57bff" />
+
+    <!-- Open Graph (náhled při sdílení) -->
     <meta property="og:title" content="Vlasy od Týnky – kadeřnictví Mladá Boleslav" />
-    <meta property="og:description" content="Střih, barvení, melír a péče v příjemné atmosféře. Akce −20 % celý říjen (pro všechny zákazníky)." />
+    <meta property="og:description" content="Střih, barvení, melír a péče v příjemné atmosféře. Akce –20 % pro všechny klienty v říjnu." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vlasyodtynky-mb.cz/" />
     <meta property="og:image" content="/logo-siluety.png" />
     <meta property="og:locale" content="cs_CZ" />
-    <meta name="theme-color" content="#b57bff" />
 
-    <!-- Tailwind přes CDN (rychlé spuštění) -->
+    <!-- Tailwind přes CDN (pokud používáš build Tailwindu, tenhle řádek smaž) -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3C9XLZ6QR"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-X3C9XLZ6QR');
-    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
