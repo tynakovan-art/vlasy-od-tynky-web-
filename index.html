@@ -1,41 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Vlasy od Týnky – kadeřnictví Mladá Boleslav</title>
-    <meta
-      name="description"
-      content="Střih, barvení, melír a péče v příjemné atmosféře. Vlasy od Týnky – Zalužanská 1272, 293 01 Mladá Boleslav. Sleva –20 % celý říjen 2025."
-    />
+    <meta name="description" content="Kadeřnictví Vlasy od Týnky – střih, barvení, melír a péče v příjemné atmosféře. Zalužanská 1272, 293 01 Mladá Boleslav. Akce −20 % celý říjen." />
 
-    <!-- Favicon -->
+    <!-- Icons -->
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Apple iOS ikona -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-
-    <!-- Android (Chrome) ikony -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-
-    <!-- Web manifest (pro Android PWA) -->
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Open Graph náhled (FB / Messenger / WhatsApp) -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Vlasy od Týnky – kadeřnictví Mladá Boleslav" />
-    <meta property="og:description" content="Střih, barvení, melír a péče v příjemné atmosféře. Sleva –20 % celý říjen 2025." />
+    <meta property="og:description" content="Střih, barvení, melír a péče v příjemné atmosféře. Akce −20 % celý říjen (pro všechny zákazníky)." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vlasyodtynky-mb.cz/" />
     <meta property="og:image" content="/logo-siluety.png" />
     <meta property="og:locale" content="cs_CZ" />
-
-    <!-- Barva lišty v mobilu -->
     <meta name="theme-color" content="#b57bff" />
 
-    <!-- Tailwind přes CDN (pokud nepoužíváš build Tailwindu) -->
+    <!-- Tailwind přes CDN (rychlé spuštění) -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3C9XLZ6QR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-X3C9XLZ6QR');
+    </script>
   </head>
   <body>
     <div id="root"></div>
