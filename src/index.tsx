@@ -1,35 +1,62 @@
-import React, { useEffect } from "react";
-import { createRoot } from "react-dom/client";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/* Konstanty */
-const ADDRESS_LINE1 = "Zalužanská 1272";
-const ADDRESS_CITY = "293 01 Mladá Boleslav";
-const MAP_URL = `https://www.google.com/maps?q=${encodeURIComponent(`${ADDRESS_LINE1}, ${ADDRESS_CITY}`)}`;
-const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
-const FB_URL = "https://www.facebook.com/vlasyodtynky/";
-const PHONE_RAW = "725882820";
-const PHONE_DISPLAY = "725 882 820";
+/* Jednoduchý <img> s fallbackem */
+function SmartImage({
+  srcs,
+  alt,
+  className,
+  fallback,
+}: {
+  srcs: string[];
+  alt: string;
+  className?: string;
+  fallback: JSX.Element;
+}) {
+  const [i, setI] = useState(0);
+  if (i < srcs.length) {
+    return (
+      <img
+        src={srcs[i]}
+        alt={alt}
+        className={className}
+        onError={() => setI((v) => v + 1)}
+      />
+    );
+  }
+  return fallback;
+}
 
-/* Pomůcka: gradient text pro “Vlasy od Týnky” */
-const GradientText: React.FC<{ className?: string; children: React.ReactNode }> = ({ className, children }) => (
-  <span
-    className={className}
-    style={{
-      background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-      WebkitBackgroundClip: "text",
-      color: "transparent",
-    }}
-  >
-    {children}
-  </span>
-);
+export default function Site() {
+  /* === JEDINÉ POUŽÍVANÉ SOUBORY LOG === */
+  const LOGO_SILUETY = ["/logo-siluety.png"];
+  const LOGO_TEXT = ["/logo-text.png"];
 
-const App: React.FC = () => {
+  /* Adresa & kontakty */
+  const ADDRESS_LINE1 = "Zalužanská 1272";
+  const ADDRESS_CITY = "293 01 Mladá Boleslav";
+  const ADDRESS_DISTRICT = "Mladá Boleslav III";
+  const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
+  const FB_URL = "https://www.facebook.com/vlasyodtynky/";
+  const PHONE_RAW = "725882820";
+  const PHONE_DISPLAY = "725 882 820";
+  const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${ADDRESS_LINE1}, ${ADDRESS_CITY}`
+  )}`;
+
   useEffect(() => {
     document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
   }, []);
+
+  const PriceStrike = ({ oldLabel, newLabel }: { oldLabel: string; newLabel: string }) => (
+    <div className="flex items-baseline gap-2">
+      <span className="text-sm text-slate-400 line-through">{oldLabel}</span>
+      <span className="font-semibold text-pink-600">{newLabel}</span>
+    </div>
+  );
+
+  const gradient = "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)";
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
@@ -37,7 +64,12 @@ const App: React.FC = () => {
       <header className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b">
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
           <a href="#hero" className="flex items-center gap-3">
-            <img src="/logo-siluety.png" className="h-9 w-auto object-contain" alt="" />
+            <SmartImage
+              srcs={LOGO_SILUETY}
+              alt="Vlasy od Týnky – logo"
+              className="h-9 w-auto object-contain"
+              fallback={<Scissors className="h-6 w-6 text-pink-500" />}
+            />
             <span className="font-semibold">Vlasy od Týnky</span>
           </a>
           <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -51,12 +83,13 @@ const App: React.FC = () => {
 
       {/* HERO */}
       <section id="hero" className="relative z-10">
-        <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
-          {/* Levý sloupec – přesně tři řádky H1, gradient jen prostřední */}
+        <div className="mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
+          {/* Levá část */}
           <div>
+            {/* Badge s datem otevření – dveře */}
             <div
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white mb-4"
-              style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+              style={{ background: gradient }}
             >
               🚪 Otevírám 1.&nbsp;10.&nbsp;2025
             </div>
@@ -67,49 +100,55 @@ const App: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-semibold leading-tight"
             >
-              <span className="block">Kadeřnictví</span>
-              <GradientText className="block">Vlasy od Týnky</GradientText>
-              <span className="block">Mladá Boleslav</span>
+              Kadeřnictví{" "}
+              <span
+                className="block"
+                style={{ background: gradient, WebkitBackgroundClip: "text", color: "transparent" }}
+              >
+                Vlasy od Týnky
+              </span>
+              Mladá Boleslav
             </motion.h1>
 
             <p className="mt-5 text-slate-600 md:text-lg max-w-prose">
-              Precizní střihy, barvení i melír v příjemné atmosféře. Objednejte se a dopřejte vlasům péči, kterou si zaslouží.
+              Precizní střihy, barvení i melír v příjemné atmosféře.
+              Objednejte se a dopřejte vlasům péči, kterou si zaslouží.
             </p>
-
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a href={`tel:${PHONE_RAW}`} className="rounded-2xl px-5 py-3 text-white shadow-md text-sm font-medium"
-                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
-                📞 Zavolat {PHONE_DISPLAY}
-              </a>
-              <a href="#sluzby" className="rounded-2xl px-5 py-3 border text-sm font-medium bg-white/70 backdrop-blur hover:bg-white">
-                Prohlédnout služby
-              </a>
-            </div>
-
-            <div className="mt-3 text-xs text-slate-500 flex items-center gap-2">
-              <span>🌟</span>
-              <span>Individuální přístup • Příjemné prostředí</span>
-            </div>
           </div>
 
-          {/* Pravý sloupec – karta v původní velikosti s LOGO TEXTEM + CTA */}
+          {/* Pravá část – karta s logem (původní velikost) */}
           <div className="md:justify-self-end relative">
-            <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
-                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }} />
-            <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden max-w-md">
-              <img src="/logo-text.png" className="mx-auto mb-2 h-32 w-auto object-contain" alt="" />
-              <div className="text-2xl font-semibold">Vlasy od Týnky</div>
-              <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
-              <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
+            <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl" style={{ background: gradient }} />
+            <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center">
+              <SmartImage
+                srcs={LOGO_TEXT}
+                alt="Vlasy od Týnky – textové logo"
+                className="mx-auto mb-4 h-24 w-auto object-contain"
+                fallback={<Scissors className="h-10 w-10 text-pink-500 mx-auto" />}
+              />
+              <div className="text-lg font-medium">Objednávky přes sociální sítě nebo telefon.</div>
               <div className="mt-5 flex flex-col gap-2">
-                <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
-                  <Instagram className="h-4 w-4" /> Napsat na Instagramu
+                <a
+                  href={IG_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
+                >
+                  <Instagram className="h-4 w-4" /> Instagram
                 </a>
-                <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
-                  <Facebook className="h-4 w-4" /> Napsat na Facebooku
+                <a
+                  href={FB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
+                >
+                  <Facebook className="h-4 w-4" /> Facebook
                 </a>
-                <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
-                   style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
+                <a
+                  href={`tel:${PHONE_RAW}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
+                  style={{ background: gradient }}
+                >
                   <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
                 </a>
               </div>
@@ -118,32 +157,38 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* OTEVÍRACÍ AKCE – BANNER NAD SLUŽBAMI (pro všechny zákazníky) */}
+      {/* BANÉR – Otevírací akce NAD SLUŽBAMI */}
       <section aria-label="Akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="rounded-2xl border bg-white/70 backdrop-blur p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-               style={{ boxShadow: "0 6px 24px rgba(0,0,0,0.06)" }}>
+          <div
+            className="rounded-2xl border bg-white/70 backdrop-blur p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow-md"
+          >
             <div className="text-slate-800">
-              <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm md:text-lg font-semibold text-white"
-                   style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
+              <div
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm md:text-lg font-semibold text-white"
+                style={{ background: gradient }}
+              >
                 🎉 Otevírací akce říjen
               </div>
               <div className="mt-3 text-sm md:text-base font-medium">
-                Po celý říjen nabízím <span className="font-bold">20 % slevu</span> na všechny služby <strong>pro všechny zákazníky</strong>.
+                Po celý říjen nabízím <span className="font-bold">20% slevu</span> na všechny služby.
               </div>
               <div className="text-xs md:text-sm text-slate-600">
-                Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
-              </div>
-              <div className="mt-2 text-xs md:text-sm text-slate-600">
                 📍 {ADDRESS_LINE1}, {ADDRESS_CITY}
               </div>
             </div>
             <div className="flex gap-2">
-              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
-                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
+              <a
+                href={`tel:${PHONE_RAW}`}
+                className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
+                style={{ background: gradient }}
+              >
                 <Phone className="h-4 w-4 mr-1" /> Zavolat {PHONE_DISPLAY}
               </a>
-              <a href="#cenik" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
+              <a
+                href="#cenik"
+                className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
+              >
                 Mrknout na ceník
               </a>
             </div>
@@ -158,19 +203,19 @@ const App: React.FC = () => {
           <div className="mt-6 grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Střihy</div>
-              <p className="mt-2 text-sm text-slate-600">Dámský, pánský i dětský střih. Vždy s konzultací, mytím, foukanou a stylingem podle potřeby.</p>
+              <p className="mt-2 text-sm text-slate-600">Dámský, pánský i dětský střih, konzultace, foukaná a styling.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Barvení a tónování</div>
-              <p className="mt-2 text-sm text-slate-600">Jemné i výrazné změny. Tónování slouží k doladění odstínu a neutralizaci nežádoucích tónů.</p>
+              <p className="mt-2 text-sm text-slate-600">Jemné i výrazné změny, doladění odstínu a neutralizace tónů.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Melír / Mikromelír</div>
-              <p className="mt-2 text-sm text-slate-600">Prosvětlení a struktura účesu pomocí jemných pramínků. Přirozený, vzdušný výsledek.</p>
+              <p className="mt-2 text-sm text-slate-600">Prosvětlení účesu jemnými pramínky pro přirozený výsledek.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Vlasová péče</div>
-              <p className="mt-2 text-sm text-slate-600">Hloubkové čištění pokožky a péče po barvení/melíru pro sílu a lesk vlasů.</p>
+              <p className="mt-2 text-sm text-slate-600">Hloubkové čištění pokožky a regenerace vlasů po barvení.</p>
             </div>
           </div>
         </div>
@@ -181,10 +226,9 @@ const App: React.FC = () => {
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">O mně</h2>
           <p className="mt-4 text-slate-700 leading-relaxed">
-            Jmenuji se Kristýna Hálová Vávrová. Vlasy jsou pro mě vášní a mým cílem je, aby každý zákazník
-            odcházel spokojený a s účesem, který mu opravdu sedí. Nabízím dámské, pánské i dětské kadeřnické služby
-            a vždy kladu důraz na individuální přístup a příjemnou atmosféru. Pracuji s <strong>Echosline</strong> –
-            profesionální italskou vlasovou kosmetikou zaměřenou na šetrné složení a skvělé výsledky.
+            Jmenuji se Kristýna Hálová Vávrová. Vlasy jsou pro mě vášní a mým cílem je, aby každý
+            zákazník odcházel spokojený a s účesem, který mu opravdu sedí. Nabízím dámské, pánské i dětské
+            kadeřnické služby s individuálním přístupem a příjemnou atmosférou.
           </p>
         </div>
       </section>
@@ -193,35 +237,24 @@ const App: React.FC = () => {
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
           {/* Banner nad ceníkem */}
-          <div className="w-full bg-white border rounded-xl shadow-sm text-center py-4 my-6">
-            <p className="text-lg font-semibold">
-              🎉 Otevírací sleva <span className="text-red-600 font-bold">−20&nbsp;%</span> celý říjen! 🎉
-            </p>
-            <p className="text-xs md:text-sm text-slate-600">
-              Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí <strong>pro všechny zákazníky</strong> po celý říjen 2025.
+          <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
+            <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen!</p>
+            <p className="text-xs md:text-sm opacity-90">
+              Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí pro všechny klienty po celý říjen 2025.
             </p>
           </div>
 
+          {/* Titulek ceníku */}
           <div className="flex items-center gap-3 mb-2">
-            <h2 className="text-2xl font-bold">Ceník kadeřnictví Vlasy od Týnky Mladá Boleslav</h2>
+            <h2 className="text-2xl font-bold">Ceník</h2>
+            <span className="text-red-500 font-semibold">–20 %</span>
           </div>
-          <p className="text-xs text-neutral-500 mb-4">
-            Přeškrtnuté částky jsou původní ceny, zvýrazněné částky jsou akční ceny po slevě −20 %.
-          </p>
 
-          {/* Karta ceníku s vodoznakem (logo siluet) */}
+          {/* Karta ceníku */}
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
-              style={{
-                WebkitMaskImage: "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-                maskImage: "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-              }}
-            >
-              <img src="/logo-siluety.png" className="max-w-[80%] md:max-w-[50%] h-auto blur-[1.5px] select-none" alt="" />
-            </div>
+            {/* (volitelně se dá přidat vodoznak, teď bez něj) */}
 
+            {/* Obsah */}
             <div className="relative z-10">
               {/* Střih & styling */}
               <div className="p-6 border-b">
@@ -229,19 +262,19 @@ const App: React.FC = () => {
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li className="flex justify-between">
                     <span>Dámský střih</span>
-                    <span><span className="text-slate-400 line-through mr-2">od 650 Kč</span><span className="font-semibold text-pink-600">od 520 Kč</span></span>
+                    <PriceStrike oldLabel="650 Kč" newLabel="520 Kč" />
                   </li>
                   <li className="flex justify-between">
                     <span>Pánský střih</span>
-                    <span><span className="text-slate-400 line-through mr-2">od 350 Kč</span><span className="font-semibold text-pink-600">od 280 Kč</span></span>
+                    <PriceStrike oldLabel="350 Kč" newLabel="280 Kč" />
                   </li>
                   <li className="flex justify-between">
                     <span>Dětský střih (do 12 let)</span>
-                    <span><span className="text-slate-400 line-through mr-2">od 250 Kč</span><span className="font-semibold text-pink-600">od 200 Kč</span></span>
+                    <PriceStrike oldLabel="250 Kč" newLabel="200 Kč" />
                   </li>
                   <li className="flex justify-between">
                     <span>Foukaná / styling bez střihu</span>
-                    <span><span className="text-slate-400 line-through mr-2">od 400 Kč</span><span className="font-semibold text-pink-600">od 320 Kč</span></span>
+                    <PriceStrike oldLabel="400 Kč" newLabel="320 Kč" />
                   </li>
                 </ul>
               </div>
@@ -252,30 +285,30 @@ const App: React.FC = () => {
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li className="flex justify-between">
                     <span>Barvení / tónování</span>
-                    <span><span className="text-slate-400 line-through mr-2">od 1 350 Kč</span><span className="font-semibold text-pink-600">od 1 080 Kč</span></span>
+                    <PriceStrike oldLabel="1 350 Kč" newLabel="1 080 Kč" />
                   </li>
                   <li className="flex justify-between">
                     <span>Melír klasický</span>
-                    <span><span className="text-slate-400 line-through mr-2">od 1 850 Kč</span><span className="font-semibold text-pink-600">od 1 480 Kč</span></span>
+                    <PriceStrike oldLabel="1 850 Kč" newLabel="1 480 Kč" />
                   </li>
                   <li className="flex justify-between">
                     <span>Mikromelír + tónování</span>
-                    <span><span className="text-slate-400 line-through mr-2">od 2 050 Kč</span><span className="font-semibold text-pink-600">od 1 640 Kč</span></span>
+                    <PriceStrike oldLabel="2 050 Kč" newLabel="1 640 Kč" />
                   </li>
                 </ul>
               </div>
 
-              {/* Péče */}
+              {/* Péče & regenerace */}
               <div className="p-6">
                 <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
                   <li className="flex justify-between">
                     <span>B.Pur hloubkové čištění</span>
-                    <span><span className="text-slate-400 line-through mr-2">+230 Kč</span><span className="font-semibold text-pink-600">+184 Kč</span></span>
+                    <PriceStrike oldLabel="+230 Kč" newLabel="+184 Kč" />
                   </li>
                   <li className="flex justify-between">
                     <span>Ki-Power Veg rekonstrukce</span>
-                    <span><span className="text-slate-400 line-through mr-2">+260 Kč</span><span className="font-semibold text-pink-600">+208 Kč</span></span>
+                    <PriceStrike oldLabel="+260 Kč" newLabel="+208 Kč" />
                   </li>
                 </ul>
               </div>
@@ -288,7 +321,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* KONTAKT + MAPA */}
+      {/* KONTAKT + DĚKUJI KARTA (užší, vyšší, menší a sytější vodoznak) */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
           {/* Levý sloupec */}
@@ -301,9 +334,7 @@ const App: React.FC = () => {
                   <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
                     {ADDRESS_LINE1}
                   </a>
-                  <div>{ADDRESS_CITY} – Mladá Boleslav III</div>
-                  <div>Okres Mladá Boleslav</div>
-                  <div>Česko</div>
+                  <div>{ADDRESS_CITY} – {ADDRESS_DISTRICT}</div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -316,94 +347,66 @@ const App: React.FC = () => {
               <div className="flex items-start gap-3">
                 <Phone className="h-5 w-5 mt-0.5" />
                 <div>
-                  <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">{PHONE_DISPLAY}</a>
+                  <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">
+                    {PHONE_DISPLAY}
+                  </a>
                   <div className="text-xs text-slate-500">Volejte nebo napište zprávu.</div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
-                <Instagram className="h-4 w-4" /> Instagram
-              </a>
-              <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
-                <Facebook className="h-4 w-4" /> Facebook
-              </a>
-              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
-                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
-                <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
-              </a>
-            </div>
-          </div>
-
-          {/* Pravý sloupec – Mapa (iframe) */}
-          <div className="w-full md:justify-self-end">
-            <div className="rounded-2xl overflow-hidden border shadow-sm">
-              <iframe
-                title="Mapa – Vlasy od Týnky"
-                className="w-full h-[380px]"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps?q=${encodeURIComponent(`${ADDRESS_LINE1}, ${ADDRESS_CITY}`)}&output=embed`}
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PODĚKOVÁNÍ – užší karta, menší a sytější vodoznak */}
-      <section className="relative z-10">
-        <div className="mx-auto max-w-6xl px-6 pb-16">
-          <div className="relative max-w-lg mx-auto">
-            <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
-                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }} />
-            <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-24 px-10 shadow-xl text-center overflow-hidden">
-              {/* vodoznak – menší a sytější */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
-                style={{
-                  WebkitMaskImage: "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)",
-                  maskImage: "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)",
-                }}
-              >
-                <img src="/logo-text.png" className="max-w-[65%] md:max-w-[48%] h-auto blur-[1px] select-none" alt="" />
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
+                  <Instagram className="h-4 w-4" /> Instagram
+                </a>
+                <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
+                  <Facebook className="h-4 w-4" /> Facebook
+                </a>
               </div>
+            </div>
+          </div>
 
-              <div className="relative z-10">
-                <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
-                <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na {ADDRESS_LINE1}.</div>
+          {/* Pravý sloupec – Děkuji karta */}
+          <div className="md:justify-self-end w-full">
+            <div className="relative max-w-sm ml-auto">
+              <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl" style={{ background: gradient }} />
+              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-20 px-10 shadow-xl text-center overflow-hidden">
+                {/* Vodoznak – menší, o fous sytější */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
+                  style={{
+                    WebkitMaskImage:
+                      "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                    maskImage:
+                      "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                  }}
+                >
+                  <SmartImage
+                    srcs={LOGO_TEXT}
+                    alt="Vlasy od Týnky – vodoznak"
+                    className="max-w-[65%] h-auto scale-105 blur-[1.2px] select-none pointer-events-none"
+                    fallback={<></>}
+                  />
+                </div>
+
+                <div className="relative z-10">
+                  <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
+                  <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na {ADDRESS_LINE1}.</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER (bez loga) */}
+      {/* FOOTER – bez loga */}
       <footer className="relative z-10 border-t bg-white/60 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-6 py-10 text-slate-600">
-          <div className="flex flex-col items-center gap-4 text-center">
-            <div className="flex items-center gap-4 text-sm">
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
-                <Instagram className="h-4 w-4" /> Instagram
-              </a>
-              <span className="opacity-40">•</span>
-              <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
-                <Facebook className="h-4 w-4" /> Facebook
-              </a>
-              <span className="opacity-40">•</span>
-              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 hover:opacity-70">
-                <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
-              </a>
-            </div>
-            <div className="text-xs text-slate-500">© {new Date().getFullYear()} Vlasy od Týnky</div>
-          </div>
+        <div className="mx-auto max-w-6xl px-6 py-8 text-center text-sm text-slate-600">
+          © {new Date().getFullYear()} Vlasy od Týnky •{" "}
+          <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="hover:opacity-70">Instagram</a> •{" "}
+          <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="hover:opacity-70">Facebook</a>
         </div>
       </footer>
     </div>
   );
-};
-
-/* Mount */
-const root = createRoot(document.getElementById("root")!);
-root.render(<App />);
+}
