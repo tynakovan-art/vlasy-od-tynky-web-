@@ -226,19 +226,24 @@ export default function Site() {
           </div>
         </div>
       </section>
-
-      {/* O MNĚ */}
-      <section id="o-mne" className="relative z-10">
-        <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
-          <h2 className="text-2xl md:text-3xl font-semibold">O mně</h2>
-          <p className="mt-4 text-slate-700 leading-relaxed">
-            Jmenuji se Kristýna Hálová Vávrová. Vlasy jsou pro mě vášní a mým cílem je, aby každý zákazník
-            odcházel spokojený a s účesem, který mu sedí. Nabízím dámské, pánské i dětské kadeřnické služby
-            s důrazem na individuální přístup a příjemnou atmosféru.
-          </p>
-        </div>
-      </section>
-
+      
+{/* O MNĚ */}
+<section id="o-mne" className="relative z-10">
+  <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+    <h2 className="text-2xl md:text-3xl font-semibold">O mně</h2>
+    <p className="mt-4 text-slate-700 leading-relaxed">
+      Jmenuji se Kristýna Hálová Vávrová. Vlasy jsou pro mě vášní a mým cílem je,
+      aby každý zákazník odcházel spokojený a s účesem, který mu opravdu sedí.
+      Nabízím dámské, pánské i dětské kadeřnické služby a vždy kladu důraz na
+      individuální přístup a příjemnou atmosféru.
+    </p>
+    <p className="mt-2 text-sm text-slate-500">
+      Pracuji s <strong>Echosline</strong> – profesionální italskou vlasovou
+      kosmetikou zaměřenou na šetrné složení a skvělé výsledky.
+    </p>
+  </div>
+</section>
+      
       {/* CENÍK */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
