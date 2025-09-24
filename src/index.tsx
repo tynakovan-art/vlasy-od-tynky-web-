@@ -244,116 +244,185 @@ export default function Site() {
   </div>
 </section>
       
-      {/* CENÍK */}
-      <section id="cenik" className="relative z-10">
-        <div className="relative mx-auto max-w-6xl px-6 py-16">
-          <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
-            <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen!</p>
-            <p className="text-xs md:text-sm opacity-90">Zvýhodněné ceny pro nové i stávající klienty po celý říjen 2025.</p>
-          </div>
+      {/* CENÍK – sleva a vysvětlivky u každé služby */}
+<section id="cenik" className="relative z-10">
+  <div className="relative mx-auto max-w-6xl px-6 py-16">
+    {/* Banner nad ceníkem – přeškrtnuté ceny */}
+    <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
+      <p className="text-lg font-semibold">🎉 Otevírací sleva <span className="text-red-200">–20 %</span> celý říjen! 🎉</p>
+      <p className="text-xs md:text-sm opacity-90">
+        Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí pro nové klienty po celý říjen 2025.
+      </p>
+    </div>
 
-          <div className="flex items-center gap-3 mb-2">
-            <h2 className="text-2xl font-bold">Ceník</h2>
-            <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-red-50 text-red-600 border border-red-200">–20 % říjen</span>
-          </div>
-          <p className="text-xs text-neutral-500 mb-4">
-            Akce –20 % platí do 31. 10. 2025. Přeškrtnuté částky jsou původní ceny, zvýrazněné jsou akční.
-          </p>
+    {/* Nadpis ceníku se štítkem */}
+    <div className="flex items-center gap-3 mb-2">
+      <h2 className="text-2xl font-bold">Ceník</h2>
+      <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
+        <span className="text-red-600 font-semibold">–20 %</span> říjen • noví klienti
+      </span>
+    </div>
+    <p className="text-xs text-neutral-500 mb-4">
+      Akce –20 % pro nové klienty platí do 31. 10. 2025. Přeškrtnuté částky jsou původní ceny, zvýrazněné částky jsou akční ceny po slevě.
+    </p>
 
-          <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
-              style={{
-                zIndex: 0,
-                WebkitMaskImage:
-                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-                maskImage:
-                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-              }}
-            >
-              <SmartImage srcs={LOGO_SILUETY} className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none" />
-            </div>
+    {/* Karta ceníku s vodoznakem */}
+    <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
+      {/* Vodoznak uvnitř karty (není moc výrazný, jen jemně) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
+        style={{
+          zIndex: 0,
+          WebkitMaskImage:
+            "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+          maskImage:
+            "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+        }}
+      >
+        <img
+          src="/Mladá Boleslav - logo.png"
+          alt=""
+          className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
+          loading="lazy"
+        />
+      </div>
 
-            <div className="relative" style={{ zIndex: 1 }}>
-              <div className="p-6 border-b">
-                <div className="font-medium text-lg">✂️ Střih &amp; styling</div>
-                <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Dámský střih</span>
-                      <PriceStrike oldLabel="od 650 Kč" newLabel="od 520 Kč" />
-                    </div>
-                    <div className="text-xs text-slate-500">Konzultace, mytí, foukaná a styling.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Pánský střih</span>
-                      <PriceStrike oldLabel="od 350 Kč" newLabel="od 280 Kč" />
-                    </div>
-                    <div className="text-xs text-slate-500">Střih nůžkami i strojkem.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Dětský střih (do 12 let)</span>
-                      <PriceStrike oldLabel="od 250 Kč" newLabel="od 200 Kč" />
-                    </div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Foukaná / styling bez střihu</span>
-                      <PriceStrike oldLabel="od 400 Kč" newLabel="od 320 Kč" />
-                    </div>
-                  </li>
-                </ul>
+      {/* Obsah ceníku */}
+      <div className="relative" style={{ zIndex: 1 }}>
+        {/* Střih & styling */}
+        <div className="p-6 border-b">
+          <div className="font-medium text-lg">✂️ Střih &amp; styling</div>
+          <ul className="mt-3 text-sm text-slate-700 space-y-4">
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>Dámský střih</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">od 650 Kč</span>
+                  <span className="font-semibold text-red-600">od 520 Kč</span>
+                </div>
               </div>
+              <div className="text-xs text-slate-500">Konzultace, mytí vlasů, střih, foukaná a styling.</div>
+            </li>
 
-              <div className="p-6 border-b">
-                <div className="font-medium text-lg">🎨 Barvení &amp; melír</div>
-                <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Barvení / tónování</span>
-                      <PriceStrike oldLabel="od 1 350 Kč" newLabel="od 1 080 Kč" />
-                    </div>
-                    <div className="text-xs text-slate-500">Komplet vč. střihu a foukané.</div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Melír klasický</span>
-                      <PriceStrike oldLabel="od 1 850 Kč" newLabel="od 1 480 Kč" />
-                    </div>
-                  </li>
-                  <li>
-                    <div className="flex justify-between font-medium">
-                      <span>Mikromelír + tónování</span>
-                      <PriceStrike oldLabel="od 2 050 Kč" newLabel="od 1 640 Kč" />
-                    </div>
-                  </li>
-                </ul>
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>Pánský střih</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">od 350 Kč</span>
+                  <span className="font-semibold text-red-600">od 280 Kč</span>
+                </div>
               </div>
+              <div className="text-xs text-slate-500">Střih nůžkami i strojkem, suché i mokré vlasy.</div>
+            </li>
 
-              <div className="p-6">
-                <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
-                <ul className="mt-3 text-sm text-slate-700 space-y-4">
-                  <li className="flex justify-between font-medium">
-                    <span>B.Pur hloubkové čištění</span>
-                    <PriceStrike oldLabel="+230 Kč" newLabel="+184 Kč" />
-                  </li>
-                  <li className="flex justify-between font-medium">
-                    <span>Ki-Power Veg rekonstrukce</span>
-                    <PriceStrike oldLabel="+260 Kč" newLabel="+208 Kč" />
-                  </li>
-                </ul>
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>Dětský střih (do 12 let)</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">od 250 Kč</span>
+                  <span className="font-semibold text-red-600">od 200 Kč</span>
+                </div>
               </div>
+              <div className="text-xs text-slate-500">Rychlý střih přizpůsobený dětem.</div>
+            </li>
 
-              <div className="p-4 text-xs text-slate-500 border-t">
-                Uvedené ceny jsou orientační. Konečná cena záleží na délce a hustotě vlasů a spotřebě materiálu.
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>Foukaná / styling bez střihu</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">od 400 Kč</span>
+                  <span className="font-semibold text-red-600">od 320 Kč</span>
+                </div>
               </div>
-            </div>
-          </div>
+              <div className="text-xs text-slate-500">Foukaná a finální úprava účesu bez střihu.</div>
+            </li>
+          </ul>
         </div>
-      </section>
+
+        {/* Barvení & melír */}
+        <div className="p-6 border-b">
+          <div className="font-medium text-lg">🎨 Barvení &amp; melír</div>
+          <ul className="mt-3 text-sm text-slate-700 space-y-4">
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>Barvení / tónování</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">od 1 350 Kč</span>
+                  <span className="font-semibold text-red-600">od 1 080 Kč</span>
+                </div>
+              </div>
+              <div className="text-xs text-slate-500">
+                Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu.
+              </div>
+            </li>
+
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>Melír klasický</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">od 1 850 Kč</span>
+                  <span className="font-semibold text-red-600">od 1 480 Kč</span>
+                </div>
+              </div>
+              <div className="text-xs text-slate-500">Melírování pramenů, střih, foukaná a styling.</div>
+            </li>
+
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>Mikromelír + tónování</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">od 2 050 Kč</span>
+                  <span className="font-semibold text-red-600">od 1 640 Kč</span>
+                </div>
+              </div>
+              <div className="text-xs text-slate-500">
+                Jemné prosvětlení s doladěním odstínu, střih, foukaná a styling.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        {/* Péče & regenerace */}
+        <div className="p-6">
+          <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
+          <ul className="mt-3 text-sm text-slate-700 space-y-4">
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>B.Pur hloubkové čištění</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">+230 Kč</span>
+                  <span className="font-semibold text-red-600">+184 Kč</span>
+                </div>
+              </div>
+              <div className="text-xs text-slate-500">
+                Detox vlasů a pokožky, ideální jako doplněk ke střihu.
+              </div>
+            </li>
+
+            <li>
+              <div className="flex justify-between font-medium">
+                <span>Ki-Power Veg rekonstrukce</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-slate-400 line-through">+260 Kč</span>
+                  <span className="font-semibold text-red-600">+208 Kč</span>
+                </div>
+              </div>
+              <div className="text-xs text-slate-500">
+                Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div className="p-4 text-xs text-slate-500 border-t">
+          Uvedené ceny jsou orientační. Konečná cena záleží na délce a hustotě vlasů a spotřebě materiálu.
+          Vše vždy předem domluvíme na místě nebo ve zprávě.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* KONTAKT + MAPA */}
       <section id="kontakt" className="relative z-10">
