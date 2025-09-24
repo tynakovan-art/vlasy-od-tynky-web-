@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/* Jednoduchý fallback loader pro obrázky */
+/* Obrázek s fallbackem */
 function SmartImage({
   srcs,
   className,
@@ -34,17 +34,17 @@ function SmartImage({
 }
 
 export default function Site() {
-  /* *** PŘESNÉ NÁZVY SOUBORŮ V /public *** */
-  const LOGO_TEXT = ["/logo-text.png"];        // = „kadeřnictví - logo bez .png“
-  const LOGO_SILUETY = ["/logo-siluety.png"];  // = „Mladá Boleslav - logo.png“
+  /* přesné názvy z /public */
+  const LOGO_TEXT = ["/logo-text.png"];        // „kadeřnictví - logo bez .png“
+  const LOGO_SILUETY = ["/logo-siluety.png"];  // „Mladá Boleslav - logo.png“
 
-  /* Adresa */
+  /* adresa */
   const ADDRESS_LINE1 = "Zalužanská 1272";
   const ADDRESS_CITY = "293 01 Mladá Boleslav";
   const ADDRESS_DISTRICT = "Mladá Boleslav III";
   const ADDRESS_COUNTRY = "Česko";
 
-  /* Kontakty / odkazy */
+  /* odkazy */
   const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
   const FB_URL = "https://www.facebook.com/vlasyodtynky/";
   const MAP_QUERY = encodeURIComponent(`${ADDRESS_LINE1}, ${ADDRESS_CITY}`);
@@ -86,7 +86,7 @@ export default function Site() {
         <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
           {/* Levý sloupec */}
           <div>
-            {/* Badge s datem otevření */}
+            {/* badge s datem */}
             <div
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white mb-4"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
@@ -94,7 +94,7 @@ export default function Site() {
               🚪 Otevírám 1.&nbsp;10.&nbsp;2025
             </div>
 
-            {/* TŘÍŘÁDKOVÝ NADPIS – těsnější řádkování */}
+            {/* původní třířádkový nadpis se zhuštěním */}
             <motion.h1
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -142,40 +142,25 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s logem + CTA (původní velikost karty, menší logo) */}
+          {/* Pravý sloupec – karta s logem + CTA (původní velikost loga h-32) */}
           <div className="md:justify-self-end relative">
             <div
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
-              {/* V HERO používáme logo-text.png – menší h-28 */}
-              <SmartImage srcs={LOGO_TEXT} className="mx-auto mb-2 h-28 w-auto object-contain" />
+              <SmartImage srcs={LOGO_TEXT} className="mx-auto mb-2 h-32 w-auto object-contain" />
               <div className="text-2xl font-semibold">Vlasy od Týnky</div>
               <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
               <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
               <div className="mt-5 flex flex-col gap-2">
-                <a
-                  href={IG_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
-                >
+                <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
                   <Instagram className="h-4 w-4" /> Napsat na Instagramu
                 </a>
-                <a
-                  href={FB_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
-                >
+                <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
                   <Facebook className="h-4 w-4" /> Napsat na Facebooku
                 </a>
-                <a
-                  href={`tel:${PHONE_RAW}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
-                  style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
-                >
+                <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                   <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
                 </a>
               </div>
@@ -205,17 +190,11 @@ export default function Site() {
               <div className="mt-2 text-xs md:text-sm text-slate-600">📍 {ADDRESS_LINE1}, {ADDRESS_CITY}</div>
             </div>
             <div className="flex gap-2">
-              <a
-                href={`tel:${PHONE_RAW}`}
-                className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
-                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
-              >
+              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
+                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                 <Phone className="h-4 w-4 mr-1" /> Zavolat {PHONE_DISPLAY}
               </a>
-              <a
-                href="#cenik"
-                className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50"
-              >
+              <a href="#cenik" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
                 Mrknout na ceník
               </a>
             </div>
@@ -230,27 +209,19 @@ export default function Site() {
           <div className="mt-6 grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Střihy</div>
-              <p className="mt-2 text-sm text-slate-600">
-                Dámský, pánský i dětský střih. Vždy s konzultací, mytím, foukanou a stylingem.
-              </p>
+              <p className="mt-2 text-sm text-slate-600">Dámský, pánský i dětský střih. S konzultací, mytím, foukanou a stylingem.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Barvení a tónování</div>
-              <p className="mt-2 text-sm text-slate-600">
-                Jemné i výrazné změny. Doladění odstínu a neutralizace nežádoucích tónů.
-              </p>
+              <p className="mt-2 text-sm text-slate-600">Jemné i výrazné změny. Doladění odstínu a neutralizace nežádoucích tónů.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Melír / Mikromelír</div>
-              <p className="mt-2 text-sm text-slate-600">
-                Prosvětlení a struktura účesu pomocí jemných pramínků.
-              </p>
+              <p className="mt-2 text-sm text-slate-600">Prosvětlení a struktura účesu pomocí jemných pramínků.</p>
             </div>
             <div className="rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Vlasová péče</div>
-              <p className="mt-2 text-sm text-slate-600">
-                Hloubkové čištění pokožky a regenerace pro sílu a lesk vlasů.
-              </p>
+              <p className="mt-2 text-sm text-slate-600">Hloubkové čištění pokožky a regenerace pro sílu a lesk vlasů.</p>
             </div>
           </div>
         </div>
@@ -271,26 +242,19 @@ export default function Site() {
       {/* CENÍK */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
-          {/* Banner */}
           <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
             <p className="text-lg font-semibold">🎉 Otevírací sleva –20 % celý říjen!</p>
-            <p className="text-xs md:text-sm opacity-90">
-              Původní ceny jsou přeškrtnuté, zvýhodněné pro nové i stávající klienty po celý říjen 2025.
-            </p>
+            <p className="text-xs md:text-sm opacity-90">Zvýhodněné ceny pro nové i stávající klienty po celý říjen 2025.</p>
           </div>
 
-          {/* Nadpis + červený štítek –20 % */}
           <div className="flex items-center gap-3 mb-2">
             <h2 className="text-2xl font-bold">Ceník</h2>
-            <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-red-50 text-red-600 border border-red-200">
-              –20 % říjen
-            </span>
+            <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-red-50 text-red-600 border border-red-200">–20 % říjen</span>
           </div>
           <p className="text-xs text-neutral-500 mb-4">
             Akce –20 % platí do 31. 10. 2025. Přeškrtnuté částky jsou původní ceny, zvýrazněné jsou akční.
           </p>
 
-          {/* Karta ceníku s vodoznakem (logo-siluety.png) */}
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
             <div
               aria-hidden
@@ -303,14 +267,10 @@ export default function Site() {
                   "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
               }}
             >
-              <SmartImage
-                srcs={LOGO_SILUETY}
-                className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
-              />
+              <SmartImage srcs={LOGO_SILUETY} className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none" />
             </div>
 
             <div className="relative" style={{ zIndex: 1 }}>
-              {/* Střih & styling */}
               <div className="p-6 border-b">
                 <div className="font-medium text-lg">✂️ Střih &amp; styling</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -343,7 +303,6 @@ export default function Site() {
                 </ul>
               </div>
 
-              {/* Barvení & melír */}
               <div className="p-6 border-b">
                 <div className="font-medium text-lg">🎨 Barvení &amp; melír</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -369,7 +328,6 @@ export default function Site() {
                 </ul>
               </div>
 
-              {/* Péče */}
               <div className="p-6">
                 <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -395,7 +353,6 @@ export default function Site() {
       {/* KONTAKT + MAPA */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
-          {/* Levý sloupec */}
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold">Kontakt</h2>
             <div className="mt-4 flex flex-col gap-3 text-slate-700">
@@ -440,7 +397,6 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – MAPA */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto">
               <div
@@ -462,7 +418,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ */}
+      {/* PODĚKOVÁNÍ – zúžená karta + menší vodoznak */}
       <section className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 pb-16">
           <div className="relative max-w-[560px] mx-auto">
@@ -471,6 +427,7 @@ export default function Site() {
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-24 px-10 shadow-xl text-center overflow-hidden">
+              {/* MENŠÍ VODOZNAK */}
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
@@ -483,7 +440,7 @@ export default function Site() {
               >
                 <SmartImage
                   srcs={LOGO_TEXT}
-                  className="max-w-[60%] h-auto blur-[1px] select-none pointer-events-none"
+                  className="max-w-[45%] h-auto blur-[1px] select-none pointer-events-none"
                 />
               </div>
 
@@ -498,7 +455,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* FOOTER – bez loga */}
+      {/* FOOTER bez loga */}
       <footer className="relative z-10 border-t bg-white/60 backdrop-blur">
         <div className="mx-auto max-w-6xl px-6 py-8 text-slate-600">
           <div className="flex flex-col items-center gap-3 text-center">
