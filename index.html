@@ -7,31 +7,31 @@
     <title>Vlasy od Týnky – kadeřnictví Mladá Boleslav</title>
     <meta
       name="description"
-      content="Střih, barvení, melír a péče v příjemné atmosféře. Vlasy od Týnky – Zalužanská 1272, 293 01 Mladá Boleslav. Akce –20 % pro všechny klienty v říjnu 2025."
+      content="Střih, barvení, melír a péče v příjemné atmosféře. Vlasy od Týnky – Zalužanská 1272, 293 01 Mladá Boleslav. Otevírám 1. 10. 2025. Akce −20 % v říjnu."
     />
 
-    <!-- Favicon + platform ikony -->
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-
-    <!-- PWA / Android -->
+    <!-- Ikony -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#b57bff" />
 
-    <!-- Open Graph (náhled při sdílení) -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Vlasy od Týnky – kadeřnictví Mladá Boleslav" />
-    <meta property="og:description" content="Střih, barvení, melír a péče v příjemné atmosféře. Akce –20 % pro všechny klienty v říjnu." />
+    <meta property="og:description" content="Střih, barvení, melír a péče v příjemné atmosféře. Otevírám 1. 10. 2025. Akce −20 % v říjnu." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vlasyodtynky-mb.cz/" />
     <meta property="og:image" content="/logo-siluety.png" />
     <meta property="og:locale" content="cs_CZ" />
 
-    <!-- Tailwind přes CDN (pokud používáš build Tailwindu, tenhle řádek smaž) -->
+    <!-- Barva lišty -->
+    <meta name="theme-color" content="#b57bff" />
+
+    <!-- Výkon: preload hero obrázku v kartě -->
+    <link rel="preload" as="image" href="/logo-text.png" fetchpriority="high" />
+
+    <!-- Tailwind přes CDN (ponecháno kvůli zachování vzhledu) -->
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
