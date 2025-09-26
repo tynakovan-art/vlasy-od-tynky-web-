@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
 /* Univerzální obrázek s fallbackem */
@@ -104,10 +103,7 @@ export default function Site() {
               🚪 Otevírám 1. 10. 2025
             </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+            <h1
               className="text-4xl md:text-5xl font-semibold leading-tight"
             >
               Kadeřnictví{" "}
@@ -122,7 +118,7 @@ export default function Site() {
                 Vlasy od Týnky
               </span>
               Mladá Boleslav
-            </motion.h1>
+            </h1>
 
             <p className="mt-5 text-slate-600 md:text-lg max-w-prose">
               Precizní střihy, barvení i melír v příjemné atmosféře.
