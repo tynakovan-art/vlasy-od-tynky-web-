@@ -157,7 +157,7 @@ export default function Site() {
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
-            <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
+            <div className="relative rounded-[2rem] border-0 ring-0 outline-none bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
               <SmartImage
                 srcs={LOGO_TEXT}
                 alt="Vlasy od Týnky – logo textové"
@@ -194,7 +194,7 @@ export default function Site() {
       <section aria-label="Otevírací akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div
-            className="rounded-2xl border bg-white/70 backdrop-blur p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+            className="relative rounded-2xl border-0 ring-0 outline-none bg-white/70 backdrop-blur p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
             style={{ boxShadow: "0 6px 24px rgba(0,0,0,0.06)" }}
           >
             <div className="text-slate-800">
@@ -232,19 +232,19 @@ export default function Site() {
         <div className="mx-auto max-w-6xl px-6 py-12">
           <h2 className="text-2xl md:text-3xl font-semibold">Kadeřnické služby v Mladé Boleslavi</h2>
           <div className="mt-6 grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border bg-white/70 p-6">
+            <div className="relative rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Střihy</div>
               <p className="mt-2 text-sm text-slate-600">
                 Dámský, pánský i dětský střih. Vždy s konzultací, mytím, foukanou a stylingem podle potřeby.
               </p>
             </div>
-            <div className="rounded-2xl border bg-white/70 p-6">
+            <div className="relative rounded-2xl border-0 ring-0 outline-none bg-whiteú70 p-6">
               <div className="text-lg font-medium">Barvení a tónování</div>
               <p className="mt-2 text-sm text-slate-600">
                 Jemné i výrazné změny. Tónování slouží k doladění odstínu a neutralizaci nežádoucích tónů.
               </p>
             </div>
-            <div className="rounded-2xl border bg-white/70 p-6">
+            <div className="relative rounded-2xl border bg-white/70 p-6">
               <div className="text-lg font-medium">Melír / Mikromelír</div>
               <p className="mt-2 text-sm text-slate-600">
                 Prosvětlení a struktura účesu pomocí jemných pramínků. Přirozený, vzdušný výsledek.
@@ -469,7 +469,7 @@ export default function Site() {
                 className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
               />
-              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur overflow-hidden shadow-xl">
+              <div className="rounded-[2rem] border-0 ring-0 outline-none bg-white/70 backdrop-blur overflow-hidden shadow-xl">
                 <iframe
                   title="Mapa – Vlasy od Týnky"
                   src={MAP_EMBED}
@@ -491,7 +491,7 @@ export default function Site() {
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             />
-            <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-14 px-10 shadow-xl text-center overflow-hidden">
+            <div className="relative rounded-[2rem] border-0 ring-0 outline-none bg-white/70 backdrop-blur py-14 px-10 shadow-xl text-center overflow-hidden">
               {/* Vodoznak menší/sytější */}
               <div
                 aria-hidden
