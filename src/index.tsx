@@ -1,89 +1,41 @@
+// src/index.tsx
 import React, { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/* ===== Obrázek s fallbackem (doplněno: width/height + loading + fetchPriority) ===== */
+/* Mini helper – bezpečný <img> s fallbackem (můžeš si nechat) */
 function SmartImage({
   srcs,
   alt,
   className,
   fallback,
-  width,
-  height,
-  loading = "lazy",
-  fetchPriority,
 }: {
   srcs: string[];
-  alt: string;
+  alt?: string;
   className?: string;
-  fallback: JSX.Element;
-  width?: number;
-  height?: number;
-  loading?: "eager" | "lazy";
-  fetchPriority?: "high" | "low" | "auto";
+  fallback?: JSX.Element;
 }) {
   const [i, setI] = useState(0);
   if (i < srcs.length) {
     return (
       <img
         src={srcs[i]}
-        alt={alt}
+        alt={alt ?? ""}
         className={className}
         onError={() => setI((v) => v + 1)}
-        width={width}
-        height={height}
-        loading={loading}
-        fetchPriority={fetchPriority}
       />
     );
   }
-  return fallback;
-}
-
-/* ===== Hlavní komponenta ===== */
-export default function Site() {
-  /* Cesty k souborům v /public (používáme pouze aktuální názvy) */
-  const LOGO_TEXT = ["/logo-text.png"];             // textové logo
-  const LOGO_SILUETY = ["/logo-siluety.png"];       // siluety (OG, vodoznaky apod.)
-
-  /* Adresa – sjednocená */
-  const ADDRESS_LINE1 = "Zalužanská 1272";
-  const ADDRESS_CITY = "293 01 Mladá Boleslav";
-  const ADDRESS_DISTRICT = "Mladá Boleslav III";
-  const ADDRESS_COUNTRY = "Česko";
-
-  /* Odkazy a kontakty */
-  const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
-  const FB_URL = "https://www.facebook.com/vlasyodtynky/";
-  const MAP_QUERY = encodeURIComponent(`${ADDRESS_LINE1}, ${ADDRESS_CITY}`);
-  const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
-  const PHONE_RAW = "725882820";
-  const PHONE_DISPLAY = "725 882 820";
-
+  export default function Site() {
+  // (Volitelné) titulek stránky
   useEffect(() => {
     document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
   }, []);
 
-  /* Pomocná komponenta pro akční ceny: přeškrtnutá původní + zvýrazněná akční */
-  const PriceStrike = ({
-    oldLabel,
-    newLabel,
-  }: {
-    oldLabel: string;
-    newLabel: string;
-  }) => (
-    <div className="flex items-baseline gap-2">
-      <span className="text-sm text-slate-400 line-through">{oldLabel}</span>
-      <span className="font-semibold text-pink-600">{newLabel}</span>
-    </div>
-  );
-
-  /* Lazy načtení mapy (výkon) */
-  const [showMap, setShowMap] = useState(false);
-  const MAP_EMBED_URL =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d0!2d14.915!3d50.412!2m3!1f0!2f0!3f0!3m2!1ics!2scz!4v0000000000000";
-
+  // Sem vlož JEN cesty na obrázky z /public, které používáš:
+  const LOGO_TEXT = ["/logo-text.png"];
+  const LOGO_SILUETY = ["/logo-siluety.png"];
+    
   return (
     <div className="min-h-screen bg-white text-slate-800">
       {/* NAVBAR */}
@@ -572,11 +524,3 @@ export default function Site() {
     </div>
   );
 }
-
-/* Mount */
-const el = document.getElementById("root")!;
-createRoot(el).render(
-  <React.StrictMode>
-    <Site />
-  </React.StrictMode>
-);
