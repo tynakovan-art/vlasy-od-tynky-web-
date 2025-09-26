@@ -1,9 +1,8 @@
-// src/index.tsx
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors } from "lucide-react";
 
-/* Mini helper – bezpečný <img> s fallbackem (můžeš si nechat) */
+/* Univerzální obrázek s fallbackem */
 function SmartImage({
   srcs,
   alt,
@@ -11,46 +10,66 @@ function SmartImage({
   fallback,
 }: {
   srcs: string[];
-  alt?: string;
+  alt: string;
   className?: string;
-  fallback?: JSX.Element;
+  fallback: JSX.Element;
 }) {
   const [i, setI] = useState(0);
   if (i < srcs.length) {
     return (
       <img
         src={srcs[i]}
-        alt={alt ?? ""}
+        alt={alt}
         className={className}
         onError={() => setI((v) => v + 1)}
       />
     );
   }
-  export default function Site() {
-  // (Volitelné) titulek stránky
+  return fallback;
+}
+
+export default function Site() {
+  /* ====== Cesty k souborům (jen nové názvy) ====== */
+  const LOGO_TEXT = ["/logo-text.png"];       // textové logo
+  const LOGO_SILUETY = ["/logo-siluety.png"]; // siluety
+
+  /* ====== Kontakt / adresa ====== */
+  const ADDRESS_LINE1 = "Zalužanská 1272";
+  const ADDRESS_CITY = "293 01 Mladá Boleslav";
+  const ADDRESS_DISTRICT = "Mladá Boleslav III";
+  const ADDRESS_COUNTRY = "Česko";
+
+  const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
+  const FB_URL = "https://www.facebook.com/vlasyodtynky/";
+  const PHONE_RAW = "725882820";
+  const PHONE_DISPLAY = "725 882 820";
+
+  const MAP_QUERY = encodeURIComponent(`${ADDRESS_LINE1}, ${ADDRESS_CITY}`);
+  const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
+  const MAP_EMBED = `https://www.google.com/maps?q=${MAP_QUERY}&output=embed`;
+
   useEffect(() => {
     document.title = "Vlasy od Týnky – kadeřnictví Mladá Boleslav";
   }, []);
 
-  // Sem vlož JEN cesty na obrázky z /public, které používáš:
-  const LOGO_TEXT = ["/logo-text.png"];
-  const LOGO_SILUETY = ["/logo-siluety.png"];
-    
+  /* Přeškrtnuté → akční */
+  const PriceStrike = ({ oldLabel, newLabel }: { oldLabel: string; newLabel: string }) => (
+    <div className="flex items-baseline gap-2">
+      <span className="text-sm text-slate-400 line-through">{oldLabel}</span>
+      <span className="font-semibold text-pink-600">{newLabel}</span>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-white text-slate-800">
-      {/* NAVBAR */}
+      {/* ===== NAVBAR ===== */}
       <header className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b">
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          {/* Logo + název */}
           <a href="#hero" className="flex items-center gap-3">
             <SmartImage
               srcs={LOGO_SILUETY}
-              alt="Vlasy od Týnky – logo se siluetami"
+              alt="Vlasy od Týnky – logo"
               className="h-9 w-auto object-contain"
-              width={256}
-              height={256}
-              loading="eager"
-              fetchPriority="high"
               fallback={
                 <div
                   className="h-9 w-9 rounded-xl flex items-center justify-center text-white"
@@ -63,7 +82,6 @@ function SmartImage({
             <span className="font-semibold">Vlasy od Týnky</span>
           </a>
 
-          {/* Menu */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#o-mne" className="hover:opacity-70">O mně</a>
             <a href="#sluzby" className="hover:opacity-70">Služby</a>
@@ -73,16 +91,17 @@ function SmartImage({
         </div>
       </header>
 
-      {/* HERO */}
+      {/* ===== HERO ===== */}
       <section id="hero" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-16 md:pt-16 md:pb-24 grid md:grid-cols-2 gap-10 items-center">
-          {/* Levý sloupec – H1 (beze změny vzhledu/textu) */}
+          {/* Levý sloupec */}
           <div>
+            {/* Badge s datem otevření – dveře */}
             <div
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white mb-4"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
             >
-              🚪 Otevírám <strong className="font-semibold">1.&nbsp;10.&nbsp;2025</strong>
+              🚪 Otevírám 1. 10. 2025
             </div>
 
             <motion.h1
@@ -91,7 +110,7 @@ function SmartImage({
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-semibold leading-tight"
             >
-              Kadeřnictví
+              Kadeřnictví{" "}
               <span
                 className="block"
                 style={{
@@ -132,7 +151,7 @@ function SmartImage({
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s logem (beze změny vzhledu; přidány width/height + eager) */}
+          {/* Pravý sloupec – karta (původní velikost) */}
           <div className="md:justify-self-end relative">
             <div
               className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
@@ -141,12 +160,8 @@ function SmartImage({
             <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
               <SmartImage
                 srcs={LOGO_TEXT}
-                alt="Vlasy od Týnky – textové logo"
+                alt="Vlasy od Týnky – logo textové"
                 className="mx-auto mb-2 h-32 w-auto object-contain"
-                width={512}
-                height={512}
-                loading="eager"
-                fetchPriority="high"
                 fallback={
                   <div
                     className="h-16 w-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-white"
@@ -175,8 +190,8 @@ function SmartImage({
         </div>
       </section>
 
-      {/* AKCE – banner NAD SLUŽBAMI (beze změny textu, pouze výkon beze změny vzhledu) */}
-      <section aria-label="Akce" className="relative z-10">
+      {/* ===== Otevírací banner NAD SLUŽBAMI ===== */}
+      <section aria-label="Otevírací akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div
             className="rounded-2xl border bg-white/70 backdrop-blur p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
@@ -190,7 +205,7 @@ function SmartImage({
                 🎉 Otevírací akce říjen
               </div>
               <div className="mt-3 text-sm md:text-base font-medium">
-                Po celý říjen nabízím <span className="font-bold text-red-600">20% slevu</span> na všechny služby pro všechny zákazníky.
+                Po celý říjen nabízím <span className="font-bold text-red-600">–20 %</span> na všechny kadeřnické služby <strong>pro všechny zákazníky</strong>.
               </div>
               <div className="text-xs md:text-sm text-slate-600">
                 Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
@@ -212,7 +227,7 @@ function SmartImage({
         </div>
       </section>
 
-      {/* SLUŽBY */}
+      {/* ===== SLUŽBY ===== */}
       <section id="sluzby" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-12">
           <h2 className="text-2xl md:text-3xl font-semibold">Kadeřnické služby v Mladé Boleslavi</h2>
@@ -245,7 +260,7 @@ function SmartImage({
         </div>
       </section>
 
-      {/* O MNĚ */}
+      {/* ===== O MNĚ ===== */}
       <section id="o-mne" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
           <h2 className="text-2xl md:text-3xl font-semibold">O mně</h2>
@@ -260,26 +275,29 @@ function SmartImage({
         </div>
       </section>
 
-      {/* CENÍK (banner nad ceníkem zůstává) */}
+      {/* ===== CENÍK ===== */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
+          {/* Banner nad ceníkem */}
           <div className="w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-white text-center py-4 rounded-xl shadow-md my-6">
-            <p className="text-lg font-semibold">🎉 Otevírací sleva <span className="text-red-100">–20 %</span> celý říjen! 🎉</p>
+            <p className="text-lg font-semibold">🎉 Otevírací sleva <span className="text-red-200 font-bold">–20 %</span> celý říjen! 🎉</p>
             <p className="text-xs md:text-sm opacity-90">
-              Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí pro všechny zákazníky po celý říjen 2025.
+              Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí <strong>pro všechny zákazníky</strong> po celý říjen 2025.
             </p>
           </div>
 
+          {/* Nadpis ceníku + štítek */}
           <div className="flex items-center gap-3 mb-2">
             <h2 className="text-2xl font-bold">Ceník</h2>
-            <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-red-600 border border-pink-200">
-              –20 % říjen
+            <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-pink-700 border border-pink-200">
+              –20 % říjen • všichni zákazníci
             </span>
           </div>
           <p className="text-xs text-neutral-500 mb-4">
             Akce –20 % platí do 31. 10. 2025. Přeškrtnuté částky jsou původní ceny, zvýrazněné částky jsou akční ceny po slevě.
           </p>
 
+          {/* Karta ceníku s vodoznakem */}
           <div className="relative mt-6 overflow-hidden rounded-2xl border bg-white">
             {/* Vodoznak uvnitř karty */}
             <div
@@ -295,10 +313,9 @@ function SmartImage({
             >
               <SmartImage
                 srcs={LOGO_SILUETY}
-                alt="Vlasy od Týnky – vodoznak v kartě ceníku"
+                alt="Vlasy od Týnky – vodoznak ceník"
                 className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
-                width={800}
-                height={800}
+                fallback={<div className="text-6xl font-bold text-slate-200">Vlasy od Týnky</div>}
               />
             </div>
 
@@ -396,13 +413,13 @@ function SmartImage({
         </div>
       </section>
 
-      {/* KONTAKT + MAPA (mapa se načte až po kliknutí) */}
+      {/* ===== KONTAKT + MAPA ===== */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
-          {/* Levý sloupec */}
+          {/* Levý sloupec – info */}
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold">Kontakt</h2>
-            <div className="mt-4 flex flex-col gap-3 text-slate-700">
+            <div className="mt-4 flex flex-col gap-4 text-slate-700">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5" />
                 <div>
@@ -412,7 +429,6 @@ function SmartImage({
                   <div>{ADDRESS_CITY} – {ADDRESS_DISTRICT}</div>
                   <div>Okres Mladá Boleslav</div>
                   <div>{ADDRESS_COUNTRY}</div>
-                  <div className="mt-1 text-xs text-pink-600 font-medium">🚪 Otevírám 1.&nbsp;10.&nbsp;2025</div>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -425,85 +441,89 @@ function SmartImage({
               <div className="flex items-start gap-3">
                 <Phone className="h-5 w-5 mt-0.5" />
                 <div>
-                  <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">{PHONE_DISPLAY}</a>
+                  <a href={`tel:${PHONE_RAW}`} className="text-sm font-medium">
+                    {PHONE_DISPLAY}
+                  </a>
                   <div className="text-xs text-slate-500">Volejte nebo napište zprávu.</div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
-                <Instagram className="h-4 w-4" /> Instagram
-              </a>
-              <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
-                <Facebook className="h-4 w-4" /> Facebook
-              </a>
-              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
-                <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
-              </a>
+              <div className="mt-2 flex flex-wrap gap-3">
+                <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
+                  <Instagram className="h-4 w-4" /> Instagram
+                </a>
+                <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm border bg-white hover:bg-slate-50">
+                  <Facebook className="h-4 w-4" /> Facebook
+                </a>
+                <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
+                  <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Pravá – karta s poděkováním (zmenšený vodoznak, jak jsme ladili) */}
+          {/* Pravý sloupec – mapa */}
           <div className="md:justify-self-end w-full">
-            <div className="relative max-w-[420px] ml-auto">
+            <div className="relative max-w-md ml-auto w-full">
               <div
                 className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
               />
-              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-24 px-10 shadow-xl text-center overflow-hidden">
-                {/* Vodoznak textového loga – menší a o chlup sytější */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.12]"
-                  style={{
-                    WebkitMaskImage:
-                      "radial-gradient(68% 68% at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)",
-                    maskImage:
-                      "radial-gradient(68% 68% at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)",
-                  }}
-                >
-                  <SmartImage
-                    srcs={LOGO_TEXT}
-                    alt="Vlasy od Týnky – vodoznak textového loga"
-                    className="max-w-[70%] md:max-w-[62%] h-auto scale-110 blur-[1.2px] select-none pointer-events-none"
-                    width={700}
-                    height={700}
-                  />
-                </div>
-
-                <div className="relative z-10">
-                  <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
-                  <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na {ADDRESS_LINE1}.</div>
-                  <div className="mt-6">
-                    {!showMap ? (
-                      <button
-                        onClick={() => setShowMap(true)}
-                        className="rounded-xl px-4 py-2 border bg-white hover:bg-slate-50 text-sm"
-                      >
-                        Otevřít mapu
-                      </button>
-                    ) : (
-                      <iframe
-                        src={MAP_EMBED_URL}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        className="w-full h-56 rounded-xl border"
-                        title="Mapa – Vlasy od Týnky"
-                      />
-                    )}
-                  </div>
-                </div>
+              <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur overflow-hidden shadow-xl">
+                <iframe
+                  title="Mapa – Vlasy od Týnky"
+                  src={MAP_EMBED}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-[360px] md:h-[420px] rounded-[2rem]"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER – bez loga (dle tvého přání) */}
+      {/* ===== PODĚKOVÁNÍ (užší karta + menší vodoznak) ===== */}
+      <section aria-label="Poděkování" className="relative z-10 pb-12">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mx-auto max-w-md relative">
+            <div
+              className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
+              style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
+            />
+            <div className="relative rounded-[2rem] border bg-white/70 backdrop-blur py-14 px-10 shadow-xl text-center overflow-hidden">
+              {/* Vodoznak menší/sytější */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15"
+                style={{
+                  WebkitMaskImage:
+                    "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                  maskImage:
+                    "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                }}
+              >
+                <SmartImage
+                  srcs={LOGO_TEXT}
+                  alt="Vlasy od Týnky – watermark"
+                  className="max-w-[65%] md:max-w-[55%] h-auto scale-110 blur-[1.0px] select-none pointer-events-none"
+                  fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
+                />
+              </div>
+
+              <div className="relative z-10">
+                <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
+                <div className="mt-2 text-sm text-slate-600">Těším se na vás v salonu na {ADDRESS_LINE1}.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FOOTER (bez loga) ===== */}
       <footer className="relative z-10 border-t bg-white/60 backdrop-blur">
         <div className="mx-auto max-w-6xl px-6 py-10 text-slate-600">
-          <div className="flex flex-col items-center gap-4 text-center">
+          <div className="flex flex-col items-center gap-3 text-center">
             <div className="flex items-center gap-4 text-sm">
               <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-70">
                 <Instagram className="h-4 w-4" /> Instagram
