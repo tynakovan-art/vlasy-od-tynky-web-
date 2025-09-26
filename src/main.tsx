@@ -1,9 +1,10 @@
-import "./index.css";
+// src/main.tsx
 import React from "react";
-import ReactDOM from "react-dom/client";
-import Site from "./index"; // pokud máš hlavní komponentu v src/index.tsx
+import { createRoot } from "react-dom/client";
+import Site from "./index";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const el = document.getElementById("root")!;
+createRoot(el).render(
   <React.StrictMode>
     <Site />
   </React.StrictMode>
