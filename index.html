@@ -7,44 +7,33 @@
     <title>Vlasy od Týnky – kadeřnictví Mladá Boleslav</title>
     <meta name="description" content="Střih, barvení, melír a péče v příjemné atmosféře. Otevírám 1. 10. 2025. Akce –20 % v říjnu." />
 
-    <!-- Kanonická adresa (pomáhá Googlu neplést si verze) -->
-    <link rel="canonical" href="https://vlasyodtynky-mb.cz/" />
-
     <!-- Ikony / manifest -->
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Preload obrázků, které se zobrazují hned nahoře (zrychlí LCP) -->
-    <link rel="preload" as="image" href="/logo-text.png" imagesrcset="/logo-text.png 1x" />
-    <link rel="preload" as="image" href="/logo-siluety.png" imagesrcset="/logo-siluety.png 1x" />
-
-    <!-- Open Graph (náhledy na sociálních sítích) -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Vlasy od Týnky – kadeřnictví Mladá Boleslav" />
     <meta property="og:description" content="Střih, barvení, melír a péče v příjemné atmosféře. Otevírám 1. 10. 2025. Akce –20 % v říjnu." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vlasyodtynky-mb.cz/" />
     <meta property="og:image" content="/logo-siluety.png" />
-    <meta property="og:image:alt" content="Logo Vlasy od Týnky" />
     <meta property="og:locale" content="cs_CZ" />
-
-    <!-- Barva lišty pro mobily -->
     <meta name="theme-color" content="#b57bff" />
 
-    <!-- POZN.: ŽÁDNÝ Tailwind CDN; styly jdou z build procesu (Vite) -->
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3C9XLZ6QR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-X3C9XLZ6QR");
+    </script>
   </head>
   <body class="bg-white text-slate-800">
     <div id="root"></div>
-    
-<!-- Preload hlavního loga (LCP) -->
-<link rel="preload" as="image" href="/logo-siluety.png" imagesrcset="/logo-siluety.png 1x" fetchpriority="high" />
-
-<!-- Hinty pro prohlížeč -->
-<link rel="dns-prefetch" href="//www.google.com" />
-<link rel="dns-prefetch" href="//maps.googleapis.com" />
-<link rel="preconnect" href="https://www.google.com" crossorigin>
-    
-    <!-- Vite dev/prod vstup -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
