@@ -273,7 +273,7 @@ export default function Site() {
           </p>
         </div>
 
-        <h2 className="text-2xl font-bold">Ceník</h2>
+        <h2 className="text-2xl font-bold">Ceník <span className="text-red-600">–20%</span></h2>
         <div className="relative mt-6 overflow-hidden rounded-2xl border border-slate-200/60 bg-white">
           {/* vodoznak v kartě ceníku */}
           <div
