@@ -29,7 +29,7 @@ function SmartImage({
 }
 
 export default function Site() {
-  /* LOGA v /public (aktuální názvy) */
+  /* LOGA v /public */
   const LOGO_SILUETY = ["/logo-siluety.png"]; // Mladá Boleslav – logo
   const LOGO_TEXT = ["/logo-text.png"];       // Textové logo „Vlasy od Týnky“
 
@@ -140,7 +140,7 @@ export default function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s textovým logem (původní velikost) */}
+          {/* Pravý sloupec – karta s textovým logem */}
           <div className="relative md:justify-self-end">
             <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl" style={{ background: grad }} />
             <div className="relative rounded-[2rem] border border-slate-200/60 bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
@@ -172,34 +172,49 @@ export default function Site() {
         </div>
       </section>
 
-      {/* BANNER NAD SLUŽBAMI – jen podbarvený gradientem (bez rámečku) */}
+      {/* BANNER NAD SLUŽBAMI – karta jako v hero (glow + rámeček, ne fullwidth barva) */}
       <section aria-label="Akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
-          <div
-            className="rounded-2xl p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow text-white"
-            style={{ background: grad }}
-          >
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm md:text-lg font-semibold bg-white/15">
-                🎉 Otevírací akce říjen
+          <div className="relative">
+            {/* glow pozadí */}
+            <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl" style={{ background: grad }} />
+            {/* karta */}
+            <div
+              className="relative rounded-[2rem] border border-slate-200/60 bg-white/70 backdrop-blur p-5 md:p-6 shadow-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+            >
+              <div className="text-slate-800">
+                <div
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm md:text-lg font-semibold text-white"
+                  style={{ background: grad }}
+                >
+                  🎉 Otevírací akce říjen
+                </div>
+                <div className="mt-3 text-sm md:text-base font-medium">
+                  Po celý říjen nabízím <span className="font-bold text-red-600">20% slevu</span> na všechny služby pro všechny zákazníky.
+                </div>
+                <div className="text-xs md:text-sm text-slate-600">
+                  Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
+                </div>
+                <div className="mt-2 text-xs md:text-sm text-slate-600">
+                  📍 {ADDRESS_LINE1}, {ADDRESS_CITY}
+                </div>
               </div>
-              <div className="mt-3 text-sm md:text-base font-medium">
-                Po celý říjen nabízím <span className="font-bold text-red-200">20% slevu</span> na všechny služby pro všechny zákazníky.
+              <div className="flex gap-2 shrink-0">
+                <a
+                  href={`tel:${PHONE_RAW}`}
+                  className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
+                  style={{ background: grad }}
+                >
+                  <Phone className="h-4 w-4 mr-1" />
+                  Zavolat {PHONE_DISPLAY}
+                </a>
+                <a
+                  href="#cenik"
+                  className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border border-slate-200/60 bg-white hover:bg-slate-50"
+                >
+                  Mrknout na ceník
+                </a>
               </div>
-              <div className="text-xs md:text-sm opacity-90">
-                Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
-              </div>
-              <div className="mt-2 text-xs md:text-sm opacity-90">
-                📍 {ADDRESS_LINE1}, {ADDRESS_CITY}
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm bg-white text-slate-800 hover:bg-slate-50">
-                📞 Zavolat
-              </a>
-              <a href="#cenik" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm bg-white text-slate-800 hover:bg-slate-50">
-                Mrknout na ceník
-              </a>
             </div>
           </div>
         </div>
@@ -339,7 +354,7 @@ export default function Site() {
               </ul>
             </div>
 
-            {/* Péče & regenerace / doplňky */}
+            {/* Péče & regenerace */}
             <div className="p-6">
               <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
               <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -434,11 +449,10 @@ export default function Site() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ – vodoznak uvnitř karty (výraznější) */}
+      {/* PODĚKOVÁNÍ – vodoznak uvnitř karty */}
       <section className="relative z-10">
         <div className="relative mx-auto max-w-md px-6 py-12">
           <div className="relative rounded-[2rem] border border-slate-200/60 bg-white/70 backdrop-blur py-24 px-10 shadow-xl text-center overflow-hidden">
-            {/* Vodoznak uvnitř karty */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
