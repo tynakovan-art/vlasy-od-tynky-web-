@@ -1,9 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import Site from "./Site";
+import { createRoot } from "react-dom/client";
+import Site from "./index";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const el = document.getElementById("root")!;
+createRoot(el).render(
   <React.StrictMode>
     <Site />
   </React.StrictMode>
