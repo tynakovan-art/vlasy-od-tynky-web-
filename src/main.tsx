@@ -3,8 +3,7 @@ import { createRoot } from "react-dom/client";
 import Site from "./index";
 import "./index.css";
 
-const el = document.getElementById("root")!;
-createRoot(el).render(
+createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Site />
   </React.StrictMode>
