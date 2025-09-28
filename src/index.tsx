@@ -30,8 +30,8 @@ function SmartImage({
 
 export default function Site() {
   /* LOGA v /public (aktuální názvy) */
-  const LOGO_SILUETY = ["/logo-siluety.png"]; // Mladá Boleslav – logo.png (přejmenované v public)
-  const LOGO_TEXT = ["/logo-text.png"];       // kadeřnictví - logo bez .png (přejmenované v public)
+  const LOGO_SILUETY = ["/logo-siluety.png"]; // Mladá Boleslav – logo
+  const LOGO_TEXT = ["/logo-text.png"];       // Textové logo „Vlasy od Týnky“
 
   /* Adresa a odkazy */
   const ADDRESS_LINE1 = "Zalužanská 1272";
@@ -172,35 +172,32 @@ export default function Site() {
         </div>
       </section>
 
-      {/* BANNER NAD SLUŽBAMI – gradientový rámeček + „20 %“ červeně */}
+      {/* BANNER NAD SLUŽBAMI – jen podbarvený gradientem (bez rámečku) */}
       <section aria-label="Akce" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div
-            className="rounded-2xl bg-white/70 backdrop-blur p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow"
-            style={{ border: "2px solid transparent", borderImage: `${grad} 1` }}
+            className="rounded-2xl p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow text-white"
+            style={{ background: grad }}
           >
-            <div className="text-slate-800">
-              <div
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm md:text-lg font-semibold text-white"
-                style={{ background: grad }}
-              >
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm md:text-lg font-semibold bg-white/15">
                 🎉 Otevírací akce říjen
               </div>
               <div className="mt-3 text-sm md:text-base font-medium">
-                Po celý říjen nabízím <span className="font-bold text-red-600">20% slevu</span> na všechny služby pro všechny zákazníky.
+                Po celý říjen nabízím <span className="font-bold text-red-200">20% slevu</span> na všechny služby pro všechny zákazníky.
               </div>
-              <div className="text-xs md:text-sm text-slate-600">
+              <div className="text-xs md:text-sm opacity-90">
                 Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
               </div>
-              <div className="mt-2 text-xs md:text-sm text-slate-600">
+              <div className="mt-2 text-xs md:text-sm opacity-90">
                 📍 {ADDRESS_LINE1}, {ADDRESS_CITY}
               </div>
             </div>
             <div className="flex gap-2">
-              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white" style={{ background: grad }}>
+              <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm bg-white text-slate-800 hover:bg-slate-50">
                 📞 Zavolat
               </a>
-              <a href="#cenik" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm border border-slate-200/60 bg-white hover:bg-slate-50">
+              <a href="#cenik" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm bg-white text-slate-800 hover:bg-slate-50">
                 Mrknout na ceník
               </a>
             </div>
@@ -208,7 +205,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* SLUŽBY – včetně Doplňkových služeb */}
+      {/* SLUŽBY */}
       <section id="sluzby" className="mx-auto max-w-6xl px-6 py-12">
         <h2 className="text-2xl md:text-3xl font-semibold">Kadeřnické služby v Mladé Boleslavi</h2>
         <div className="mt-6 grid md:grid-cols-2 gap-6">
@@ -234,12 +231,6 @@ export default function Site() {
             <div className="text-lg font-medium">Vlasová péče</div>
             <p className="mt-2 text-sm text-slate-600">
               Hloubkové čištění pokožky a péče po barvení/melíru pro sílu a lesk vlasů.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-slate-200/60 bg-white/70 p-6 md:col-span-2">
-            <div className="text-lg font-medium">Doplňkové služby</div>
-            <p className="mt-2 text-sm text-slate-600">
-              Ki-Power Veg rekonstrukce, B.Pur hloubkové čištění pokožky, závěrečné tónování pro doladění odstínu a lesku.
             </p>
           </div>
         </div>
@@ -443,30 +434,33 @@ export default function Site() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ – menší vodoznak, užší karta */}
+      {/* PODĚKOVÁNÍ – vodoznak uvnitř karty (výraznější) */}
       <section className="relative z-10">
-        <div className="relative mx-auto max-w-md px-6 py-12 text-center">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-14"
-            style={{
-              WebkitMaskImage:
-                "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-              maskImage:
-                "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-            }}
-          >
-            <SmartImage
-              srcs={LOGO_TEXT}
-              className="max-w-[55%] h-auto blur-[1.2px] select-none pointer-events-none"
-              fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
-            />
-          </div>
+        <div className="relative mx-auto max-w-md px-6 py-12">
+          <div className="relative rounded-[2rem] border border-slate-200/60 bg-white/70 backdrop-blur py-24 px-10 shadow-xl text-center overflow-hidden">
+            {/* Vodoznak uvnitř karty */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-20"
+              style={{
+                WebkitMaskImage:
+                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                maskImage:
+                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+              }}
+            >
+              <SmartImage
+                srcs={LOGO_TEXT}
+                className="max-w-[60%] h-auto blur-[1.2px] select-none pointer-events-none"
+                fallback={<div className="text-4xl font-bold text-slate-200">Vlasy od Týnky</div>}
+              />
+            </div>
 
-          <div className="relative z-10 rounded-[2rem] border border-slate-200/60 bg-white/70 backdrop-blur py-24 px-10 shadow-xl">
-            <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
-            <div className="mt-2 text-sm text-slate-600">
-              Těším se na vás v salonu na {ADDRESS_LINE1}.
+            <div className="relative z-10">
+              <div className="text-lg font-semibold">Děkuji za návštěvu 💜</div>
+              <div className="mt-2 text-sm text-slate-600">
+                Těším se na vás v salonu na {ADDRESS_LINE1}.
+              </div>
             </div>
           </div>
         </div>
