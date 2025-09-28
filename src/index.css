@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --grad: linear-gradient(135deg, #6aa2ff, #b57bff, #ff7ad6);
+/* Reusable gradient utilita – stejná barva všude */
+:root{
+  --brand-grad: linear-gradient(135deg, #6aa2ff, #b57bff, #ff7ad6);
 }
 
-body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol";
+/* Pomocníci pro vzhled, aby byl stejný jako „správná verze“ */
+.gradient-bg { background: var(--brand-grad); }
+.gradient-text {
+  background: var(--brand-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
+
+.border-subtle { border-color: theme('borderColor.subtle'); }
+.shadow-card   { box-shadow: theme('boxShadow.card'); }
+.shadow-soft   { box-shadow: theme('boxShadow.soft'); }
