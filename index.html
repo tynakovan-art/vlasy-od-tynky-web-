@@ -7,24 +7,36 @@
     <title>Vlasy od Týnky – kadeřnictví Mladá Boleslav</title>
     <meta name="description" content="Střih, barvení, melír a péče v příjemné atmosféře. Otevírám 1. 10. 2025. Akce –20 % v říjnu." />
 
+    <!-- Kanonická adresa (pomáhá Googlu neplést si verze) -->
+    <link rel="canonical" href="https://vlasyodtynky-mb.cz/" />
+
     <!-- Ikony / manifest -->
     <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Open Graph -->
+    <!-- Preload obrázků, které se zobrazují hned nahoře (zrychlí LCP) -->
+    <link rel="preload" as="image" href="/logo-text.png" imagesrcset="/logo-text.png 1x" />
+    <link rel="preload" as="image" href="/logo-siluety.png" imagesrcset="/logo-siluety.png 1x" />
+
+    <!-- Open Graph (náhledy na sociálních sítích) -->
     <meta property="og:title" content="Vlasy od Týnky – kadeřnictví Mladá Boleslav" />
     <meta property="og:description" content="Střih, barvení, melír a péče v příjemné atmosféře. Otevírám 1. 10. 2025. Akce –20 % v říjnu." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vlasyodtynky-mb.cz/" />
     <meta property="og:image" content="/logo-siluety.png" />
+    <meta property="og:image:alt" content="Logo Vlasy od Týnky" />
     <meta property="og:locale" content="cs_CZ" />
+
+    <!-- Barva lišty pro mobily -->
     <meta name="theme-color" content="#b57bff" />
 
-    <!-- ŽÁDNÝ Tailwind CDN – styly jdou z /src/index.css přes Vite build -->
+    <!-- POZN.: ŽÁDNÝ Tailwind CDN; styly jdou z build procesu (Vite) -->
   </head>
   <body class="bg-white text-slate-800">
     <div id="root"></div>
+
+    <!-- Vite dev/prod vstup -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
