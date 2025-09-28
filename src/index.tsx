@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Facebook, Instagram, MapPin, Clock, Phone, Scissors, DoorOpen } from "lucide-react";
 
-/* --- Pomocné komponenty --- */
+/* Obrázek s drobnými performance atributy */
 function SmartImage({
   src,
   alt,
@@ -13,7 +12,7 @@ function SmartImage({
   src: string;
   alt?: string;
   className?: string;
-  priority?: boolean; // pro LCP obrázky
+  priority?: boolean;
 }) {
   return (
     <img
@@ -21,13 +20,13 @@ function SmartImage({
       alt={alt ?? ""}
       className={className}
       loading={priority ? "eager" : "lazy"}
-      fetchpriority={priority ? "high" : undefined}
+      fetchPriority={priority ? "high" : undefined}
       decoding="async"
     />
   );
 }
 
-/* Přeškrtnutá původní cena + zvýrazněná akční */
+/* Původní helper pro akční ceny */
 const PriceStrike = ({ oldLabel, newLabel }: { oldLabel: string; newLabel: string }) => (
   <div className="flex items-baseline gap-2">
     <span className="text-sm text-slate-400 line-through">{oldLabel}</span>
@@ -36,11 +35,11 @@ const PriceStrike = ({ oldLabel, newLabel }: { oldLabel: string; newLabel: strin
 );
 
 function Site() {
-  /* Cesty k souborům v /public (aktuální názvy, žádné přezdívky) */
-  const LOGO_TEXT = "/logo-text.png";       // textové logo (použito v hero kartě + vodoznak)
-  const LOGO_SILUETY = "/logo-siluety.png"; // logo se siluetami (navbar, vodoznaky apod.)
+  /* Aktuální názvy souborů v /public */
+  const LOGO_TEXT = "/logo-text.png";
+  const LOGO_SILUETY = "/logo-siluety.png";
 
-  /* Adresa a kontakty */
+  /* Kontakty a adresa */
   const ADDRESS_LINE1 = "Zalužanská 1272";
   const ADDRESS_CITY = "293 01 Mladá Boleslav";
   const ADDRESS_DISTRICT = "Mladá Boleslav III";
@@ -49,10 +48,8 @@ function Site() {
   const PHONE_RAW = "725882820";
   const PHONE_DISPLAY = "725 882 820";
 
-  /* Mapy */
   const MAP_QUERY = encodeURIComponent(`${ADDRESS_LINE1}, ${ADDRESS_CITY}`);
   const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
-  // Embed je vhodný s q= a hl=cs, bez API klíče:
   const MAP_EMBED = `https://www.google.com/maps?q=${MAP_QUERY}&hl=cs&output=embed`;
 
   useEffect(() => {
@@ -61,19 +58,13 @@ function Site() {
 
   return (
     <div className="min-h-screen bg-white text-slate-800">
-      {/* NAVBAR (bez rámečku) */}
+      {/* NAVBAR */}
       <header className="sticky top-0 z-20 bg-white/80 backdrop-blur">
         <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
           <a href="#hero" className="flex items-center gap-3">
-            <SmartImage
-              src={LOGO_SILUETY}
-              alt="Vlasy od Týnky — logo"
-              className="h-9 w-auto object-contain"
-              priority
-            />
+            <SmartImage src={LOGO_SILUETY} alt="Vlasy od Týnky — logo" className="h-9 w-auto object-contain" priority />
             <span className="font-semibold">Vlasy od Týnky</span>
           </a>
-
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#o-mne" className="hover:opacity-70">O mně</a>
             <a href="#sluzby" className="hover:opacity-70">Služby</a>
@@ -86,9 +77,7 @@ function Site() {
       {/* HERO */}
       <section id="hero" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 pt-10 pb-14 md:pt-14 md:pb-20 grid md:grid-cols-2 gap-10 items-center">
-          {/* Levý sloupec – přesný titulek (jen „Vlasy od Týnky“ je v gradientu) */}
           <div>
-            {/* Badge s datem otevření (🚪 místo 📘) */}
             <div
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white mb-4"
               style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
@@ -97,20 +86,11 @@ function Site() {
               <span>Otevírám 1.&nbsp;10.&nbsp;2025</span>
             </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="leading-tight"
-            >
+            <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="leading-tight">
               <span className="block text-3xl md:text-4xl font-semibold">Kadeřnictví</span>
               <span
                 className="block text-4xl md:text-5xl font-semibold"
-                style={{
-                  background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
-                }}
+                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)", WebkitBackgroundClip: "text", color: "transparent" }}
               >
                 Vlasy od Týnky
               </span>
@@ -122,17 +102,11 @@ function Site() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
-                href={`tel:${PHONE_RAW}`}
-                className="rounded-2xl px-5 py-3 text-white shadow-md text-sm font-medium"
-                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
-              >
+              <a href={`tel:${PHONE_RAW}`} className="rounded-2xl px-5 py-3 text-white shadow-md text-sm font-medium"
+                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                 📞 Zavolat {PHONE_DISPLAY}
               </a>
-              <a
-                href="#sluzby"
-                className="rounded-2xl px-5 py-3 text-sm font-medium bg-white/70 backdrop-blur hover:bg-white"
-              >
+              <a href="#sluzby" className="rounded-2xl px-5 py-3 text-sm font-medium bg-white/70 backdrop-blur hover:bg-white">
                 Prohlédnout služby
               </a>
             </div>
@@ -143,31 +117,26 @@ function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s logem a CTA (původní velikost) */}
+          {/* pravý sloupec – karta s logem a CTA */}
           <div className="md:justify-self-end relative">
-            {/* jemné „glow“ pozadí bez hrany */}
-            <div
-              className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
-              style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
-            />
+            <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
+                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }} />
             <div className="relative rounded-[2rem] bg-white/70 backdrop-blur p-8 shadow-xl text-center overflow-hidden">
-              <SmartImage
-                src={LOGO_TEXT}
-                className="mx-auto mb-2 h-32 w-auto object-contain"
-                alt=""
-                priority
-              />
+              <SmartImage src={LOGO_TEXT} className="mx-auto mb-2 h-32 w-auto object-contain" alt="" priority />
               <div className="text-2xl font-semibold">Vlasy od Týnky</div>
               <div className="mt-1 text-sm text-slate-500">kadeřnictví · Mladá Boleslav</div>
               <div className="mt-4 text-sm text-slate-600">Objednávky přes sociální sítě nebo telefon.</div>
               <div className="mt-5 flex flex-col gap-2">
-                <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm bg-white hover:bg-slate-50">
+                <a href="https://www.instagram.com/vlasy_od_tynky_mb" target="_blank" rel="noopener noreferrer"
+                   className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm bg-white hover:bg-slate-50">
                   <Instagram className="h-4 w-4" /> Napsat na Instagramu
                 </a>
-                <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm bg-white hover:bg-slate-50">
+                <a href="https://www.facebook.com/vlasyodtynky/" target="_blank" rel="noopener noreferrer"
+                   className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm bg-white hover:bg-slate-50">
                   <Facebook className="h-4 w-4" /> Napsat na Facebooku
                 </a>
-                <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
+                <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm text-white"
+                   style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                   <Phone className="h-4 w-4" /> Zavolat {PHONE_DISPLAY}
                 </a>
               </div>
@@ -176,7 +145,7 @@ function Site() {
         </div>
       </section>
 
-      {/* BANNER NAD SLUŽBAMI — gradient „rámeček“ jako v hero, –20 % červeně */}
+      {/* Banner nad službami (gradientový rám + –20 % červeně) */}
       <section aria-label="Otevírací akce – banner" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6">
           <div className="relative rounded-[1.2rem] p-[1px]" style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
@@ -188,25 +157,15 @@ function Site() {
                     <span className="text-red-600 font-bold">–20&nbsp;%</span>
                     <span className="text-slate-800 font-normal">na všechny služby pro všechny zákazníky</span>
                   </div>
-                  <div className="text-xs md:text-sm text-slate-600">
-                    Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨
-                  </div>
-                  <div className="mt-1 text-xs md:text-sm text-slate-600">
-                    📍 {ADDRESS_LINE1}, {ADDRESS_CITY}
-                  </div>
+                  <div className="text-xs md:text-sm text-slate-600">Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨</div>
+                  <div className="mt-1 text-xs md:text-sm text-slate-600">📍 {ADDRESS_LINE1}, {ADDRESS_CITY}</div>
                 </div>
                 <div className="flex gap-2">
-                  <a
-                    href={`tel:${PHONE_RAW}`}
-                    className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
-                    style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
-                  >
+                  <a href={`tel:${PHONE_RAW}`} className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm text-white"
+                     style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
                     <Phone className="h-4 w-4 mr-1" /> Zavolat {PHONE_DISPLAY}
                   </a>
-                  <a
-                    href="#cenik"
-                    className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm bg-white hover:bg-slate-50"
-                  >
+                  <a href="#cenik" className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm bg-white hover:bg-slate-50">
                     Mrknout na ceník
                   </a>
                 </div>
@@ -259,7 +218,6 @@ function Site() {
       {/* CENÍK */}
       <section id="cenik" className="relative z-10">
         <div className="relative mx-auto max-w-6xl px-6 py-16">
-          {/* Banner nad ceníkem v plném gradientu */}
           <div className="w-full text-white text-center py-4 rounded-xl shadow-md my-6"
                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}>
             <p className="text-lg font-semibold">🎉 Otevírací sleva <span className="text-white">–20 %</span> celý říjen! 🎉</p>
@@ -268,7 +226,6 @@ function Site() {
             </p>
           </div>
 
-          {/* Nadpis ceníku se štítkem – „–20 %“ červeně */}
           <div className="flex items-center gap-3 mb-2">
             <h2 className="text-2xl font-bold">Ceník</h2>
             <span className="text-xs md:text-sm px-2 py-1 rounded-full bg-pink-100 text-red-600 border border-pink-200">
@@ -279,29 +236,20 @@ function Site() {
             Akce –20 % platí do 31. 10. 2025. Přeškrtnuté částky jsou původní ceny, zvýrazněné částky jsou akční ceny po slevě.
           </p>
 
-          {/* Karta ceníku s jemným vodoznakem siluet */}
           <div className="relative mt-6 overflow-hidden rounded-2xl bg-white shadow">
-            {/* vodoznak */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10"
               style={{
                 zIndex: 0,
-                WebkitMaskImage:
-                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-                maskImage:
-                  "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                WebkitMaskImage: "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+                maskImage: "radial-gradient(70% 70% at 50% 50%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
               }}
             >
-              <SmartImage
-                src={LOGO_SILUETY}
-                className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none"
-                alt=""
-              />
+              <SmartImage src={LOGO_SILUETY} className="max-w-[80%] md:max-w-[50%] h-auto scale-110 blur-[1.5px] select-none pointer-events-none" alt="" />
             </div>
 
             <div className="relative z-10">
-              {/* Střih & styling */}
               <div className="p-6 border-b border-slate-100">
                 <div className="font-medium text-lg">✂️ Střih &amp; styling</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -335,7 +283,6 @@ function Site() {
                 </ul>
               </div>
 
-              {/* Barvení & melír */}
               <div className="p-6 border-b border-slate-100">
                 <div className="font-medium text-lg">🎨 Barvení &amp; melír</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -363,7 +310,6 @@ function Site() {
                 </ul>
               </div>
 
-              {/* Péče & regenerace */}
               <div className="p-6">
                 <div className="font-medium text-lg">🌸 Péče &amp; regenerace</div>
                 <ul className="mt-3 text-sm text-slate-700 space-y-4">
@@ -393,10 +339,9 @@ function Site() {
         </div>
       </section>
 
-      {/* KONTAKT — vlevo info, vpravo mapa (embed) */}
+      {/* KONTAKT + MAPA */}
       <section id="kontakt" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-10 items-start">
-          {/* Levý sloupec */}
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold">Kontakt</h2>
             <div className="mt-4 flex flex-col gap-3 text-slate-700">
@@ -442,13 +387,10 @@ function Site() {
             </div>
           </div>
 
-          {/* Pravý sloupec — mapa v kartě s glow */}
           <div className="md:justify-self-end w-full">
             <div className="relative max-w-md ml-auto">
-              <div
-                className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
-                style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
-              />
+              <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
+                   style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }} />
               <div className="relative rounded-[2rem] bg-white/70 backdrop-blur p-4 shadow-xl overflow-hidden">
                 <div className="rounded-xl overflow-hidden">
                   <iframe
@@ -465,31 +407,22 @@ function Site() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ — užší karta uprostřed s menším, ale sytějším vodoznakem LOGO_TEXT */}
+      {/* PODĚKOVÁNÍ s jemnějším menším vodoznakem */}
       <section aria-label="Poděkování" className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 pb-16">
           <div className="relative max-w-lg mx-auto">
-            <div
-              className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
-              style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }}
-            />
+            <div className="absolute -inset-6 rounded-[2rem] opacity-20 blur-2xl"
+                 style={{ background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)" }} />
             <div className="relative rounded-[2rem] bg-white/70 backdrop-blur py-24 px-10 shadow-xl text-center overflow-hidden">
-              {/* vodoznak — trochu menší, ale o chlup sytější */}
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15"
                 style={{
-                  WebkitMaskImage:
-                    "radial-gradient(68% 68% at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)",
-                  maskImage:
-                    "radial-gradient(68% 68% at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)",
+                  WebkitMaskImage: "radial-gradient(68% 68% at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)",
+                  maskImage: "radial-gradient(68% 68% at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%)",
                 }}
               >
-                <SmartImage
-                  src={LOGO_TEXT}
-                  className="max-w-[70%] md:max-w-[55%] h-auto scale-110 blur-[1.1px] select-none pointer-events-none"
-                  alt=""
-                />
+                <SmartImage src={LOGO_TEXT} className="max-w-[70%] md:max-w-[55%] h-auto scale-110 blur-[1.1px] select-none pointer-events-none" alt="" />
               </div>
 
               <div className="relative z-10">
@@ -501,7 +434,7 @@ function Site() {
         </div>
       </section>
 
-      {/* FOOTER — bez loga, jen odkazy */}
+      {/* FOOTER bez loga, s odkazy */}
       <footer className="relative z-10">
         <div className="mx-auto max-w-6xl px-6 py-10 text-slate-600">
           <div className="flex flex-col items-center gap-3 text-center">
@@ -526,6 +459,4 @@ function Site() {
   );
 }
 
-/* Mount */
-const root = createRoot(document.getElementById("root")!);
-root.render(<Site />);
+export default Site;
