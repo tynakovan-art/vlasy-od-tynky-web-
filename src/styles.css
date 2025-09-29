@@ -63,4 +63,11 @@ img { display:block; max-width:100%; height:auto }
   -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
 }
 
+.small-watermark {
+  max-width: 40%;
+  height: auto;
+  opacity: 0.15;
+  filter: blur(1px);
+}
+
 .hr{ height:1px; background:var(--border); margin: .5rem 0 1.25rem }
