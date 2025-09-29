@@ -71,3 +71,12 @@ img { display:block; max-width:100%; height:auto }
 }
 
 .hr{ height:1px; background:var(--border); margin: .5rem 0 1.25rem }
+
+/* host pro watermark (karta, ve které má zůstat) */
+.wm-host { position: relative; overflow: hidden; }
+
+/* obsah karty, který má být nad vodoznakem */
+.wm-content { position: relative; z-index: 1; }
+
+/* vodoznak pod obsahem (už máš position:absolute) */
+.watermark { z-index: 0; }
