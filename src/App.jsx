@@ -202,7 +202,7 @@ export default function App() {
           <div className="card" style={{ marginTop: "1rem", overflow: "hidden" }}>
             {/* vodoznak */}
             <div className="watermark">
-              <SmartImage srcs={LOGO_SILUETY} />
+              <SmartImage srcs={LOGO_SILUETY} className="small-watermark" />
             </div>
 
             <div style={{ position: "relative", zIndex: 1 }}>
@@ -351,7 +351,7 @@ export default function App() {
         <div className="container" style={{ display: "grid", placeItems: "center" }}>
           <div className="card karta-thanks" style={{ width: "min(44rem, 100%)" }}>
             <div className="watermark">
-              <SmartImage srcs={LOGO_TEXT} />
+              <SmartImage srcs={LOGO_TEXT} className="small-watermark" />
             </div>
             <div style={{ position: "relative", textAlign: "center", zIndex: 1 }}>
               <div style={{ fontSize: "1.4rem", fontWeight: 700 }}>Děkuji za návštěvu 💜</div>
