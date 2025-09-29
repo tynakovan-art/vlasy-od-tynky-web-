@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-/* Obrázek s fallbackem – bez TS přísnosti a bez externích ikon */
-function SmartImage({
-  srcs,
-  alt,
-  className,
-  fallback,
-}: {
+/* Obrázek s fallbackem – bez TS přísnosti a bez externíc
+function SmartImage(props: {
   srcs: string[];
   alt?: string;
   className?: string;
   fallback?: React.ReactNode;
 }) {
+  const { srcs, alt, className, fallback } = props;
   const [i, setI] = useState(0);
+
   const safeFallback =
     fallback ?? (
       <div
