@@ -72,7 +72,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* pravý sloupec – užší karta s glowem kolem */}
+          {/* pravý sloupec – užší karta s glowem těsně okolo */}
           <div className="hero-card-wrap glow">
             <div className="hero-card">
               <img src="/logo-text.png" alt="" className="hero-logo" />
@@ -165,7 +165,7 @@ export default function App() {
           </h2>
 
           <div className="card wm-host price-card">
-            {/* vodoznak — viditelný */}
+            {/* vodoznak — ZESÍLEN (viditelnější) */}
             <div className="watermark">
               <img src="/logo-text.png" alt="" className="wm-logo" />
             </div>
@@ -318,7 +318,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ – uprostřed, vodoznak zvýrazněn */}
+      {/* PODĚKOVÁNÍ – uprostřed, vodoznak ZESÍLEN */}
       <section className="section">
         <div className="container thanks-center">
           <div className="card wm-host karta-thanks">
