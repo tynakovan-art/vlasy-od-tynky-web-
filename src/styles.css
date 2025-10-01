@@ -149,3 +149,42 @@ img{display:block;max-width:100%;height:auto}
   line-height: 1.4;
 }
 .price-note p { margin: 0.3rem 0; }
+
+/* --- Bezpečné zlepšení výkonu + mobile fixy (beze změny vzhledu) --- */
+
+/* Zabraň horizontálnímu posuvu na malých displejích */
+html, body { overflow-x: hidden; }
+
+/* Glow držme opravdu jen okolo karty (už máš .glow::before) – přidám pojistku proti přetečení */
+.glow::before{
+  max-width: calc(100% + 2.5rem);
+}
+
+/* Rezervace místa pro vodoznaky, aby neskákal layout (CLS) */
+.wm-host { position: relative; overflow: hidden; min-height: 14rem; }
+.watermark img { width: 60%; height: auto; }
+
+/* Mapa centrovaná na mobilu + poměr stran, ať neskáče výška */
+.map-wrap { display: flex; justify-content: center; }
+.map-card { width: 100%; max-width: 24rem; }         /* cca 384px */
+.map-iframe { aspect-ratio: 16 / 9; height: auto; display: block; }
+
+/* Ikonky a CTA na mobilu, aby se vešlo vše na řádek a nezalomilo se ošklivě */
+.icon { width: 16px; height: 16px; flex: 0 0 16px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+.cta-row .btn { white-space: nowrap; }
+
+/* V banneru nad ceníkem menší mezera k nadpisu */
+.banner-cenik { margin-bottom: .75rem; }
+h2.cenik-title { margin-top: 0; }
+
+/* Plynulejší ceník na mobilu – trošku větší svislé rozestupy */
+@media (max-width: 480px){
+  .price-row { gap: .5rem; }
+  .price-row .desc { margin-top: .25rem; }
+}
+
+/* Preferuje-li uživatel méně animací, ztlumíme je (PageSpeed to má rád) */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
