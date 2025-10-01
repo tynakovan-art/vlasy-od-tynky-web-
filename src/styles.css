@@ -280,3 +280,65 @@ section {
 
 /* drobnost: text banneru nad službami/na ceníku vždy na střed */
 .banner { text-align: center; }
+
+/* ---- tlačítka: jeden řádek na mobilech, bez přetékání ---- */
+
+/* obálka pro skupinu tlačítek (hero, banner) */
+.btn-row,
+.hero-actions,
+.banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: center;           /* mobil: doprostřed */
+}
+
+/* samotná tlačítka: pružná šířka, aby se tři vešly do řádku */
+.btn-fit {
+  flex: 1 1 calc((100% - 2 * .75rem) / 3);  /* 3 vedle sebe */
+  min-width: 9.5rem;                        /* brání příliš malým tlačítkům */
+  text-align: center;
+}
+
+/* velmi úzké telefony: raději 2 vedle sebe */
+@media (max-width: 380px) {
+  .btn-fit { flex-basis: calc((100% - .75rem) / 2); }
+}
+
+/* ikonky v tlačítkách menší, ať se text vejde */
+.btn svg { width: 16px; height: 16px; }
+
+/* trochu zmenšit padding na mobilech */
+@media (max-width: 420px) {
+  .btn { padding: .6rem .9rem; font-size: .95rem; }
+}
+
+/* ---- glow: jen kolem karet + žádné vodorovné posouvání ---- */
+html, body { overflow-x: hidden; }
+.card { overflow: hidden; }
+.glow::before{
+  inset: -1rem;
+  filter: blur(20px);
+  opacity: .22;
+}
+section { overflow-x: clip; }
+
+/* ---- mapa: karta i iframe zarovnat doprostřed a vyplnit šířku ---- */
+
+/* funguje i bez úprav HTML (moderní prohlížeče) */
+.card:has(> iframe[src*="google.com/maps"]) {
+  max-width: 32rem;                 /* rozumná šířka na mobilu */
+  margin-inline: auto;              /* doprostřed */
+}
+
+.card:has(> iframe[src*="google.com/maps"]) iframe {
+  display: block;
+  width: 100%;
+  height: 340px;
+  border: 0;
+  border-radius: var(--radius-lg);
+}
+
+/* fallback kdyby :has nebylo k dispozici – použij, pokud máš class .map-card */
+.map-card { max-width: 32rem; margin-inline: auto; }
+.map-card iframe { display:block; width:100%; height:340px; border:0; border-radius: var(--radius-lg); }
