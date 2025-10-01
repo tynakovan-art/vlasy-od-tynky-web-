@@ -28,7 +28,7 @@ a{color:inherit;text-decoration:none}
 
 .hero{padding-top:1.25rem}
 .hero-grid{display:grid;gap:2rem}
-@media (min-width:900px){ .hero-grid{grid-template-columns:1fr 1fr;align-items:center} }
+@media (min-width:768px){ .hero-grid{grid-template-columns:1fr 1fr;align-items:center} }
 
 .badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .9rem;border-radius:999px;background:var(--grad);color:#fff;font-weight:700;font-size:.95rem}
 
@@ -87,7 +87,7 @@ a{color:inherit;text-decoration:none}
 .row .dot{font-size:1.2rem;line-height:1}
 .k-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem}
 .map-wrap{max-width:520px;margin:0 auto}
-@media (min-width:900px){ .map-wrap{margin-left:auto} }
+@media (min-width:768px){ .map-wrap{margin-left:auto} }
 .map-card{position:relative;border:1px solid var(--border);border-radius:var(--radius-xl);background:#fff;padding:.5rem;box-shadow:var(--shadow)}
 .map-wrap::before{content:"";position:absolute;inset:-1.25rem;border-radius:var(--radius-xl);background:var(--grad);filter:blur(24px);opacity:.22;z-index:-1}
 .map-frame{display:block;border:0;border-radius:calc(var(--radius-xl) - .6rem);width:100%;height:340px}
