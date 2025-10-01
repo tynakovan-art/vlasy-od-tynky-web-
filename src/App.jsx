@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-/* Obrázek s fallbackem mezi více zdroji */
+/* Obrázek s fallbackem (zkusí víc src) */
 function SmartImage({
   srcs, alt = "", className, width, height,
   loading = "lazy", fetchpriority, decoding = "async"
@@ -18,7 +18,7 @@ function SmartImage({
   );
 }
 
-/* Ikonky (SVG inline, nulový vliv na síť) */
+/* Inline SVG ikony (bez externích knihoven) */
 const IconPhone = (p)=>(<svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" {...p}><path strokeWidth="2" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.11 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.59 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.47-1.16a2 2 0 0 1 2.11-.45c.84.27 1.71.47 2.61.59A2 2 0 0 1 22 16.92z"/></svg>);
 const IconInstagram = (p)=>(<svg className="icon" viewBox="0 0 24 24" fill="currentColor" {...p}><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>);
 const IconFacebook = (p)=>(<svg className="icon" viewBox="0 0 24 24" fill="currentColor" {...p}><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H8.1V12h2.4V9.8c0-2.37 1.41-3.68 3.56-3.68 1.03 0 2.1.18 2.1.18V8.7h-1.18c-1.16 0-1.53.72-1.53 1.46V12h2.61l-.42 2.91h-2.19v7.04A10 10 0 0 0 22 12z"/></svg>);
@@ -49,19 +49,18 @@ export default function App() {
 
   return (
     <div>
-      {/* NAVBAR — menší logo + pravé menu */}
+      {/* NAVBAR — logo vpravo menší + menu vpravo */}
       <header className="section" style={{ paddingBlock: "0.75rem" }}>
         <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <a href="#hero" style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
             <SmartImage
               srcs={LOGO_SILUETY}
-              width={120} height={30} /* menší než dřív */
+              width={120} height={30}
               fetchpriority="high" loading="eager" decoding="async"
             />
             <strong>Vlasy od Týnky</strong>
           </a>
 
-          {/* Pravé menu – kotvy (lehoučké, výkonu nevadí) */}
           <nav className="top-nav" aria-label="Hlavní">
             <a href="#o-mne">O mně</a>
             <a href="#sluzby">Služby</a>
@@ -71,7 +70,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* HERO — karta zpět vpravo, vpravo není prázdno */}
+      {/* HERO — DVA SLOUPCE: vlevo text, vpravo karta (na desktopu) */}
       <section id="hero" className="section">
         <div className="container grid-2">
           {/* Levý sloupec */}
@@ -96,9 +95,9 @@ export default function App() {
             </div>
           </div>
 
-          {/* Pravý sloupec – UŽŠÍ karta s logem + glow jen okolo */}
-          <div style={{ justifySelf: "end" }}>
-            <div className="card glow" style={{ width: "min(92%, 360px)", textAlign: "center" }}>
+          {/* Pravý sloupec — karta s logem (BÍLÁ uvnitř, glow jen okolo) */}
+          <div className="hero-right" style={{ justifySelf: "end", alignSelf: "start" }}>
+            <div className="card glow" style={{ width: "min(95%, 360px)", textAlign: "center" }}>
               <SmartImage srcs={LOGO_TEXT} width={340} height={95} className="center" />
               <div style={{ fontWeight: 600, fontSize: "1.1rem", marginTop: ".25rem" }}>Vlasy od Týnky</div>
               <div className="muted" style={{ fontSize: ".92rem" }}>kadeřnictví · Mladá Boleslav</div>
@@ -120,7 +119,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* BANNER NAD SLUŽBAMI – bílá karta, glow okolo */}
+      {/* BANNER NAD SLUŽBAMI — karta BÍLÁ uvnitř, glow okolo */}
       <section aria-label="Akce" className="section">
         <div className="container">
           <div className="card glow" style={{ display: "grid", gap: "1rem", alignItems: "center" }}>
@@ -171,7 +170,7 @@ export default function App() {
       {/* CENÍK */}
       <section id="cenik" className="section">
         <div className="container">
-          {/* Banner nad ceníkem – text na střed */}
+          {/* Banner nad ceníkem — text na střed */}
           <div className="card glow" style={{ padding: "1rem", marginBottom: ".6rem", textAlign: "center" }}>
             <div className="badge">🎉 Otevírací sleva –20 % celý říjen!</div>
             <div className="muted" style={{ marginTop: ".25rem", fontSize: ".9rem" }}>
@@ -183,9 +182,9 @@ export default function App() {
             Ceník <span style={{ background: "var(--grad)", color: "#fff", padding: ".2rem .6rem", borderRadius: "999px", fontSize: "1rem", marginLeft: ".5rem" }}>–20 % říjen</span>
           </h2>
 
-          {/* Karta s vodoznakem (jemnější) */}
+          {/* Karta s jemným vodoznakem */}
           <div className="card wm-host" style={{ marginTop: "1rem" }}>
-            <div className="watermark" style={{ opacity: .10 }}>
+            <div className="watermark" style={{ opacity: .1 }}>
               <SmartImage srcs={LOGO_SILUETY} width={520} height={200} className="small-watermark" />
             </div>
 
@@ -288,7 +287,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* KONTAKT + MAPA (vedle sebe na desktopu, mapa větší; na mobilu pod sebou, mapa na střed) */}
+      {/* KONTAKT + MAPA — vedle sebe na desktopu (stejná řada gridu) */}
       <section id="kontakt" className="section">
         <div className="container grid-2">
           <div className="stack-6">
@@ -331,8 +330,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* mapa vpravo (větší), se glow okolo, na mobilu na střed */}
-          <div className="map-wrap">
+          {/* Mapa vpravo (stejná řada) */}
+          <div className="map-wrap" style={{ justifySelf: "end" }}>
             <div className="map-card card glow" style={{ maxWidth: 520 }}>
               <iframe
                 src={MAP_EMBED}
@@ -347,7 +346,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ — menší, tišší vodoznak */}
+      {/* PODĚKOVÁNÍ */}
       <section className="section">
         <div className="container" style={{ display: "grid", placeItems: "center" }}>
           <div className="card wm-host karta-thanks" style={{ width: "min(92%, 560px)", textAlign: "center" }}>
