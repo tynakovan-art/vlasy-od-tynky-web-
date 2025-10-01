@@ -85,3 +85,71 @@ img { display:block; max-width:100%; height:auto }
   .hero-title{ margin-top:.35rem }
   .hero-card{ margin-inline:auto } /* na mobilu vystředit */
 }
+
+/* ----- Nadpisy, mřížky, utility ----- */
+.h2{ font-size: clamp(1.4rem, .9vw + 1.1rem, 2rem); font-weight:600; margin: 0 0 .75rem }
+.lead{ font-size: clamp(1rem, .35vw + .95rem, 1.1rem); color:var(--text) }
+
+.cards-2{ display:grid; gap:1rem }
+@media (min-width: 768px){ .cards-2{ grid-template-columns: 1fr 1fr } }
+.service .service-title{ font-size:1.05rem; font-weight:600; margin-bottom:.4rem }
+
+/* banner nad ceníkem (plná šířka uvnitř containeru) */
+.banner-grad{
+  background: var(--grad);
+  border-radius: 1rem; color:#fff; box-shadow: var(--shadow);
+}
+.banner-inner{ text-align:center; padding: 1rem .75rem }
+.banner-title{ font-weight:700; font-size: clamp(1.05rem, .6vw + 1rem, 1.25rem) }
+.banner-desc{ opacity:.98; margin-top:.25rem; font-size: .9rem }
+
+/* ceník – jemnější spacing a ceny vpravo na řádku */
+.price-card{ padding: 1.2rem }
+.block{ padding: .4rem 0 }
+.block-title{ font-weight:600; margin-bottom:.35rem }
+.plist{ list-style:none; margin:0; padding:0; display:grid; gap:.6rem }
+.row{ display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
+.price{ display:inline-flex; align-items:baseline; gap:.6rem; white-space:nowrap }
+.price .old{ color:#94a3b8; text-decoration: line-through; font-size:.9rem }
+.price .new{ color:#e11d48; font-weight:700 }
+.desc{ color:var(--muted); font-size:.9rem; margin-top:.15rem }
+
+/* vodoznaky – více viditelné */
+.wm-logo{ max-width:55%; filter: blur(1px); opacity:.18 }
+.wm-logo-strong{ max-width:48%; filter: blur(.8px); opacity:.22 }
+@media (max-width: 767px){
+  .wm-logo{ max-width:80%; opacity:.22 }
+  .wm-logo-strong{ max-width:70%; opacity:.26 }
+}
+
+/* kontakt + mapa */
+.contact-grid{ display:grid; gap:1.5rem }
+@media (min-width: 900px){ .contact-grid{ grid-template-columns: 1fr 1fr } }
+.row-icon{ display:flex; gap:.75rem; align-items:flex-start }
+.dot{ font-size:1.2rem; line-height:1 }
+.bold{ font-weight:600 }
+.link{ text-decoration: underline; text-underline-offset: 2px }
+.cta-row{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.5rem }
+.map-wrap{ max-width: 520px; margin-left:auto; }
+.map-frame{ display:block; border:0; border-radius: calc(var(--radius-xl) - .5rem) }
+.thanks-center{ display:flex; justify-content:center }
+.thanks-title{ font-size:1.2rem; font-weight:600 }
+
+/* červená sleva */
+.sale-red{ color:#e11d48; font-weight:700 }
+
+/* footer */
+.footer{ background: rgba(255,255,255,.6); backdrop-filter: blur(6px); padding: 1rem 0; border-top:1px solid var(--border) }
+.footer-inner{ display:flex; justify-content:center; align-items:center; gap:.75rem; flex-wrap:wrap }
+.foot-link{ display:inline-flex; align-items:center; gap:.5rem; font-size:.95rem; color:var(--text) }
+.sep{ opacity:.4 }
+
+/* lepší mobil – menší tlačítka/ikonky, centrování mapy, glow jen kolem karet (už je) */
+@media (max-width: 767px){
+  .btn{ padding:.65rem 1rem; font-size:.9rem }
+  .foot-link svg, .btn svg{ width:15px; height:15px }
+  .map-wrap{ margin: 0 auto; }
+}
+
+/* užší mezera pod bannerem nad ceníkem */
+#cenik { scroll-margin-top: 72px; }
