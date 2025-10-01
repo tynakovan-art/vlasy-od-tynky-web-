@@ -216,3 +216,67 @@ img { display:block; max-width:100%; height:auto }
 =========================== */
 .thanks-card{ padding-block: 7rem }
 .thanks-card .watermark img{ max-width: 55% }  /* lehce menší než v ceníku */
+
+/* --- 1) Menší tlačítka + lepší rozvržení na mobilu --- */
+@media (max-width: 420px) {
+  .btn {
+    padding: .6rem .9rem;
+    font-size: .95rem;
+  }
+  .btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* skupiny tlačítek, které jsme dělali „vedle sebe“, na mobilu raději pod sebe */
+  .stack-4[style*="grid-auto-flow: column"] {
+    grid-auto-flow: row !important;
+    width: 100% !important;
+  }
+  .stack-4[style*="grid-auto-flow: column"] .btn {
+    width: 100%;           /* hezky na šířku, jeden pod druhým */
+    justify-content: center;
+  }
+}
+
+/* --- 2) Glow nesmí „téct“ za okraj stránky --- */
+html, body {
+  overflow-x: hidden;      /* odřízni horizontální posuv */
+}
+
+/* karty zavřít, aby pseudo-element glow nevyčníval */
+.card {
+  overflow: hidden;
+}
+
+/* jemnější a menší rozptyl, aby glow už nepřetékal */
+.glow::before{
+  inset: -1rem;            /* bylo -1.5rem */
+  filter: blur(20px);      /* bylo 24px */
+}
+
+/* pro jistotu odstřihnout přetékání jen na vodorovné ose u sekcí s glow */
+section {
+  overflow-x: clip;
+}
+
+/* --- 3) Mapa na mobilu na střed + bez přetékání --- */
+@media (max-width: 768px) {
+  .center-mobile,
+  .center-mobile .card,
+  .map-card {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+}
+.map-card iframe {
+  display: block;
+  width: 100%;
+  height: 340px;
+  border: 0;
+  border-radius: var(--radius-lg);
+}
+
+/* drobnost: text banneru nad službami/na ceníku vždy na střed */
+.banner { text-align: center; }
