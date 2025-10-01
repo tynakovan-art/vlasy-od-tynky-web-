@@ -1,64 +1,36 @@
 import React, { useEffect, useState } from "react";
 
-/* --- Jednoduchý loader s fallbackem mezi více zdroji --- */
-function SmartImage({ srcs, alt = "", className, width, height, loading = "lazy", fetchpriority, decoding = "async" }) {
+/* Obrázek s fallbackem mezi více zdroji */
+function SmartImage({
+  srcs, alt = "", className, width, height,
+  loading = "lazy", fetchpriority, decoding = "async"
+}) {
   const [i, setI] = useState(0);
   const src = srcs[i] ?? null;
   if (!src) return null;
   return (
     <img
-      src={src}
-      alt={alt}
-      className={className}
-      width={width}
-      height={height}
-      loading={loading}
-      fetchpriority={fetchpriority}
-      decoding={decoding}
-      onError={() => setI((v) => v + 1)}
+      src={src} alt={alt} className={className}
+      width={width} height={height}
+      loading={loading} fetchpriority={fetchpriority} decoding={decoding}
+      onError={() => setI(v => v + 1)}
     />
   );
 }
 
-/* --- Minimalní inline SVG ikonky --- */
-const IconPhone = (props) => (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
-    <path strokeWidth="2" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.11 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.59 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.47-1.16a2 2 0 0 1 2.11-.45c.84.27 1.71.47 2.61.59A2 2 0 0 1 22 16.92z"/>
-  </svg>
-);
-
-const IconInstagram = (props) => (
-  <svg className="icon" viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
-  </svg>
-);
-
-const IconFacebook = (props) => (
-  <svg className="icon" viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H8.1V12h2.4V9.8c0-2.37 1.41-3.68 3.56-3.68 1.03 0 2.1.18 2.1.18V8.7h-1.18c-1.16 0-1.53.72-1.53 1.46V12h2.61l-.42 2.91h-2.19v7.04A10 10 0 0 0 22 12z"/>
-  </svg>
-);
-
-const IconMapPin = (props) => (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
-    <path strokeWidth="2" d="M12 21s-7-5.33-7-12a7 7 0 0 1 14 0c0 6.67-7 12-7 12z"/>
-    <circle cx="12" cy="9" r="2" fill="currentColor"/>
-  </svg>
-);
-
-const IconClock = (props) => (
-  <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
-    <circle cx="12" cy="12" r="9" strokeWidth="2"/>
-    <path strokeWidth="2" d="M12 7v5l3 3"/>
-  </svg>
-);
+/* Ikonky (SVG inline, nulový vliv na síť) */
+const IconPhone = (p)=>(<svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" {...p}><path strokeWidth="2" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.11 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.59 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.47-1.16a2 2 0 0 1 2.11-.45c.84.27 1.71.47 2.61.59A2 2 0 0 1 22 16.92z"/></svg>);
+const IconInstagram = (p)=>(<svg className="icon" viewBox="0 0 24 24" fill="currentColor" {...p}><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>);
+const IconFacebook = (p)=>(<svg className="icon" viewBox="0 0 24 24" fill="currentColor" {...p}><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H8.1V12h2.4V9.8c0-2.37 1.41-3.68 3.56-3.68 1.03 0 2.1.18 2.1.18V8.7h-1.18c-1.16 0-1.53.72-1.53 1.46V12h2.61l-.42 2.91h-2.19v7.04A10 10 0 0 0 22 12z"/></svg>);
+const IconMapPin = (p)=>(<svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" {...p}><path strokeWidth="2" d="M12 21s-7-5.33-7-12a7 7 0 0 1 14 0c0 6.67-7 12-7 12z"/><circle cx="12" cy="9" r="2" fill="currentColor"/></svg>);
+const IconClock = (p)=>(<svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" {...p}><circle cx="12" cy="12" r="9" strokeWidth="2"/><path strokeWidth="2" d="M12 7v5l3 3"/></svg>);
 
 export default function App() {
-  /* LOGA (v /public) — názvy přesně jak máš v repu */
-  const LOGO_SILUETY = ["/logo-siluety.png"]; // navbar + vodoznak ceník (dle dohody)
-  const LOGO_TEXT = ["/logo-text.png"];       // karta vpravo v hero + vodoznak poděkování
+  /* LOGA v /public */
+  const LOGO_SILUETY = ["/logo-siluety.png"]; // navbar + vodoznak ceník
+  const LOGO_TEXT    = ["/logo-text.png"];    // karta vpravo v hero + vodoznak poděkování
 
-  /* Adresa + odkazy */
+  /* Adresa + kontakty */
   const ADDRESS_LINE1 = "Zalužanská 1272";
   const ADDRESS_CITY = "293 01 Mladá Boleslav";
   const ADDRESS_DISTRICT = "Mladá Boleslav III";
@@ -73,30 +45,33 @@ export default function App() {
   const MAP_EMBED = `https://www.google.com/maps?q=${MAP_QUERY}&hl=cs&z=16&output=embed`;
   const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
 
-  useEffect(() => {
-    document.title = "Kadeřnictví Vlasy od Týnky – Mladá Boleslav";
-  }, []);
+  useEffect(() => { document.title = "Kadeřnictví Vlasy od Týnky – Mladá Boleslav"; }, []);
 
   return (
     <div>
-      {/* NAVBAR */}
-      <header className="section" style={{ paddingBlock: "1rem" }}>
+      {/* NAVBAR — menší logo + pravé menu */}
+      <header className="section" style={{ paddingBlock: "0.75rem" }}>
         <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <a href="#hero" style={{ display: "flex", alignItems: "center", gap: ".75rem" }}>
+          <a href="#hero" style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
             <SmartImage
               srcs={LOGO_SILUETY}
-              width={144} height={36}           /* nastav na reálný rozměr souboru */
-              fetchpriority="high"
-              loading="eager"
-              decoding="async"
+              width={120} height={30} /* menší než dřív */
+              fetchpriority="high" loading="eager" decoding="async"
             />
             <strong>Vlasy od Týnky</strong>
           </a>
-          <nav style={{ display: "none" }} aria-hidden="true">{/* jednoduchý top nav teď skrýváme */}</nav>
+
+          {/* Pravé menu – kotvy (lehoučké, výkonu nevadí) */}
+          <nav className="top-nav" aria-label="Hlavní">
+            <a href="#o-mne">O mně</a>
+            <a href="#sluzby">Služby</a>
+            <a href="#cenik">Ceník</a>
+            <a href="#kontakt">Kontakt</a>
+          </nav>
         </div>
       </header>
 
-      {/* HERO */}
+      {/* HERO — karta zpět vpravo, vpravo není prázdno */}
       <section id="hero" className="section">
         <div className="container grid-2">
           {/* Levý sloupec */}
@@ -106,8 +81,8 @@ export default function App() {
             {/* přesně 3 řádky */}
             <h1 className="hero-title">
               Kadeřnictví
-              <span className="block grad" style={{ display: "block" }}>Vlasy od Týnky</span>
-              <span className="block" style={{ display: "block" }}>Mladá Boleslav</span>
+              <span className="grad" style={{ display: "block" }}>Vlasy od Týnky</span>
+              <span style={{ display: "block" }}>Mladá Boleslav</span>
             </h1>
 
             <p className="muted">
@@ -116,26 +91,20 @@ export default function App() {
             </p>
 
             <div className="cta-row">
-              <a href={`tel:${PHONE_RAW}`} className="btn btn-grad">
-                <IconPhone /> Zavolat {PHONE_DISPLAY}
-              </a>
+              <a href={`tel:${PHONE_RAW}`} className="btn btn-grad"><IconPhone /> Zavolat {PHONE_DISPLAY}</a>
               <a href="#sluzby" className="btn btn-ghost">Prohlédnout služby</a>
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s textovým logem, užší, glow jen okolo */}
+          {/* Pravý sloupec – UŽŠÍ karta s logem + glow jen okolo */}
           <div style={{ justifySelf: "end" }}>
             <div className="card glow" style={{ width: "min(92%, 360px)", textAlign: "center" }}>
-              <SmartImage
-                srcs={LOGO_TEXT}
-                width={360} height={100}       /* uprav na reálný rozměr souboru */
-                className="center"
-              />
-              <div style={{ fontWeight: 600, fontSize: "1.25rem" }}>Vlasy od Týnky</div>
-              <div className="muted" style={{ fontSize: ".9rem" }}>kadeřnictví · Mladá Boleslav</div>
-              <div className="muted" style={{ fontSize: ".9rem", marginTop: ".5rem" }}>Objednávky přes sociální sítě nebo telefon.</div>
+              <SmartImage srcs={LOGO_TEXT} width={340} height={95} className="center" />
+              <div style={{ fontWeight: 600, fontSize: "1.1rem", marginTop: ".25rem" }}>Vlasy od Týnky</div>
+              <div className="muted" style={{ fontSize: ".92rem" }}>kadeřnictví · Mladá Boleslav</div>
+              <div className="muted" style={{ fontSize: ".92rem", marginTop: ".35rem" }}>Objednávky přes sociální sítě nebo telefon.</div>
 
-              <div className="stack-6" style={{ marginTop: "1rem" }}>
+              <div className="stack-6" style={{ marginTop: ".9rem" }}>
                 <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
                   <IconInstagram /> Napsat na Instagramu
                 </a>
@@ -151,7 +120,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* BANNER NAD SLUŽBAMI – bílá karta, glow okolo, CTA s číslem */}
+      {/* BANNER NAD SLUŽBAMI – bílá karta, glow okolo */}
       <section aria-label="Akce" className="section">
         <div className="container">
           <div className="card glow" style={{ display: "grid", gap: "1rem", alignItems: "center" }}>
@@ -199,11 +168,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* CENÍK – banner + karta s vodoznakem */}
+      {/* CENÍK */}
       <section id="cenik" className="section">
         <div className="container">
-          {/* Banner s gradientem (jen lišta) */}
-          <div className="card glow" style={{ padding: "1rem", marginBottom: ".75rem" }}>
+          {/* Banner nad ceníkem – text na střed */}
+          <div className="card glow" style={{ padding: "1rem", marginBottom: ".6rem", textAlign: "center" }}>
             <div className="badge">🎉 Otevírací sleva –20 % celý říjen!</div>
             <div className="muted" style={{ marginTop: ".25rem", fontSize: ".9rem" }}>
               Původní ceny jsou přeškrtnuté, zvýhodněné ceny platí pro <strong>všechny zákazníky</strong> po celý říjen 2025.
@@ -214,11 +183,10 @@ export default function App() {
             Ceník <span style={{ background: "var(--grad)", color: "#fff", padding: ".2rem .6rem", borderRadius: "999px", fontSize: "1rem", marginLeft: ".5rem" }}>–20 % říjen</span>
           </h2>
 
-          {/* Karta ceníku s vodoznakem */}
+          {/* Karta s vodoznakem (jemnější) */}
           <div className="card wm-host" style={{ marginTop: "1rem" }}>
-            {/* vodoznak (siluety) */}
-            <div className="watermark">
-              <SmartImage srcs={LOGO_SILUETY} width={560} height={220} className="small-watermark" />
+            <div className="watermark" style={{ opacity: .10 }}>
+              <SmartImage srcs={LOGO_SILUETY} width={520} height={200} className="small-watermark" />
             </div>
 
             <div className="wm-content">
@@ -233,7 +201,6 @@ export default function App() {
                     </div>
                     <div className="muted desc">Konzultace, mytí vlasů, střih, foukaná a styling.</div>
                   </li>
-
                   <li>
                     <div className="price-row" style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "baseline", gap: "1rem" }}>
                       <span>Pánský střih</span>
@@ -241,7 +208,6 @@ export default function App() {
                     </div>
                     <div className="muted desc">Střih nůžkami i strojkem, suché i mokré vlasy.</div>
                   </li>
-
                   <li>
                     <div className="price-row" style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "baseline", gap: "1rem" }}>
                       <span>Dětský střih (do 12 let)</span>
@@ -249,7 +215,6 @@ export default function App() {
                     </div>
                     <div className="muted desc">Rychlý střih přizpůsobený dětem.</div>
                   </li>
-
                   <li>
                     <div className="price-row" style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "baseline", gap: "1rem" }}>
                       <span>Foukaná / styling bez střihu</span>
@@ -272,7 +237,6 @@ export default function App() {
                     </div>
                     <div className="muted desc">Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu.</div>
                   </li>
-
                   <li>
                     <div className="price-row" style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "baseline", gap: "1rem" }}>
                       <span>Melír klasický</span>
@@ -280,7 +244,6 @@ export default function App() {
                     </div>
                     <div className="muted desc">Melírování pramenů, střih, foukaná a styling.</div>
                   </li>
-
                   <li>
                     <div className="price-row" style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "baseline", gap: "1rem" }}>
                       <span>Mikromelír + tónování</span>
@@ -304,7 +267,6 @@ export default function App() {
                     </div>
                     <div className="muted desc">Detox vlasů a pokožky, ideální jako doplněk ke střihu.</div>
                   </li>
-
                   <li>
                     <div className="price-row" style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "baseline", gap: "1rem" }}>
                       <span>Ki-Power Veg rekonstrukce</span>
@@ -326,7 +288,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* KONTAKT + MAPA (center na mobilu, glow okolo mapy) */}
+      {/* KONTAKT + MAPA (vedle sebe na desktopu, mapa větší; na mobilu pod sebou, mapa na střed) */}
       <section id="kontakt" className="section">
         <div className="container grid-2">
           <div className="stack-6">
@@ -369,13 +331,12 @@ export default function App() {
             </div>
           </div>
 
-          {/* mapa vpravo */}
+          {/* mapa vpravo (větší), se glow okolo, na mobilu na střed */}
           <div className="map-wrap">
-            <div className="map-card card glow">
+            <div className="map-card card glow" style={{ maxWidth: 520 }}>
               <iframe
                 src={MAP_EMBED}
-                width="100%"
-                height="340"
+                width="100%" height="380"
                 className="map-iframe"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -386,18 +347,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ – vodoznak (textové logo) */}
+      {/* PODĚKOVÁNÍ — menší, tišší vodoznak */}
       <section className="section">
         <div className="container" style={{ display: "grid", placeItems: "center" }}>
           <div className="card wm-host karta-thanks" style={{ width: "min(92%, 560px)", textAlign: "center" }}>
-            <div className="watermark">
-              <SmartImage srcs={LOGO_TEXT} width={520} height={160} className="small-watermark" />
+            <div className="watermark" style={{ opacity: .12 }}>
+              <SmartImage srcs={LOGO_TEXT} width={500} height={150} className="small-watermark" />
             </div>
             <div className="wm-content">
               <div style={{ fontWeight: 600, fontSize: "1.125rem" }}>Děkuji za návštěvu 💜</div>
-              <div className="muted" style={{ marginTop: ".25rem" }}>
-                Těším se na vás v salonu na {ADDRESS_LINE1}.
-              </div>
+              <div className="muted" style={{ marginTop: ".25rem" }}>Těším se na vás v salonu na {ADDRESS_LINE1}.</div>
             </div>
           </div>
         </div>
