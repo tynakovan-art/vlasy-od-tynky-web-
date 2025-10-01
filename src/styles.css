@@ -1,344 +1,261 @@
-/* ===========================
+/* =========================
    ZÁKLAD
-=========================== */
+   ========================= */
 :root{
   --grad: linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6);
   --bg: #ffffff;
   --text: #0f172a;             /* slate-900 */
   --muted: #475569;            /* slate-600 */
-  --border: rgba(15,23,42,.16);/* slabý rámeček */
+  --border: rgba(15,23,42,.14);/* jemnější obrys */
   --shadow: 0 10px 30px rgba(2,6,23,.10);
-
-  /* typografie a rytmus */
   --radius-xl: 2rem;
-  --radius-lg: 1.5rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
+  --radius-lg: 1.25rem;
 
-  /* barvy ceníku */
-  --price-old: #94a3b8;  /* slate-400 */
-  --price-new: #dc2626;  /* red-600 */
+  /* typografie */
+  --fs-base: 16px;
+  --fs-sm: .9375rem;
+  --fs-xs: .85rem;
+  --fs-h1: clamp(2rem, 1.5rem + 3.2vw, 3.25rem);
+  --fs-h2: clamp(1.375rem, 1.1rem + 1.4vw, 2rem);
+
+  /* spacing */
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
 }
 
 * { box-sizing: border-box }
-html,body { margin:0; background:var(--bg); color:var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji"; }
+html,body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font: 400 var(--fs-base)/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 a { color: inherit; text-decoration: none }
 img { display:block; max-width:100%; height:auto }
 
-/* ===========================
-   LAYOUT
-=========================== */
-.container { max-width: 72rem; margin-inline:auto; padding-inline: 1.5rem }
-.section    { padding-block: 3rem }
-.section-lg { padding-block: 4rem }
+/* Layout helpers */
+.container { max-width: 72rem; margin-inline:auto; padding-inline: 1.25rem }
+.section  { padding-block: var(--sp-10) }
+.section-lg{ padding-block: calc(var(--sp-10) + .75rem) }
 
-.stack-4 { display:grid; gap: var(--space-4) }
-.stack-6 { display:grid; gap: var(--space-6) }
-.stack-8 { display:grid; gap: var(--space-8) }
-.stack-10{ display:grid; gap: var(--space-10) }
+.stack-4 { display:grid; gap: var(--sp-4) }
+.stack-6 { display:grid; gap: var(--sp-6) }
+.stack-8 { display:grid; gap: var(--sp-8) }
+.grid-2  { display:grid; gap: var(--sp-8) }
+@media (min-width: 768px){ .grid-2{ grid-template-columns: 1fr 1fr }}
 
-.grid-2 { display:grid; gap: var(--space-10) }
-@media (min-width: 768px){ .grid-2{ grid-template-columns: 1fr 1fr } }
-
-/* ===========================
-   KOMPONENTY
-=========================== */
-
-/* Karty – bílé uvnitř, glow jen okolo */
-.card {
-  position:relative;
-  border:1px solid var(--border);
-  background:#fff;                 /* bílé jádro karty */
-  border-radius: var(--radius-xl);
-  padding: var(--space-8);
-  box-shadow: var(--shadow);
-}
-.glow { position:relative; }
-.glow::before{
-  content:"";
-  position:absolute; inset:-1.5rem;
-  border-radius: var(--radius-xl);
+/* Titulky */
+h1,h2,h3 { margin:0; font-weight: 700 }
+.hero-title{ line-height:1.12; font-size: var(--fs-h1) }
+.hero-title .grad{
   background:var(--grad);
-  filter: blur(24px);
-  opacity:.22;
-  z-index:-1;                      /* glow je pouze okolo */
+  -webkit-background-clip:text; background-clip:text; color:transparent;
 }
+.h2{ font-size: var(--fs-h2); line-height: 1.25 }
 
-/* Badge (otevírám…) */
+/* Odstíny textu */
+.muted{ color: var(--muted) }
+
+/* Dělítko (jemnější) */
+.hr{ height:1px; background:var(--border); margin: .5rem 0 1.25rem }
+
+/* =========================
+   NAVBAR / BRAND
+   ========================= */
+.navbar {
+  position: sticky; top:0; z-index:50;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.navbar .bar { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block: .75rem }
+.brand { display:flex; align-items:center; gap:.75rem; min-width:0 }
+.brand-title { font-weight:700; line-height:1.1 }
+.brand-sub   { font-size: var(--fs-xs); color:var(--muted) }
+
+/* LOGA */
+.brand-logo { height: 36px; width:auto }   /* menší v navbaru */
+.hero-logo  { max-width: 160px; height:auto; margin: 0 auto } /* menší v hero kartě */
+
+/* Menu */
+.nav { display:flex; align-items:center; gap: 1rem; flex-wrap:wrap }
+.nav a { font-size: var(--fs-sm); opacity:.9 }
+.nav a:hover { opacity:1 }
+
+/* =========================
+   BADGE / BUTTONS
+   ========================= */
 .badge {
   display:inline-flex; align-items:center; gap:.5rem;
-  padding:.5rem 1rem;
-  border-radius:999px; color:#fff;
-  background:var(--grad);
+  padding:.5rem 1rem; border-radius:999px; color:#fff; background:var(--grad);
   font-size:.95rem; font-weight:600;
 }
 
-/* Tlačítka */
+/* tlačítka */
 .btn {
   display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-  padding:.75rem 1.25rem;
-  border-radius:1rem; font-weight:600; font-size:.95rem;
-  border:1px solid transparent;
+  padding:.75rem 1.1rem; border-radius:1rem; font-weight:600; font-size:.95rem;
+  border:1px solid transparent; box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+.btn svg { width: 18px; height: 18px }
+.btn-grad { background:var(--grad); color:#fff }
+.btn-ghost{ background:rgba(255,255,255,.8); backdrop-filter: blur(6px); border-color:var(--border); box-shadow:none }
+.btn-outline{ background:#fff; border-color:var(--border); box-shadow:none }
+.btn:hover{ filter:saturate(1.05) }
+
+@media (max-width: 480px){
+  .btn { padding:.65rem .9rem; font-size:.9rem }
+  .btn svg { width:16px; height:16px }
+}
+
+/* řádka CTA v hero (aby se vešla na mobily) */
+.cta-row {
+  display:grid; gap:.75rem;
+  grid-template-columns: repeat(12, 1fr);
+}
+.cta-row .btn-ghost   { grid-column: span 6 }
+.cta-row .btn-outline { grid-column: span 6 }
+.cta-row .btn-grad    { grid-column: 1 / -1 }
+@media (min-width: 520px){
+  .cta-row { grid-template-columns: 1fr 1fr auto }
+  .cta-row .btn-ghost,
+  .cta-row .btn-outline,
+  .cta-row .btn-grad { grid-column: auto }
+}
+
+/* =========================
+   KARTY + GLOW JEN OKOLO
+   ========================= */
+.card {
+  position:relative;
+  border:1px solid var(--border);
+  background:#fff; /* uvnitř bílé – podle přání */
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
-  transition: filter .15s ease;
-}
-.btn:hover { filter:saturate(1.05) }
-.btn-grad   { background:var(--grad); color:#fff }
-.btn-ghost  { background:rgba(255,255,255,.7); backdrop-filter: blur(6px); border:1px solid var(--border); box-shadow:none }
-.btn-outline{ background:#fff; border:1px solid var(--border); box-shadow:none }
-
-/* Navbar (aby logo nezůstávalo přilepené při scrollu celé přes viewport) */
-.navbar {
-  position: sticky; top: 0; z-index: 20;
-  background: rgba(255,255,255,.85);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
+  padding: var(--sp-8);
 }
 
-/* HERO titulek – snadné rozdělení na 3 řádky přes <span class="block"> */
-.hero-title{
-  font-weight:700; line-height:1.1;
-  font-size: clamp(2rem, 3.2vw + 1rem, 3.2rem);
+/* vnější glow – používej jako obal: <div class="glow-wrap"><div class="card">… */
+.glow-wrap { position:relative }
+.glow-wrap::before{
+  content:""; position:absolute; inset:-1.25rem; border-radius: var(--radius-xl);
+  background: var(--grad); filter: blur(26px); opacity:.22; z-index:-1;
 }
-.block { display:block }
-.grad  { background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent }
 
-/* Jemnější popisky */
-.muted{ color: var(--muted) }
+/* hero pravá karta – trochu užší na desktopu */
+.hero-right { max-width: 520px; margin-left:auto }
+@media (max-width: 767px){
+  .hero-right { max-width: 460px; margin-inline:auto }
+}
 
-/* Dělící linka (když je potřeba) */
-.hr{ height:1px; background:var(--border); margin: .5rem 0 1.25rem }
+/* =========================
+   HERO BLOCK
+   ========================= */
+.hero { padding-block: var(--sp-10) }
+.hero-grid { display:grid; gap: var(--sp-8) }
+@media (min-width: 768px){ .hero-grid{ grid-template-columns: 1fr 1fr }}
 
-/* Host pro vodoznak + vrstvy */
-.wm-host    { position: relative; overflow: hidden; }
-.wm-content { position: relative; z-index: 1; }
+/* Nadpisy na 3 řádky (vynucení zalomení) */
+.hero-title .line { display:block }
 
-/* Vodoznak (pod obsahem, viditelnější než dřív) */
+/* badge menší mezera pod sebou */
+.hero .badge { margin-bottom: .5rem }
+
+/* =========================
+   BANNERY
+   ========================= */
+.banner { margin-top: .25rem } /* menší mezera nad ceníkem */
+.banner .card { padding: 1.25rem 1.5rem }
+.banner .title { font-weight:700 }
+.banner .subtitle { font-size: var(--fs-sm); color: var(--muted) }
+
+/* =========================
+   CENÍK – jemnější vzhled
+   ========================= */
+.cenik-card { overflow:hidden }
+.price-group + .price-group { border-top: 1px solid var(--border) }
+
+.price-row {
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap: .75rem;
+  font-weight: 600;
+}
+.price-note { color: var(--muted); font-size: var(--fs-xs); margin-top: .35rem }
+
+.price      { display:flex; align-items:baseline; gap:.5rem; white-space:nowrap }
+.price-old  { color:#94a3b8; text-decoration:line-through; font-weight:500 }
+.price-new  { color:#e11d48; font-weight:700 }  /* červená nová cena */
+
+.section-title {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:.75rem; margin-bottom: .5rem;
+}
+.badge-sale { background:#ffe4ec; color:#be185d; padding:.25rem .6rem; border-radius:999px; font-weight:700; font-size:.85rem }
+
+/* spacing uvnitř bloků ceníku */
+.block { padding: 1.25rem 1.5rem }
+.block + .block { border-top:1px solid var(--border) }
+
+/* více vzduchu na mobilu mezi bloky */
+@media (max-width: 480px){
+  .block { padding: 1.1rem 1.1rem }
+  .price-row { gap:.5rem }
+}
+
+/* =========================
+   MAPA
+   ========================= */
+.map-wrap { max-width: 540px; margin-left:auto }
+@media (max-width: 767px){
+  .map-wrap { margin-inline:auto }
+}
+.map-card iframe{
+  width:100%; height:340px; border:0; display:block; border-radius: calc(var(--radius-xl) - .5rem);
+}
+
+/* =========================
+   VODOZNAKY – jen uvnitř karty
+   ========================= */
+.wm-host   { position:relative; overflow:hidden }
+.wm-content{ position:relative; z-index:1 }
 .watermark{
   position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  opacity:.22;                      /* zvýrazněno */
-  pointer-events:none;
+  opacity:.18; pointer-events:none;
   mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
   -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
+  z-index:0;
+}
+/* méně nápadný, menší a jemně rozostřený */
+.small-watermark {
+  max-width: 30%;
+  height: auto;
+  opacity: 0.12;
   filter: blur(1px);
 }
-.watermark img{ max-width: 60%; height:auto; }
 
-/* Speciální menší vodoznak (např. v poděkování) */
-.small-watermark img { max-width: 40%; }
+/* vyšší karta poděkování */
+.karta-thanks{ padding-block: 6.5rem }
 
-/* ===========================
-   CENÍK – rozložení a ceny vlevo vedle názvu
-=========================== */
+/* =========================
+   FOOTER
+   ========================= */
+.footer { background: rgba(255,255,255,.65); backdrop-filter: blur(8px); padding-block: 1.25rem; border-top:1px solid var(--border) }
+.footer .row { display:flex; align-items:center; justify-content:center; gap:.9rem; flex-wrap:wrap }
+.footer a { display:inline-flex; align-items:center; gap:.4rem; color: var(--muted) }
+.footer a:hover{ color: var(--text) }
+.footer svg { width: 16px; height: 16px }
 
-/* Sekce ceníku – mezery */
-.price-section { display:grid; gap: 1.25rem }
+/* =========================
+   OSTATNÍ
+   ========================= */
+.round-xl { border-radius: var(--radius-xl) }
+.round-lg { border-radius: var(--radius-lg) }
 
-/* Položka ceníku je jeden řádek: název vlevo, ceny vedle (ne pod) */
-.c-item{
-  display:flex; align-items:flex-start; gap:.75rem;
-  justify-content: space-between;
-}
-
-/* Název/blok vlevo */
-.c-name{
-  font-weight:600;
-}
-
-/* Ceny – drží se vpravo vedle názvu; na malých šířkách se dají pod, ale držíme inline co nejdéle */
-.c-price{
-  display:flex; align-items:baseline; gap:.5rem;
-  white-space: nowrap;
-  margin-left:auto;         /* odsune ceny k pravému okraji řádku */
-}
-
-/* Původní cena přeškrtnutá, tlumená */
-.c-old{
-  color: var(--price-old);
-  text-decoration: line-through;
-  font-size: .95rem;
-}
-
-/* Nová cena červená, zvýrazněná */
-.c-new{
-  color: var(--price-new);
-  font-weight: 700;
-}
-
-/* Popisek pod položkou (malý a tlumený) */
-.c-desc{
-  font-size: .8rem;
-  color: var(--muted);
-  margin-top: .25rem;
-}
-
-/* Jemnější rozestupy mezi skupinami ceníku */
-.price-group{ padding: 1.25rem 0; border-top:1px solid var(--border) }
-.price-group:first-child{ border-top:0; padding-top:0 }
-
-/* Banner nad ceníkem – blíže k názvu */
-.banner { margin-block: 1rem 1.25rem }   /* menší mezera pod bannerem */
-
-@media (max-width: 420px){
-  /* Když je opravdu úzký mobil, dovolíme zalomení cen pod název,
-     ale s malou vertikální mezerou, aby to nebylo nalepené. */
-  .c-item{ flex-wrap: wrap }
-  .c-price{ margin-left:0 }
-}
-
-/* ===========================
-   MAPA – karta se glow okolo
-=========================== */
-.map-card{ padding: .5rem }       /* tenký vnitřní okraj pro zaoblení iframe */
-.map-card iframe{
-  width:100%; height:340px; border:0;
-  border-radius: calc(var(--radius-xl) - .5rem);
-}
-
-/* ===========================
-   RESPONZIVNÍ DOLADĚNÍ
-=========================== */
-@media (min-width: 768px){
-  /* Hero: menší mezery mezi badge, titulkem a textem */
-  .hero-tight > * + * { margin-top: .75rem }
-}
-
-@media (max-width: 767px){
-  /* Pravá karta v hero a „Akce“ karta – centrovat na mobilu */
-  .center-mobile { margin-inline:auto; }
-}
-
-/* ===========================
-   UŽŠÍ „děkuji“ karta + výraznější vodoznak uvnitř
-=========================== */
-.thanks-card{ padding-block: 7rem }
-.thanks-card .watermark img{ max-width: 55% }  /* lehce menší než v ceníku */
-
-/* --- 1) Menší tlačítka + lepší rozvržení na mobilu --- */
-@media (max-width: 420px) {
-  .btn {
-    padding: .6rem .9rem;
-    font-size: .95rem;
-  }
-  .btn svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* skupiny tlačítek, které jsme dělali „vedle sebe“, na mobilu raději pod sebe */
-  .stack-4[style*="grid-auto-flow: column"] {
-    grid-auto-flow: row !important;
-    width: 100% !important;
-  }
-  .stack-4[style*="grid-auto-flow: column"] .btn {
-    width: 100%;           /* hezky na šířku, jeden pod druhým */
-    justify-content: center;
-  }
-}
-
-/* --- 2) Glow nesmí „téct“ za okraj stránky --- */
-html, body {
-  overflow-x: hidden;      /* odřízni horizontální posuv */
-}
-
-/* karty zavřít, aby pseudo-element glow nevyčníval */
-.card {
-  overflow: hidden;
-}
-
-/* jemnější a menší rozptyl, aby glow už nepřetékal */
-.glow::before{
-  inset: -1rem;            /* bylo -1.5rem */
-  filter: blur(20px);      /* bylo 24px */
-}
-
-/* pro jistotu odstřihnout přetékání jen na vodorovné ose u sekcí s glow */
-section {
-  overflow-x: clip;
-}
-
-/* --- 3) Mapa na mobilu na střed + bez přetékání --- */
-@media (max-width: 768px) {
-  .center-mobile,
-  .center-mobile .card,
-  .map-card {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-width: 100% !important;
-  }
-}
-.map-card iframe {
-  display: block;
-  width: 100%;
-  height: 340px;
-  border: 0;
-  border-radius: var(--radius-lg);
-}
-
-/* drobnost: text banneru nad službami/na ceníku vždy na střed */
-.banner { text-align: center; }
-
-/* ---- tlačítka: jeden řádek na mobilech, bez přetékání ---- */
-
-/* obálka pro skupinu tlačítek (hero, banner) */
-.btn-row,
-.hero-actions,
-.banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  justify-content: center;           /* mobil: doprostřed */
-}
-
-/* samotná tlačítka: pružná šířka, aby se tři vešly do řádku */
-.btn-fit {
-  flex: 1 1 calc((100% - 2 * .75rem) / 3);  /* 3 vedle sebe */
-  min-width: 9.5rem;                        /* brání příliš malým tlačítkům */
-  text-align: center;
-}
-
-/* velmi úzké telefony: raději 2 vedle sebe */
-@media (max-width: 380px) {
-  .btn-fit { flex-basis: calc((100% - .75rem) / 2); }
-}
-
-/* ikonky v tlačítkách menší, ať se text vejde */
-.btn svg { width: 16px; height: 16px; }
-
-/* trochu zmenšit padding na mobilech */
-@media (max-width: 420px) {
-  .btn { padding: .6rem .9rem; font-size: .95rem; }
-}
-
-/* ---- glow: jen kolem karet + žádné vodorovné posouvání ---- */
-html, body { overflow-x: hidden; }
-.card { overflow: hidden; }
-.glow::before{
-  inset: -1rem;
-  filter: blur(20px);
-  opacity: .22;
-}
-section { overflow-x: clip; }
-
-/* ---- mapa: karta i iframe zarovnat doprostřed a vyplnit šířku ---- */
-
-/* funguje i bez úprav HTML (moderní prohlížeče) */
-.card:has(> iframe[src*="google.com/maps"]) {
-  max-width: 32rem;                 /* rozumná šířka na mobilu */
-  margin-inline: auto;              /* doprostřed */
-}
-
-.card:has(> iframe[src*="google.com/maps"]) iframe {
-  display: block;
-  width: 100%;
-  height: 340px;
-  border: 0;
-  border-radius: var(--radius-lg);
-}
-
-/* fallback kdyby :has nebylo k dispozici – použij, pokud máš class .map-card */
-.map-card { max-width: 32rem; margin-inline: auto; }
-.map-card iframe { display:block; width:100%; height:340px; border:0; border-radius: var(--radius-lg); }
+/* Zabránění horizontálnímu skrolu na mobilech (kvůli glow) */
+html, body { overflow-x: hidden }
+.glow-wrap { isolation: isolate } /* jistota, že ::before zůstane pod obsahem */
