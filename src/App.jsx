@@ -254,10 +254,11 @@ export default function App() {
               </ul>
             </div>
 
-            <div className="fineprint">
-              Uvedené ceny jsou orientační. Konečná cena záleží na délce a hustotě vlasů a spotřebě materiálu.
-              Vše vždy předem domluvíme na místě nebo ve zprávě.
-            </div>
+            <div className="price-note">
+  <p>Uvedené ceny jsou orientační.</p>
+  <p>Konečná cena záleží na délce a hustotě vlasů a spotřebě materiálu.</p>
+  <p>Vše vždy předem domluvíme na místě nebo ve zprávě.</p>
+</div>
           </div>
         </div>
       </section>
