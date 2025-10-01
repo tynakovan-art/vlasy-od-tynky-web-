@@ -1,190 +1,110 @@
 :root{
   --grad: linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6);
   --bg: #ffffff;
-  --text: #0f172a;
-  --muted: #475569;
-  --border: rgba(15,23,42,.16);
+  --text: #0f172a;          /* slate-900 */
+  --muted: #475569;         /* slate-600 */
+  --border: rgba(15,23,42,.16); /* slate-200/60 */
   --shadow: 0 10px 30px rgba(2,6,23,.10);
   --radius-xl: 2rem;
   --radius-lg: 1.5rem;
 }
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji"}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%;height:auto}
-.container{max-width:72rem;margin-inline:auto;padding-inline:1.5rem}
 
-/* Navbar */
-.navbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-.navbar-inner{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0}
-.brand{display:flex;align-items:center;gap:.6rem;font-weight:600}
-.brand img{height:34px;width:auto}
-.nav-links{display:flex;gap:1rem;font-size:.95rem}
-@media (max-width:900px){.nav-links{display:none}}
+* { box-sizing: border-box }
+html,body { margin:0; background:var(--bg); color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji"; }
 
-/* Hero */
-.section-hero{padding:2.2rem 0 2.8rem}
-.grid-hero{display:grid;gap:2rem}
-@media (min-width:900px){.grid-hero{grid-template-columns:1fr 1fr;align-items:center}}
-.badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:999px;color:#fff;background:var(--grad);font-size:.95rem;font-weight:600;margin-bottom:.5rem}
-.hero-title{font-weight:700;line-height:1.1;font-size:clamp(2rem,2.8vw + 1rem,3.1rem);margin:0 0 .5rem}
-.hero-title .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-lead{color:var(--muted);font-size:clamp(1rem,.35vw + .95rem,1.1rem);max-width:46ch;margin:.6rem 0 1rem}
-.hero-actions{display:flex;flex-wrap:wrap;gap:.6rem}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1.15rem;border-radius:1rem;font-weight:600;font-size:.95rem;border:1px solid transparent;box-shadow:var(--shadow)}
-.btn-grad{background:var(--grad);color:#fff}
-.btn-ghost{background:rgba(255,255,255,.7);backdrop-filter:blur(6px);border-color:var(--border);box-shadow:none}
-.btn-outline{background:#fff;border-color:var(--border);box-shadow:none}
-.btn:hover{filter:saturate(1.05)}
+a { color: inherit; text-decoration: none }
+img { display:block; max-width:100%; height:auto }
 
-/* HERO karta – fix: wrap je přesně široký jako karta a zarovnaný doprava; glow sedí */
-.hero-card-wrap{position:relative;display:inline-block;width:auto;margin-left:auto}
-.hero-card-wrap.glow::before{
-  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:calc(100% + 2.2rem);height:calc(100% + 2.2rem);
-  border-radius:var(--radius-xl);background:var(--grad);filter:blur(24px);opacity:.22;z-index:0;
+.container { max-width: 72rem; margin-inline:auto; padding-inline: 1.5rem }
+.stack-6 { display:grid; gap: 1.5rem }
+.stack-10 { display:grid; gap: 2.5rem }
+.grid-2 { display:grid; gap: 2.5rem }
+@media (min-width: 768px){ .grid-2{ grid-template-columns: 1fr 1fr } }
+
+.badge {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.5rem 1rem; border-radius:999px; color:#fff; background:var(--grad);
+  font-size:.95rem; font-weight:600;
 }
-.hero-card{position:relative;z-index:1;border:1px solid var(--border);background:rgba(255,255,255,.75);backdrop-filter:blur(6px);border-radius:var(--radius-xl);padding:1.5rem;box-shadow:var(--shadow);width:min(420px,100%);text-align:center}
-.hero-logo{height:90px;margin:0 auto .35rem auto}
-.hero-card-title{font-size:1.15rem;font-weight:600}
-.hero-card-sub{margin-top:.2rem;color:var(--muted);font-size:.9rem}
-.hero-card-desc{margin-top:.6rem;color:var(--muted);font-size:.95rem}
-.hero-card-cta{display:grid;gap:.5rem;margin-top:.9rem}
 
-/* Karty / Glow */
-.card{position:relative;border:1px solid var(--border);background:rgba(255,255,255,.75);backdrop-filter:blur(6px);border-radius:var(--radius-xl);padding:1.4rem;box-shadow:var(--shadow)}
-.glow{position:relative}
-.glow::before{content:"";position:absolute;inset:-1.2rem;border-radius:var(--radius-xl);background:var(--grad);filter:blur(24px);opacity:.22;z-index:-1}
-.section{padding:2.2rem 0}
-.section-tight{padding:1.2rem 0}
-.h2{font-size:clamp(1.4rem,.9vw + 1.1rem,2rem);font-weight:600;margin:0 0 .75rem}
-.lead{font-size:clamp(1rem,.35vw + .95rem,1.1rem);color:var(--text)}
-.muted{color:var(--muted)}
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.75rem 1.25rem; border-radius:1rem; font-weight:600; font-size:.95rem;
+  border:1px solid transparent; box-shadow: var(--shadow);
+}
+.btn-grad { background:var(--grad); color:#fff }
+.btn-ghost{ background:rgba(255,255,255,.7); backdrop-filter: blur(6px); border-color:var(--border); box-shadow:none }
+.btn-outline{ background:#fff; border-color:var(--border); box-shadow:none }
+.btn:hover{ filter:saturate(1.05) }
 
-/* Banner nad Službami */
-.banner-akce-text{font-size:1rem;font-weight:500}
-.banner-akce-cta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.7rem}
+.card {
+  position:relative; border:1px solid var(--border);
+  background:rgba(255,255,255,.9); backdrop-filter: blur(6px);
+  border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow);
+}
 
-/* Služby */
-.cards-2{display:grid;gap:1rem}
-@media (min-width:768px){.cards-2{grid-template-columns:1fr 1fr}}
-.service .service-title{font-size:1.05rem;font-weight:600;margin-bottom:.4rem}
+.glow::before{
+  content:""; position:absolute; inset:-1.5rem; border-radius:var(--radius-xl);
+  background:var(--grad); filter: blur(24px); opacity:.22; z-index:-1;
+}
 
-/* Banner nad Ceníkem */
-.banner-grad{background:var(--grad);border-radius:1rem;color:#fff;box-shadow:var(--shadow)}
-.banner-inner{text-align:center;padding:1rem .75rem}
-.banner-title{font-weight:700;font-size:clamp(1.05rem,.6vw + 1rem,1.25rem)}
-.banner-desc{opacity:.98;margin-top:.25rem;font-size:.9rem}
+.hero-title{ font-weight:700; line-height:1.1; font-size: clamp(2rem, 3.2vw + 1rem, 3.2rem) }
+.hero-title .grad{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent }
 
-/* Ceník */
-.cenik-title{display:flex;align-items:center;gap:.6rem}
-.chip{background:#ffe4ef;color:#b11b3f;padding:.25rem .6rem;border-radius:999px;font-size:.9rem;font-weight:700}
-.price-card{padding:1.1rem}
-.block{padding:.45rem 0}
-.block-title{font-weight:600;margin-bottom:.35rem}
-.plist{list-style:none;margin:0;padding:0;display:grid;gap:.65rem}
-.row{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
-.price{display:inline-flex;align-items:baseline;gap:.6rem;white-space:nowrap}
-.price .old{color:#94a3b8;text-decoration:line-through;font-size:.9rem}
-.price .new{color:#e11d48;font-weight:700}
-.desc{color:var(--muted);font-size:.9rem;margin-top:.15rem}
-.hr{height:1px;background:var(--border);margin:.6rem 0 1rem}
+.section{ padding-block: 3rem }
+.section-lg{ padding-block: 4rem }
+.muted{ color: var(--muted) }
 
-/* Vodoznaky – ZESÍLENÉ */
-.wm-host{position:relative;overflow:hidden}
+.karta-thanks{ padding-block: 7rem }
+
 .watermark{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  pointer-events:none;z-index:0;
-  mask-image:radial-gradient(70% 70% at 50% 50%,#000 55%,transparent 100%);
-  -webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000 55%,transparent 100%);
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  opacity:.18; pointer-events:none; mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
 }
-.wm-logo{max-width:55%;filter:blur(.9px);opacity:.28}
-.wm-logo-strong{max-width:48%;filter:blur(.7px);opacity:.32}
-.wm-content{position:relative;z-index:1}
+
+.small-watermark {
+  max-width: 40%;
+  height: auto;
+  opacity: 0.15;
+  filter: blur(1px);
+}
+
+.hr{ height:1px; background:var(--border); margin: .5rem 0 1.25rem }
+
+/* host pro watermark (karta, ve které má zůstat) */
+.wm-host { position: relative; overflow: hidden; }
+.wm-content { position: relative; z-index: 1; }
+.watermark { z-index: 0; }
+
+/* HERO karta – margin na mobilu */
 @media (max-width:767px){
-  .wm-logo{max-width:78%;opacity:.3}
-  .wm-logo-strong{max-width:65%;opacity:.34}
+  .hero-right { margin-top:1.5rem }
 }
 
 /* Kontakt + mapa */
-.contact-grid{display:grid;gap:1.5rem}
-@media (min-width:900px){.contact-grid{grid-template-columns:1fr 1fr}}
-.row-icon{display:flex;gap:.75rem;align-items:flex-start}
-.dot{font-size:1.2rem;line-height:1}
-.bold{font-weight:600}
-.link{text-decoration:underline;text-underline-offset:2px}
-.cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.5rem}
-.map-wrap{max-width:520px;margin-left:auto}
-.map-card{padding:.75rem}
-.map-frame{display:block;border:0;border-radius:calc(var(--radius-xl) - .6rem)}
-@media (max-width:900px){.map-wrap{margin:0 auto}}
+.contact-grid { display:grid; gap:2.5rem }
+@media (min-width:768px){ .contact-grid{ grid-template-columns:1fr 1fr } }
+
+.row-icon { display:flex; gap:.75rem; align-items:flex-start }
+.dot{ font-size:1.2rem; line-height:1 }
+.bold{ font-weight:600 }
+
+.link{ text-decoration:underline; text-underline-offset:2px }
+.cta-row{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.5rem }
+
+.map-wrap{ max-width:520px; margin-left:auto }
+.map-card{ padding:.75rem; position:relative }
+.map-frame{ display:block; border:0; border-radius:calc(var(--radius-xl) - .6rem); width:100%; height:340px }
+@media (max-width:900px){ .map-wrap{ margin:0 auto } }
 
 /* Poděkování */
-.karta-thanks{padding-block:7rem}
-.thanks-center{display:flex;justify-content:center}
-.thanks-title{font-size:1.2rem;font-weight:600}
+.karta-thanks{ padding-block:7rem }
+.thanks-center{ display:flex; justify-content:center }
+.thanks-title{ font-size:1.2rem; font-weight:600 }
 
 /* Footer */
-.footer{background:rgba(255,255,255,.6);backdrop-filter:blur(6px);padding:1rem 0;border-top:1px solid var(--border)}
-.footer-inner{display:flex;justify-content:center;align-items:center;gap:.75rem;flex-wrap:wrap}
-.foot-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.95rem;color:var(--text)}
-.sep{opacity:.4}
-
-/* Další */
-.sale-red{color:#e11d48;font-weight:700}
-@media (max-width:767px){
-  .btn{padding:.6rem .95rem;font-size:.9rem}
-  .foot-link svg,.btn svg{width:15px;height:15px}
-  .hero-card{margin:.5rem auto 0 auto}
-}
-
-.price-note {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  background: #f9fafb;        /* světle šedý box */
-  border-top: 1px solid var(--border);
-  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.4;
-}
-.price-note p { margin: 0.3rem 0; }
-
-/* --- Bezpečné zlepšení výkonu + mobile fixy (beze změny vzhledu) --- */
-
-/* Zabraň horizontálnímu posuvu na malých displejích */
-html, body { overflow-x: hidden; }
-
-/* Glow držme opravdu jen okolo karty (už máš .glow::before) – přidám pojistku proti přetečení */
-.glow::before{
-  max-width: calc(100% + 2.5rem);
-}
-
-/* Rezervace místa pro vodoznaky, aby neskákal layout (CLS) */
-.wm-host { position: relative; overflow: hidden; min-height: 14rem; }
-.watermark img { width: 60%; height: auto; }
-
-/* Mapa centrovaná na mobilu + poměr stran, ať neskáče výška */
-.map-wrap { display: flex; justify-content: center; }
-.map-card { width: 100%; max-width: 24rem; }         /* cca 384px */
-.map-iframe { aspect-ratio: 16 / 9; height: auto; display: block; }
-
-/* Ikonky a CTA na mobilu, aby se vešlo vše na řádek a nezalomilo se ošklivě */
-.icon { width: 16px; height: 16px; flex: 0 0 16px; }
-.cta-row { display: flex; flex-wrap: wrap; gap: .5rem; }
-.cta-row .btn { white-space: nowrap; }
-
-/* V banneru nad ceníkem menší mezera k nadpisu */
-.banner-cenik { margin-bottom: .75rem; }
-h2.cenik-title { margin-top: 0; }
-
-/* Plynulejší ceník na mobilu – trošku větší svislé rozestupy */
-@media (max-width: 480px){
-  .price-row { gap: .5rem; }
-  .price-row .desc { margin-top: .25rem; }
-}
-
-/* Preferuje-li uživatel méně animací, ztlumíme je (PageSpeed to má rád) */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-}
+.footer{ background:rgba(255,255,255,.6); backdrop-filter:blur(6px); padding:1rem 0; border-top:1px solid var(--border) }
+.footer-inner{ display:flex; justify-content:center; align-items:center; gap:.75rem; flex-wrap:wrap }
+.foot-link{ display:inline-flex; align-items:center; gap:.5rem; font-size:.95rem; color:var(--muted) }
+.sep{ opacity:.4 }
