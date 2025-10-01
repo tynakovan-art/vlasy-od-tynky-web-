@@ -1,111 +1,218 @@
+/* ===========================
+   ZÁKLAD
+=========================== */
 :root{
   --grad: linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6);
   --bg: #ffffff;
-  --text: #0f172a;          /* slate-900 */
-  --muted: #475569;         /* slate-600 */
-  --border: rgba(15,23,42,.16); /* slate-200/60 */
-  --border-soft: rgba(15,23,42,.12);
+  --text: #0f172a;             /* slate-900 */
+  --muted: #475569;            /* slate-600 */
+  --border: rgba(15,23,42,.16);/* slabý rámeček */
   --shadow: 0 10px 30px rgba(2,6,23,.10);
+
+  /* typografie a rytmus */
   --radius-xl: 2rem;
   --radius-lg: 1.5rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+
+  /* barvy ceníku */
+  --price-old: #94a3b8;  /* slate-400 */
+  --price-new: #dc2626;  /* red-600 */
 }
 
 * { box-sizing: border-box }
-html,body { 
-  margin:0; 
-  background:var(--bg); 
-  color:var(--text); 
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji"; 
-}
-
+html,body { margin:0; background:var(--bg); color:var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji"; }
 a { color: inherit; text-decoration: none }
 img { display:block; max-width:100%; height:auto }
 
-/* Layout helpers */
+/* ===========================
+   LAYOUT
+=========================== */
 .container { max-width: 72rem; margin-inline:auto; padding-inline: 1.5rem }
-.stack-6 { display:grid; gap: 1.5rem }
-.stack-10 { display:grid; gap: 2.5rem }
-.grid-2 { display:grid; gap: 2.5rem }
+.section    { padding-block: 3rem }
+.section-lg { padding-block: 4rem }
+
+.stack-4 { display:grid; gap: var(--space-4) }
+.stack-6 { display:grid; gap: var(--space-6) }
+.stack-8 { display:grid; gap: var(--space-8) }
+.stack-10{ display:grid; gap: var(--space-10) }
+
+.grid-2 { display:grid; gap: var(--space-10) }
 @media (min-width: 768px){ .grid-2{ grid-template-columns: 1fr 1fr } }
 
-/* Badge */
+/* ===========================
+   KOMPONENTY
+=========================== */
+
+/* Karty – bílé uvnitř, glow jen okolo */
+.card {
+  position:relative;
+  border:1px solid var(--border);
+  background:#fff;                 /* bílé jádro karty */
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow);
+}
+.glow { position:relative; }
+.glow::before{
+  content:"";
+  position:absolute; inset:-1.5rem;
+  border-radius: var(--radius-xl);
+  background:var(--grad);
+  filter: blur(24px);
+  opacity:.22;
+  z-index:-1;                      /* glow je pouze okolo */
+}
+
+/* Badge (otevírám…) */
 .badge {
   display:inline-flex; align-items:center; gap:.5rem;
-  padding:.5rem 1rem; border-radius:999px; color:#fff; background:var(--grad);
+  padding:.5rem 1rem;
+  border-radius:999px; color:#fff;
+  background:var(--grad);
   font-size:.95rem; font-weight:600;
 }
 
-/* Buttons */
+/* Tlačítka */
 .btn {
   display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-  padding:.75rem 1.25rem; border-radius:1rem; font-weight:600; font-size:.95rem;
-  border:1px solid transparent; box-shadow: var(--shadow);
+  padding:.75rem 1.25rem;
+  border-radius:1rem; font-weight:600; font-size:.95rem;
+  border:1px solid transparent;
+  box-shadow: var(--shadow);
+  transition: filter .15s ease;
 }
-.btn-grad { background:var(--grad); color:#fff }
-.btn-ghost{ background:rgba(255,255,255,.7); backdrop-filter: blur(6px); border-color:var(--border); box-shadow:none }
-.btn-outline{ background:#fff; border-color:var(--border); box-shadow:none }
-.btn:hover{ filter:saturate(1.05) }
+.btn:hover { filter:saturate(1.05) }
+.btn-grad   { background:var(--grad); color:#fff }
+.btn-ghost  { background:rgba(255,255,255,.7); backdrop-filter: blur(6px); border:1px solid var(--border); box-shadow:none }
+.btn-outline{ background:#fff; border:1px solid var(--border); box-shadow:none }
 
-/* Card */
-.card {
-  position:relative; border:1px solid var(--border);
-  background:rgba(255,255,255,.7); backdrop-filter: blur(6px);
-  border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow);
-}
-
-/* Glow okolo karet */
-.glow{ position:relative; isolation:isolate; }
-.glow::before{
-  content:""; position:absolute; inset:-1.6rem; border-radius:var(--radius-xl);
-  background:var(--grad); filter: blur(36px); opacity:.38; z-index:-1;
+/* Navbar (aby logo nezůstávalo přilepené při scrollu celé přes viewport) */
+.navbar {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
 }
 
-/* Hero title */
-.hero-title{ font-weight:700; line-height:1.1; font-size: clamp(2rem, 3.2vw + 1rem, 3.2rem) }
-.hero-title .grad{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent }
+/* HERO titulek – snadné rozdělení na 3 řádky přes <span class="block"> */
+.hero-title{
+  font-weight:700; line-height:1.1;
+  font-size: clamp(2rem, 3.2vw + 1rem, 3.2rem);
+}
+.block { display:block }
+.grad  { background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent }
 
-/* Sections */
-.section{ padding-block: 3rem }
-.section-lg{ padding-block: 4rem }
+/* Jemnější popisky */
 .muted{ color: var(--muted) }
 
-/* Poděkování karta */
-.karta-thanks{ padding-block: 7rem }  
-
-/* Vodoznaky */
-.watermark{
-  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  opacity:.18; pointer-events:none; mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
-  -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
-}
-
-.small-watermark {
-  max-width: 40%;
-  height: auto;
-  opacity: 0.15;
-  filter: blur(1px);
-}
-
-/* Divider */
+/* Dělící linka (když je potřeba) */
 .hr{ height:1px; background:var(--border); margin: .5rem 0 1.25rem }
 
-/* Pricelist */
-.pricelist .group-title{ 
-  font-size:1.08rem; font-weight:600; margin:0;
+/* Host pro vodoznak + vrstvy */
+.wm-host    { position: relative; overflow: hidden; }
+.wm-content { position: relative; z-index: 1; }
+
+/* Vodoznak (pod obsahem, viditelnější než dřív) */
+.watermark{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  opacity:.22;                      /* zvýrazněno */
+  pointer-events:none;
+  mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000 55%, transparent 100%);
+  filter: blur(1px);
 }
-.pricelist .group-title:not(:first-of-type){
-  margin-top: 2rem; 
-}
-.pricelist .hr{
-  height:1px; background:var(--border-soft);
-  margin: .4rem 0 1rem;
-}
-@media (max-width:560px){
-  .pricelist .group-title:not(:first-of-type){ margin-top: 2.2rem; }
-  .pricelist .desc{ font-size:.93rem; line-height:1.6; }
+.watermark img{ max-width: 60%; height:auto; }
+
+/* Speciální menší vodoznak (např. v poděkování) */
+.small-watermark img { max-width: 40%; }
+
+/* ===========================
+   CENÍK – rozložení a ceny vlevo vedle názvu
+=========================== */
+
+/* Sekce ceníku – mezery */
+.price-section { display:grid; gap: 1.25rem }
+
+/* Položka ceníku je jeden řádek: název vlevo, ceny vedle (ne pod) */
+.c-item{
+  display:flex; align-items:flex-start; gap:.75rem;
+  justify-content: space-between;
 }
 
-/* Host pro watermark */
-.wm-host { position: relative; overflow: hidden; }
-.wm-content { position: relative; z-index: 1; }
-.watermark { z-index: 0; }
+/* Název/blok vlevo */
+.c-name{
+  font-weight:600;
+}
+
+/* Ceny – drží se vpravo vedle názvu; na malých šířkách se dají pod, ale držíme inline co nejdéle */
+.c-price{
+  display:flex; align-items:baseline; gap:.5rem;
+  white-space: nowrap;
+  margin-left:auto;         /* odsune ceny k pravému okraji řádku */
+}
+
+/* Původní cena přeškrtnutá, tlumená */
+.c-old{
+  color: var(--price-old);
+  text-decoration: line-through;
+  font-size: .95rem;
+}
+
+/* Nová cena červená, zvýrazněná */
+.c-new{
+  color: var(--price-new);
+  font-weight: 700;
+}
+
+/* Popisek pod položkou (malý a tlumený) */
+.c-desc{
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: .25rem;
+}
+
+/* Jemnější rozestupy mezi skupinami ceníku */
+.price-group{ padding: 1.25rem 0; border-top:1px solid var(--border) }
+.price-group:first-child{ border-top:0; padding-top:0 }
+
+/* Banner nad ceníkem – blíže k názvu */
+.banner { margin-block: 1rem 1.25rem }   /* menší mezera pod bannerem */
+
+@media (max-width: 420px){
+  /* Když je opravdu úzký mobil, dovolíme zalomení cen pod název,
+     ale s malou vertikální mezerou, aby to nebylo nalepené. */
+  .c-item{ flex-wrap: wrap }
+  .c-price{ margin-left:0 }
+}
+
+/* ===========================
+   MAPA – karta se glow okolo
+=========================== */
+.map-card{ padding: .5rem }       /* tenký vnitřní okraj pro zaoblení iframe */
+.map-card iframe{
+  width:100%; height:340px; border:0;
+  border-radius: calc(var(--radius-xl) - .5rem);
+}
+
+/* ===========================
+   RESPONZIVNÍ DOLADĚNÍ
+=========================== */
+@media (min-width: 768px){
+  /* Hero: menší mezery mezi badge, titulkem a textem */
+  .hero-tight > * + * { margin-top: .75rem }
+}
+
+@media (max-width: 767px){
+  /* Pravá karta v hero a „Akce“ karta – centrovat na mobilu */
+  .center-mobile { margin-inline:auto; }
+}
+
+/* ===========================
+   UŽŠÍ „děkuji“ karta + výraznější vodoznak uvnitř
+=========================== */
+.thanks-card{ padding-block: 7rem }
+.thanks-card .watermark img{ max-width: 55% }  /* lehce menší než v ceníku */
