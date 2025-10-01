@@ -1,6 +1,6 @@
 import React from "react";
 
-/* === Inline SVG ikonky (bez knihoven) === */
+/* SVG ikonky (bez knihoven) */
 const PhoneIcon = (props) => (
   <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" {...props}>
     <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.3 22 2 13.7 2 3a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/>
@@ -17,7 +17,7 @@ const FacebookIcon = (props) => (
   </svg>
 );
 
-/* Kontaktní údaje / odkazy */
+/* Kontakty / odkazy */
 const PHONE = "725882820";
 const PHONE_DISPLAY = "725 882 820";
 const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
@@ -42,8 +42,7 @@ export default function App() {
             <img src="/logo-siluety.png" alt="" />
             <span>Vlasy od Týnky</span>
           </a>
-          {/* (skryté jednoduché menu – případně doplníme hamburger) */}
-          <nav className="nav-links" style={{display:'none'}}>
+          <nav className="nav-links">
             <a href="#o-mne">O mně</a>
             <a href="#sluzby">Služby</a>
             <a href="#cenik">Ceník</a>
@@ -73,14 +72,14 @@ export default function App() {
             </div>
           </div>
 
-          {/* pravý sloupec – karta s logem a glowem kolem */}
+          {/* pravý sloupec – užší karta s glowem kolem */}
           <div className="hero-card-wrap glow">
             <div className="hero-card">
-              <img src="/logo-text.png" alt="" />
-              <div style={{fontSize:'1.25rem', fontWeight:600}}>Vlasy od Týnky</div>
-              <div style={{marginTop:4, color:'var(--muted)', fontSize:'.9rem'}}>kadeřnictví · Mladá Boleslav</div>
-              <div style={{marginTop:12, color:'var(--muted)', fontSize:'.95rem'}}>Objednávky přes sociální sítě nebo telefon.</div>
-              <div style={{display:'grid', gap:8, marginTop:16}}>
+              <img src="/logo-text.png" alt="" className="hero-logo" />
+              <div className="hero-card-title">Vlasy od Týnky</div>
+              <div className="hero-card-sub">kadeřnictví · Mladá Boleslav</div>
+              <div className="hero-card-desc">Objednávky přes sociální sítě nebo telefon.</div>
+              <div className="hero-card-cta">
                 <a className="btn btn-outline" href={IG_URL} target="_blank" rel="noreferrer"><InstagramIcon/> Napsat na Instagramu</a>
                 <a className="btn btn-outline" href={FB_URL} target="_blank" rel="noreferrer"><FacebookIcon/> Napsat na Facebooku</a>
                 <a className="btn btn-grad" href={`tel:${PHONE}`}><PhoneIcon/> Zavolat {PHONE_DISPLAY}</a>
@@ -90,18 +89,18 @@ export default function App() {
         </div>
       </section>
 
-      {/* BANNER NAD SLUŽBAMI – karta s glow kolem */}
+      {/* BANNER NAD SLUŽBAMI – bílá karta, glow okolo */}
       <section aria-label="Akce" className="section">
         <div className="container">
           <div className="glow">
             <div className="card">
               <div className="badge" style={{marginBottom:8}}>🎉 Otevírací akce říjen</div>
-              <div style={{fontSize:'1rem', fontWeight:500}}>
+              <div className="banner-akce-text">
                 Po celý říjen nabízím <span className="sale-red">20% slevu</span> na všechny služby pro všechny zákazníky.
               </div>
               <div className="muted" style={{marginTop:4}}>Přijďte se nechat hýčkat a dopřejte svým vlasům nový začátek ✨</div>
               <div className="muted" style={{marginTop:2}}>📍 {ADDRESS_LINE1}, {ADDRESS_CITY}</div>
-              <div className="stack-6" style={{marginTop:12, display:'flex', gap:8}}>
+              <div className="banner-akce-cta">
                 <a className="btn btn-grad" href={`tel:${PHONE}`}><PhoneIcon/> Zavolat {PHONE_DISPLAY}</a>
                 <a className="btn btn-outline" href="#cenik">Mrknout na ceník</a>
               </div>
@@ -145,8 +144,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* BANNER NAD CENÍKEM – plný gradient, text na střed */}
-      <section className="section">
+      {/* BANNER NAD CENÍKEM – plný gradient, text na střed, menší mezera pod ním */}
+      <section className="section section-tight">
         <div className="container">
           <div className="banner-grad">
             <div className="banner-inner">
@@ -160,13 +159,13 @@ export default function App() {
       {/* CENÍK */}
       <section id="cenik" className="section">
         <div className="container">
-          <h2 className="h2" style={{display:'flex', alignItems:'center', gap:12}}>
+          <h2 className="h2 cenik-title">
             Ceník
             <span className="chip">–20 % říjen</span>
           </h2>
 
           <div className="card wm-host price-card">
-            {/* vodoznak — zvýrazněný */}
+            {/* vodoznak — viditelný */}
             <div className="watermark">
               <img src="/logo-text.png" alt="" className="wm-logo" />
             </div>
@@ -304,7 +303,7 @@ export default function App() {
           </div>
 
           <div className="map-wrap glow">
-            <div className="card" style={{padding:'0.75rem'}}>
+            <div className="card map-card">
               <iframe
                 src={MAP_EMBED}
                 width="100%"
