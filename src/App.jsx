@@ -191,21 +191,37 @@ export default function App() {
   );
 
   /* ---- CENÍK (Název. vpravo Od XYZ; popis pod) ---- */
-  const PriceRow = ({ name, price, note }) => (
-    <li className="price-row" style={{ padding: ".55rem 0" }}>
-      <div className="price-line" style={{
-        display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem"
-      }}>
-        <span className="price-name" style={{ fontWeight: 500 }}>
-          {name.endsWith(".") ? name : `${name}.`}
-        </span>
-        <span className="price-now" style={{ fontWeight: 600 }}>
-          {price.startsWith("od") || price.startsWith("Od") ? price.replace(/^od/i, "Od") : `Od ${price}`}
-        </span>
-      </div>
-      {note && <div className="muted xsmall" style={{ marginTop: ".3rem" }}>{note}</div>}
-    </li>
-  );
+const PriceRow = ({ name, price, note }) => (
+  <li className="price-row" style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    margin: ".8rem 0"
+  }}>
+    <div className="price-left" style={{ flex: "1" }}>
+      <div className="price-name" style={{ fontWeight: 600 }}>{name}</div>
+      {note && (
+        <div className="price-note" style={{
+          fontSize: ".9rem",
+          color: "var(--muted)",
+          marginTop: ".2rem",
+          maxWidth: "80%"
+        }}>
+          {note}
+        </div>
+      )}
+    </div>
+    <div className="price-right" style={{
+      fontWeight: 700,
+      whiteSpace: "nowrap",
+      marginLeft: ".5rem",
+      minWidth: "5.5rem",
+      textAlign: "right"
+    }}>
+      {price}
+    </div>
+  </li>
+);
 
   const PriceList = () => (
     <section id="cenik" className="section">
