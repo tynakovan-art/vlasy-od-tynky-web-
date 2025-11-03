@@ -23,7 +23,7 @@ const gradText = {
   color: "transparent",
 };
 
-/** ===== SVG IKONY (přesné, jednotné) ===== */
+/** ===== SVG IKONY ===== */
 const IconPhone = (props) => (
   <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
     <path
@@ -48,7 +48,6 @@ const IconFacebook = (props) => (
     />
   </svg>
 );
-/* čitelnější hodiny – jasný ciferník + ručičky */
 const IconClock = (props) => (
   <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
     <path
@@ -66,7 +65,7 @@ const IconMapPin = (props) => (
   </svg>
 );
 
-/** ===== ŘÁDEK CEN (uvnitř jedné sekce bez dělení na karty) ===== */
+/** ===== ŘÁDEK CEN ===== */
 const PriceRow = ({ title, desc, price }) => (
   <div className="price-row">
     <div style={{ flex: 1, minWidth: 0 }}>
@@ -114,7 +113,7 @@ export default function App() {
             </p>
 
             <div className="cta-row">
-              <a href={`tel:${PHONE_RAW}`} className="btn btn-grad">
+              <a href={`tel:${PHONE_RAW}`} className="btn btn-grad" aria-label={`Zavolat ${PHONE_DISPLAY}`}>
                 <IconPhone /> Zavolat {PHONE_DISPLAY}
               </a>
               <a href="#sluzby" className="btn btn-ghost">Prohlédnout služby</a>
@@ -123,11 +122,7 @@ export default function App() {
 
           {/* Pravý sloupec – karta s logem + odkazy (glow + bílý podklad) */}
           <aside className="card center glow hero-card">
-            <img
-              src="/logo-text.png"
-              alt=""
-              className="hero-logo"
-            />
+            <img src="/logo-text.png" alt="" className="hero-logo" />
             <div className="muted" style={{ marginTop: ".25rem" }}>
               kadeřnictví · Mladá Boleslav
             </div>
@@ -142,9 +137,9 @@ export default function App() {
               <a className="soc" href={FB_URL} target="_blank" rel="noopener noreferrer">
                 <IconFacebook /> <span className="label">Napsat na Facebooku</span>
               </a>
-              {/* Explicitní call tlačítko v kartě – ať je nepřehlédnutelné */}
-              <a className="soc btn-grad" href={`tel:${PHONE_RAW}`}>
-                <IconPhone /> <span className="label">Zavolat {PHONE_DISPLAY}</span>
+              {/* VÝRAZNÉ CALL TLAČÍTKO – .btn .btn-grad (NE .soc), ať je vždy viditelné */}
+              <a className="btn btn-grad" href={`tel:${PHONE_RAW}`} aria-label={`Zavolat ${PHONE_DISPLAY}`}>
+                <IconPhone /> Zavolat {PHONE_DISPLAY}
               </a>
             </div>
           </aside>
@@ -199,18 +194,18 @@ export default function App() {
         </div>
       </section>
 
-      {/* CENÍK – 3 sekce, uvnitř jen řádky bez dělení na karty */}
+      {/* CENÍK – 3 sekce, uvnitř pouze řádky */}
       <section id="cenik" className="section">
         <div className="container">
           <h2 className="h2">Ceník</h2>
 
           <div className="price-wrap wm-host" style={{ marginTop: "1rem" }}>
-            {/* jemný vodoznak v pozadí */}
+            {/* jemný vodoznak */}
             <div className="watermark">
               <img src="/logo-text.png" alt="" aria-hidden="true" />
             </div>
 
-            {/* Sekce 1: Střih & styling */}
+            {/* Sekce 1 */}
             <div className="price-block" style={{ borderTop: 0 }}>
               <div className="price-title">✂️ Střih &amp; styling</div>
             </div>
@@ -221,7 +216,7 @@ export default function App() {
               <PriceRow title="Foukaná / styling bez střihu" desc="" price="od 400 Kč" />
             </div>
 
-            {/* Sekce 2: Barvení & melír */}
+            {/* Sekce 2 */}
             <div className="price-block">
               <div className="price-title">🎨 Barvení &amp; melír</div>
             </div>
@@ -239,7 +234,7 @@ export default function App() {
               />
             </div>
 
-            {/* Sekce 3: Péče & regenerace */}
+            {/* Sekce 3 */}
             <div className="price-block">
               <div className="price-title">🌸 Péče &amp; regenerace</div>
             </div>
@@ -260,7 +255,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* KONTAKT + MAPA (mapa s glow) */}
+      {/* KONTAKT + MAPA */}
       <section id="kontakt" className="section">
         <div className="container contact-grid grid-2">
           <div>
@@ -296,9 +291,9 @@ export default function App() {
               </div>
             </div>
 
-            {/* výrazné call tlačítko i tady */}
+            {/* výrazné call tlačítko i tady – vždy viditelné */}
             <div className="k-row" style={{ marginTop: ".5rem" }}>
-              <a className="soc btn-grad" href={`tel:${PHONE_RAW}`}>
+              <a className="btn btn-grad" href={`tel:${PHONE_RAW}`} aria-label={`Zavolat ${PHONE_DISPLAY}`}>
                 <IconPhone /> Zavolat {PHONE_DISPLAY}
               </a>
               <a className="soc" href={IG_URL} target="_blank" rel="noopener noreferrer">
@@ -325,12 +320,13 @@ export default function App() {
         </div>
       </section>
 
-      {/* PODĚKOVÁNÍ */}
+      {/* PODĚKOVÁNÍ – menší vodoznak loga */}
       <section className="section">
         <div className="container thanks">
           <div className="card center wm-host">
             <div className="watermark">
-              <img src="/logo-text.png" alt="" aria-hidden="true" />
+              {/* zmenšeno, aby text krásně vyniknul */}
+              <img src="/logo-text.png" alt="" aria-hidden="true" style={{ maxWidth: "40%", filter: "blur(1px)", opacity: 0.14 }} />
             </div>
             <div className="thanks-center">
               <div className="thanks-title">Děkuji za návštěvu 💜</div>
