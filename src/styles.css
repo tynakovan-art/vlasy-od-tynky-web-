@@ -212,3 +212,24 @@ a{color:inherit;text-decoration:none}
   .footer a{font-size:.9rem}
   .footer a svg{width:14px;height:14px}
 }
+/* --- FIX: hero karta – telefonní tlačítko bylo "prázdné" --- */
+.soc.btn-grad{
+  background: var(--grad) !important;
+  color:#fff !important;
+  border-color: transparent !important;
+  box-shadow: var(--shadow);
+}
+.soc.btn-grad svg{ color:#fff; }
+
+/* --- Sjednocení ikon v tlačítkách --- */
+.soc svg{ width:18px; height:18px; flex:0 0 18px; }
+
+/* --- Trochu větší logo v hero kartě (jen o kousek) --- */
+.hero-card .hero-logo{
+  max-width: 140px;              /* bylo ~120–130, jemně přidáváme */
+  margin-inline: auto;
+}
+
+/* Pro jistotu: text tlačítek a zarovnání obsahu */
+.soc .label{ font-weight:700; font-size:.95rem; }
+.soc{ justify-content: flex-start; }           /* stejná osa ikon + textu */
