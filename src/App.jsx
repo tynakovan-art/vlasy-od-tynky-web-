@@ -121,28 +121,27 @@ export default function App() {
           </div>
 
           {/* Pravý sloupec – karta s logem + odkazy (glow + bílý podklad) */}
-          <aside className="card center glow hero-card">
-            <img src="/logo-text.png" alt="" className="hero-logo" />
-            <div className="muted" style={{ marginTop: ".25rem" }}>
-              kadeřnictví · Mladá Boleslav
-            </div>
-            <div className="muted" style={{ fontSize: ".95rem", marginTop: ".25rem" }}>
-              Objednávky přes sociální sítě nebo telefon.
-            </div>
+<aside className="card glow hero-card" style={{ textAlign: "center" }}>
+  <img src="/logo-text.png" alt="" className="hero-logo" />
+  <div className="muted" style={{ marginTop: ".25rem" }}>
+    kadeřnictví · Mladá Boleslav
+  </div>
+  <div className="muted" style={{ fontSize: ".95rem", marginTop: ".25rem" }}>
+    Objednávky přes sociální sítě nebo telefon.
+  </div>
 
-            <div className="soc-list">
-              <a className="soc" href={IG_URL} target="_blank" rel="noopener noreferrer">
-                <IconInstagram /> <span className="label">Napsat na Instagramu</span>
-              </a>
-              <a className="soc" href={FB_URL} target="_blank" rel="noopener noreferrer">
-                <IconFacebook /> <span className="label">Napsat na Facebooku</span>
-              </a>
-              {/* VÝRAZNÉ CALL TLAČÍTKO – .btn .btn-grad (NE .soc), ať je vždy viditelné */}
-              <a className="btn btn-grad" href={`tel:${PHONE_RAW}`} aria-label={`Zavolat ${PHONE_DISPLAY}`}>
-                <IconPhone /> Zavolat {PHONE_DISPLAY}
-              </a>
-            </div>
-          </aside>
+  <div className="soc-list" style={{ justifyContent: "center" }}>
+    <a className="soc" href={IG_URL} target="_blank" rel="noopener noreferrer">
+      <IconInstagram /> <span className="label">Napsat na Instagramu</span>
+    </a>
+    <a className="soc" href={FB_URL} target="_blank" rel="noopener noreferrer">
+      <IconFacebook /> <span className="label">Napsat na Facebooku</span>
+    </a>
+    <a className="btn btn-grad" href={`tel:${PHONE_RAW}`} aria-label={`Zavolat ${PHONE_DISPLAY}`}>
+      <IconPhone /> Zavolat {PHONE_DISPLAY}
+    </a>
+  </div>
+</aside>
         </div>
       </section>
 
