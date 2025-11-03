@@ -1,3 +1,6 @@
+/* =========================
+   ZÁKLAD
+   ========================= */
 :root{
   --grad: linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6);
   --bg: #ffffff;
@@ -10,226 +13,222 @@
 }
 
 *{box-sizing:border-box}
-html,body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,"Helvetica Neue",Arial;
-  overflow-x:hidden; /* zabrání vodorovnému posunu a „šmrncům“ za okrajem */
-}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji"}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 
 .container{max-width:72rem;margin-inline:auto;padding-inline:1.25rem}
 .section{padding-block:2.5rem}
 .section-lg{padding-block:3.25rem}
+.muted{color:var(--muted)}
+.small-gap{margin-top:.75rem}
 
-/* ===== NAVBAR ===== */
+/* =========================
+   NAVBAR – vždy viditelná
+   ========================= */
 .navbar{
-  position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--border)
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
 }
 .navbar-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:1rem;padding:.75rem 1.25rem
+  display: flex; align-items: center; justify-content: space-between;
+  gap: .75rem; padding: .6rem 1.25rem;
+  flex-wrap: wrap;                 /* povolí zalomení na mobilu */
 }
-.brand{display:flex;align-items:center;gap:.6rem}
-.brand img{height:18px;width:auto}           /* menší logo */
-.brand .name{font-weight:700}
-@media (min-width:900px){ .brand img{height:32px} }
+.brand{ display: flex; align-items: center; gap: .6rem }
+.brand img{ width: 28px; height: auto }      /* menší logo na mobilu */
+.brand .name{ font-weight: 700; font-size: .98rem }
 
-.nav{display:none;gap:1.1rem;font-size:.95rem}
-@media (min-width:900px){ .nav{display:flex} }
+.nav{
+  display: flex; gap: .9rem; font-size: .95rem;
+  flex-wrap: wrap;
+}
+.nav a{ opacity:.85 }
+.nav a:hover{ opacity:1 }
 
-/* ===== HERO ===== */
-.hero{padding-top:1.1rem}
+/* od ~520px narovnat do jedné řady */
+@media (min-width:520px){
+  .navbar-inner{ flex-wrap: nowrap }
+  .nav{ margin-left: auto }
+}
+
+/* =========================
+   HERO
+   ========================= */
+.hero{padding-top:1.25rem}
 .hero-grid{display:grid;gap:2rem}
-@media (min-width:640px){
-  .hero-grid{grid-template-columns:1fr 1fr;align-items:center}
-}
+@media (min-width:640px){ .hero-grid{grid-template-columns:1fr 1fr;align-items:center} }
 
-/* badge nepotřebuje změny, ale nechávám připravené */
-.badge{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.4rem .9rem;border-radius:999px;
-  background:var(--grad);color:#fff;font-weight:700;font-size:.95rem
-}
-
-.hero-title{font-weight:800;line-height:1.1;margin:.1rem 0}
+.hero-title{font-weight:800;line-height:1.1}
 .hero-title h1{margin:.25rem 0;font-size:clamp(36px,5.2vw,54px)}
-.hero-title .grad{-webkit-background-clip:text;background-clip:text;color:transparent;background:var(--grad)}
-.hero-lead{margin-top:.55rem;color:var(--muted);font-size:clamp(15px,1.6vw,18px)}
+.hero-title .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-.cta-row{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:.85rem}
+.hero-lead{margin-top:.6rem;color:var(--muted);font-size:clamp(15px,1.6vw,18px)}
+
+.cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.9rem}
 .btn{
-  display:inline-flex;align-items:center;gap:.45rem;
-  padding:.65rem 1rem;border-radius:1rem;border:1px solid transparent;
-  font-weight:700;box-shadow:var(--shadow);font-size:.95rem
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.7rem 1.1rem;border-radius:1rem;border:1px solid transparent;
+  font-weight:700;box-shadow:var(--shadow)
 }
-.btn svg{width:18px;height:18px}
 .btn-grad{background:var(--grad);color:#fff}
 .btn-ghost{background:#fff;border-color:var(--border);box-shadow:none}
-.btn-outline{background:#fff;border-color:var(--border);box-shadow:none}
-.btn:hover{filter:saturate(1.05)}
-/* menší tlačítka a ikony na mobilu, ať se vše vejde na jeden řádek */
-@media (max-width:420px){
-  .btn{padding:.55rem .85rem;font-size:.9rem}
-  .btn svg{width:16px;height:16px}
-}
+.btn svg{width:18px;height:18px}
 
-/* Pravá hero karta – užší, střed, glow jen OKOLO (ne uvnitř) */
+/* =========================
+   KARTA / GLOW RÁM
+   ========================= */
 .card{
   position:relative;border:1px solid var(--border);
   border-radius:var(--radius-xl);background:#fff;
-  box-shadow:var(--shadow);padding:1.25rem
+  box-shadow:var(--shadow);padding:1.25rem;
 }
-.card.center{text-align:center}
+.center{text-align:center}
+
+/* „svatozář“ jen okolo – uvnitř zůstává bílo */
+.glow{ position:relative }
 .glow::before{
-  content:"";position:absolute;inset:-1.25rem;border-radius:var(--radius-xl);
-  background:var(--grad);filter:blur(24px);opacity:.22;z-index:-1
-}
-.hero-card{max-width:520px;margin-left:auto}
-.hero-card .hero-logo{height:72px;width:auto;margin:0 auto .35rem}
-@media (min-width:900px){ .hero-card .hero-logo{height:84px} }
-
-/* sociální knoflíky v kartě */
-.soc-list{display:grid;gap:.6rem;margin-top:.7rem}
-.soc{display:flex;align-items:center;gap:.55rem;padding:.6rem .9rem;border:1px solid var(--border);border-radius:1rem;background:#fff}
-.soc svg{width:18px;height:18px}
-.soc .label{font-weight:700;font-size:.95rem}
-@media (max-width:420px){
-  .soc{padding:.5rem .75rem}
-  .soc svg{width:16px;height:16px}
+  content:""; position:absolute; inset:-1.25rem; z-index:-1;
+  border-radius:var(--radius-xl);
+  background:var(--grad); filter: blur(24px); opacity:.22;
 }
 
-/* ===== BANNER s glow kolem, bílý vnitřek ===== */
-.banner-wrap{position:relative}
+/* HERO pravá karta */
+.hero-card{ text-align:center }
+.hero-card .hero-logo{ width: 88px; margin:.25rem auto .35rem }
+
+/* CTA/ikonky v kartě */
+.soc-list{ display:grid; gap:.55rem; margin-top:.7rem }
+.soc{
+  display:flex; align-items:center; justify-content:center; gap:.55rem;
+  padding:.62rem .9rem; border:1px solid var(--border);
+  border-radius:1rem; background:#fff; font-weight:700; font-size:.95rem;
+  line-height:1;
+}
+.soc svg{ width:18px; height:18px }
+.soc.btn-grad{ border-color:transparent } /* telefon – barevné pozadí */
+
+/* =========================
+   BANNER (např. nad službami)
+   ========================= */
+.banner-wrap{ position:relative }
 .banner-wrap::before{
-  content:"";position:absolute;inset:-1.25rem;border-radius:var(--radius-xl);
-  background:var(--grad);filter:blur(24px);opacity:.22;z-index:-1
+  content:""; position:absolute; inset:-1.25rem; z-index:-1;
+  border-radius:var(--radius-xl);
+  background:var(--grad); filter: blur(24px); opacity:.22;
 }
 .banner{
-  position:relative;border:1px solid var(--border);
-  border-radius:var(--radius-xl);padding:1rem;background:#fff
+  position:relative; border:1px solid var(--border);
+  border-radius:var(--radius-xl); padding:1rem; background:#fff;
 }
 .banner.center{text-align:center}
 .banner .tag{
-  display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .9rem;
-  border-radius:999px;background:var(--grad);color:#fff;font-weight:800
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.4rem .9rem;border-radius:999px;background:var(--grad);
+  color:#fff;font-weight:800
 }
-/* Menší mezera pod bannerem nad ceníkem */
-.banner + .h2{margin-top:.75rem}
 
-/* ===== NADPISY / TEXT ===== */
+/* =========================
+   NADPISY, SLUŽBY
+   ========================= */
 .h2{font-size:clamp(22px,2.6vw,28px);font-weight:800;margin:0}
-.muted{color:var(--muted)}
-.lead{font-size:clamp(16px,1.7vw,18px)}
 
-/* ===== SLUŽBY ===== */
 .services-grid{display:grid;gap:1rem;margin-top:1rem}
 @media (min-width:900px){ .services-grid{grid-template-columns:1fr 1fr} }
-.service{border:1px solid var(--border);border-radius:1.25rem;background:#fff;padding:1rem}
+
+.service{
+  border:1px solid var(--border);border-radius:1.25rem;
+  background:#fff;padding:1rem
+}
 .service .title{font-weight:700}
 .service .desc{color:var(--muted);font-size:.95rem;margin-top:.35rem}
 
-/* ===== CENÍK ===== */
-.price-wrap{position:relative;border:1px solid var(--border);border-radius:1.25rem;background:#fff;overflow:hidden}
-.wm-host{position:relative;overflow:hidden}
+/* =========================
+   CENÍK
+   ========================= */
+.price-wrap{
+  position:relative;border:1px solid var(--border);
+  border-radius:1.25rem;background:#fff;overflow:hidden
+}
+
+/* jemný vodoznak v kartě ceníku */
+.wm-host{ position:relative; overflow:hidden }
 .watermark{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  opacity:.18; /* zvýrazněný vodoznak */
-  pointer-events:none;
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  opacity:.12; pointer-events:none;
   mask-image:radial-gradient(70% 70% at 50% 50%,#000 55%,transparent 100%);
-  -webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000 55%,transparent 100%)
+  -webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000 55%,transparent 100%);
 }
-.watermark img{max-width:55%;filter:blur(1px)} /* jemnější rozostření, víc viditelné */
+.watermark img{ max-width:55%; filter:blur(1.25px) }
 
-.price-block{padding:1rem;border-top:1px solid var(--border)}
-.price-block:first-child{border-top:0}
-.price-title{font-weight:800;margin:0 0 .35rem 0}
+.price-block{ padding:1rem; border-top:1px solid var(--border) }
+.price-block:first-child{ border-top:0 }
 
-/* Název vlevo – Cena vpravo; popis pod tím */
+.price-title{ font-weight:800; margin:0 0 .25rem 0 }
 .price-row{
-  display:flex;align-items:baseline;justify-content:space-between;
-  gap:.75rem;margin:.6rem 0
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap: .75rem; margin:.6rem 0;
 }
-.price-name{font-weight:600}
-.price-now{font-weight:700}
-.price-old{color:#94a3b8;text-decoration:line-through;font-size:.95rem;margin-right:.5rem}
-.price-new{color:#dc2626;font-weight:800}
-.price-note{color:var(--muted);font-size:.9rem;margin-top:.3rem}
+.price{ font-weight:800 }          /* pravá cena */
+.price-old{ color:#94a3b8; text-decoration:line-through; font-size:.95rem }
+.price-new{ color:#dc2626; font-weight:800 }
 
-.hr{ height:1px; background:var(--border); margin: 1rem 0  .9rem }
-
-/* poznámka pod ceníkem odděleně a čitelně */
 .note{
-  padding:1rem;color:var(--muted);font-size:.9rem;
-  border-top:1px solid var(--border);background:rgba(248,250,252,.6)
+  padding:1rem; color:var(--muted); font-size:.9rem;
+  border-top:1px solid var(--border);
+  background:rgba(248,250,252,.6)
 }
 
-/* ===== KONTAKT + MAPA ===== */
-.contact-grid{display:grid;gap:1.5rem}
-@media (min-width:900px){ .contact-grid{grid-template-columns:1fr 1fr;align-items:start} }
-.row{display:flex;gap:.6rem;align-items:flex-start}
-.k-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem}
-.row svg{width:18px;height:18px}
+/* =========================
+   KONTAKT + MAPA
+   ========================= */
+.contact-grid{ display:grid; gap:1.5rem }
+@media (min-width:900px){ .contact-grid{ grid-template-columns:1fr 1fr; align-items:start } }
 
-/* mapa vpravo, glow kolem, centrovaná na menších šířkách */
-.map-wrap{position:relative;max-width:520px;margin:0 auto}
-@media (min-width:768px){ .map-wrap{margin-left:auto} }
-.map-wrap::before{
-  content:"";position:absolute;inset:-1.25rem;border-radius:var(--radius-xl);
-  background:var(--grad);filter:blur(24px);opacity:.22;z-index:-1
+.row{ display:flex; gap:.6rem; align-items:flex-start }
+.row svg{ width:18px; height:18px; margin-top:.15rem; opacity:.85 }
+.bold{ font-weight:700 }
+.link{ text-decoration:underline; text-underline-offset:2px }
+
+.k-row{ display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.5rem }
+.k-row .soc{ padding:.55rem .9rem } /* IG/FB/Call pod kontaktem lehce menší */
+
+.map-wrap{ position:relative; max-width:520px; margin:0 auto } /* centrování na mobilu */
+@media (min-width:768px){ .map-wrap{ margin-left:auto } }      /* vpravo na desktopu */
+.map-wrap.glow::before{
+  content:""; position:absolute; inset:-1.25rem; z-index:-1;
+  border-radius:var(--radius-xl);
+  background:var(--grad); filter: blur(24px); opacity:.22;
 }
-.map-card{position:relative;border:1px solid var(--border);border-radius:var(--radius-xl);background:#fff;padding:.5rem;box-shadow:var(--shadow)}
-.map-frame{display:block;border:0;border-radius:calc(var(--radius-xl) - .6rem);width:100%;height:340px}
+.map-card{
+  position:relative;border:1px solid var(--border);
+  border-radius:var(--radius-xl); background:#fff; padding:.5rem;
+  box-shadow:var(--shadow)
+}
+.map-frame{ display:block; border:0; border-radius:calc(var(--radius-xl) - .6rem); width:100%; height:340px }
 
-/* ===== PODĚKOVÁNÍ ===== */
-.thanks{position:relative;max-width:28rem;margin:0 auto}
-.thanks .card{padding:4.2rem 1.5rem}        /* o něco vyšší karta */
-.thanks .watermark{opacity:.22}             /* zvýrazněný vodoznak */
-.thanks .watermark img{max-width:50%}
-.thanks .title{font-weight:800;text-align:center}
+/* =========================
+   PODĚKOVÁNÍ
+   ========================= */
+.thanks{ position:relative; max-width:28rem; margin:0 auto }
+.thanks .card{ padding:3.8rem 1.5rem }
+.thanks .watermark img{ max-width:60% }   /* viditelnější znak, stále jemný */
+.thanks .title{ font-weight:800; text-align:center }
 
-/* ===== FOOTER ===== */
+/* =========================
+   FOOTER
+   ========================= */
 .footer{
-  background:rgba(255,255,255,.75);backdrop-filter:blur(8px);
-  border-top:1px solid var(--border);padding:1rem 0;margin-top:1.25rem
+  background:rgba(255,255,255,.75);
+  backdrop-filter:blur(8px);
+  border-top:1px solid var(--border);
+  padding:1rem 0; margin-top:1.25rem
 }
-.footer-inner{display:flex;justify-content:center;align-items:center;gap:.65rem;flex-wrap:wrap}
-.footer a{display:inline-flex;align-items:center;gap:.45rem;color:var(--muted);font-size:.95rem}
-.footer a svg{width:16px;height:16px}
-.sep{opacity:.4}
-
-/* ===== DOLAĎUJÍCÍ DROBNOSTI ===== */
-.small-gap{margin-top:.75rem}
-
-/* jemné zmenšení ikon a paddingů v úzkých mobilech */
-@media (max-width:360px){
-  .row svg{width:16px;height:16px}
-  .footer a{font-size:.9rem}
-  .footer a svg{width:14px;height:14px}
+.footer-inner{
+  display:flex; justify-content:center; align-items:center;
+  gap:.75rem; flex-wrap:wrap
 }
-/* --- FIX: hero karta – telefonní tlačítko bylo "prázdné" --- */
-.soc.btn-grad{
-  background: var(--grad) !important;
-  color:#fff !important;
-  border-color: transparent !important;
-  box-shadow: var(--shadow);
-}
-.soc.btn-grad svg{ color:#fff; }
-
-/* --- Sjednocení ikon v tlačítkách --- */
-.soc svg{ width:18px; height:18px; flex:0 0 18px; }
-
-/* --- Trochu větší logo v hero kartě (jen o kousek) --- */
-.hero-card .hero-logo{
-  max-width: 140px;              /* bylo ~120–130, jemně přidáváme */
-  margin-inline: auto;
-}
-
-/* Pro jistotu: text tlačítek a zarovnání obsahu */
-.soc .label{ font-weight:700; font-size:.95rem; }
-.soc{ justify-content: flex-start; }           /* stejná osa ikon + textu */
+.footer a{ display:inline-flex; align-items:center; gap:.5rem; color:var(--muted); font-size:.95rem }
+.sep{ opacity:.4 }
