@@ -1,6 +1,6 @@
 import React from "react";
 
-/* --- drobné SVG ikonky (bez knihoven) --- */
+/* --- drobné SVG ikonky --- */
 const IconInstagram = (props) => (
   <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
     <path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm11.25 1.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
@@ -27,7 +27,7 @@ const IconClock = (props) => (
   </svg>
 );
 
-/* jednoduchý helper na obrázek s fallbackem */
+/* Obrázek s fallbackem (jednoduchý) */
 function SmartImage({ srcs, className, alt }) {
   const [i, setI] = React.useState(0);
   if (i < srcs.length) {
@@ -62,7 +62,7 @@ export default function App() {
   const MAP_EMBED = `https://www.google.com/maps?q=${MAP_QUERY}&hl=cs&z=16&output=embed`;
   const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
 
-  /* ---- NAVBAR (logo vlevo, navigace vpravo) ---- */
+  /* ---- NAVBAR ---- */
   const Navbar = () => (
     <header style={{
       position: "sticky", top: 0, zIndex: 20,
@@ -71,10 +71,15 @@ export default function App() {
     }}>
       <div className="container" style={{
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "0.9rem 1.5rem"
+        padding: "0.8rem 1.5rem"
       }}>
-        <a href="#hero" style={{ display: "flex", alignItems: "center", gap: ".75rem" }}>
-          <SmartImage srcs={LOGO_SILUETY} className="brand-logo" alt="" />
+        <a href="#hero" style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
+          {/* MENŠÍ LOGO */}
+          <SmartImage
+            srcs={LOGO_SILUETY}
+            alt=""
+            className="brand-logo"
+          />
           <span className="brand-title" style={{ fontWeight: 600 }}>Vlasy od Týnky</span>
         </a>
         <nav className="nav-links" style={{ display: "flex", gap: "1.25rem", fontSize: ".95rem" }}>
@@ -91,12 +96,12 @@ export default function App() {
   const Hero = () => (
     <section id="hero" className="section" style={{ paddingTop: "2.25rem" }}>
       <div className="container grid-2 hero-grid" style={{ alignItems: "center", gap: "2.5rem" }}>
-        {/* Levý sloupec — 3 řádky H1, bez „Otevírám…“ */}
+        {/* Levý sloupec — H1 NA 3 ŘÁDCÍCH */}
         <div className="stack-6">
           <h1 className="hero-title" style={{ marginBottom: ".25rem" }}>
-            <span>Kadeřnictví</span>
-            <span className="grad">Vlasy od Týnky</span>
-            <span>Mladá Boleslav</span>
+            <div>Kadeřnictví</div>
+            <div className="grad">Vlasy od Týnky</div>
+            <div>Mladá Boleslav</div>
           </h1>
           <p className="muted" style={{ maxWidth: "50ch" }}>
             Precizní střihy, barvení i melír v příjemné atmosféře.
@@ -110,9 +115,9 @@ export default function App() {
 
         {/* Pravý sloupec – užší bílá karta, glow okolo, vše centrované, menší logo */}
         <div className="hero-card-wrap" style={{ alignSelf: "stretch" }}>
-          <div className="card glow hero-card" style={{ textAlign: "center", padding: "1.75rem 1.5rem", maxWidth: 520, marginLeft: "auto" }}>
+          <div className="card glow hero-card" style={{ textAlign: "center", padding: "1.6rem 1.3rem", maxWidth: 520, marginLeft: "auto" }}>
             <SmartImage srcs={LOGO_TEXT} className="hero-logo" alt="" />
-            <div className="hero-card-title" style={{ fontSize: "1.25rem", fontWeight: 600, marginTop: ".25rem" }}>Vlasy od Týnky</div>
+            <div className="hero-card-title" style={{ fontSize: "1.2rem", fontWeight: 600, marginTop: ".25rem" }}>Vlasy od Týnky</div>
             <div className="muted small" style={{ marginTop: ".25rem" }}>kadeřnictví · Mladá Boleslav</div>
             <div className="muted small" style={{ marginTop: ".35rem" }}>Objednávky přes sítě nebo telefon.</div>
 
@@ -133,7 +138,7 @@ export default function App() {
     </section>
   );
 
-  /* ---- SLUŽBY ----  (na tabletu 2×2 – zajišťuje .grid-2 v tvém CSS) */
+  /* ---- SLUŽBY ---- */
   const Services = () => (
     <section id="sluzby" className="section">
       <div className="container">
@@ -185,14 +190,20 @@ export default function App() {
     </section>
   );
 
-  /* ---- CENÍK (název vlevo, cena vpravo; popis pod) ---- */
+  /* ---- CENÍK (Název. vpravo Od XYZ; popis pod) ---- */
   const PriceRow = ({ name, price, note }) => (
-    <li className="price-row" style={{ padding: ".5rem 0" }}>
-      <div className="price-line" style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem" }}>
-        <span className="price-name" style={{ fontWeight: 500 }}>{name}</span>
-        <span className="price-now" style={{ fontWeight: 600 }}>{price}</span>
+    <li className="price-row" style={{ padding: ".55rem 0" }}>
+      <div className="price-line" style={{
+        display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem"
+      }}>
+        <span className="price-name" style={{ fontWeight: 500 }}>
+          {name.endsWith(".") ? name : `${name}.`}
+        </span>
+        <span className="price-now" style={{ fontWeight: 600 }}>
+          {price.startsWith("od") || price.startsWith("Od") ? price.replace(/^od/i, "Od") : `Od ${price}`}
+        </span>
       </div>
-      {note && <div className="muted xsmall" style={{ marginTop: ".25rem" }}>{note}</div>}
+      {note && <div className="muted xsmall" style={{ marginTop: ".3rem" }}>{note}</div>}
     </li>
   );
 
@@ -203,7 +214,7 @@ export default function App() {
 
         <div className="card wm-host price-card" style={{ marginTop: "1rem" }}>
           {/* vodoznak logo-siluety – mírně zvýrazněný */}
-          <div className="watermark">
+          <div className="watermark" style={{ opacity: .18 }}>
             <SmartImage srcs={LOGO_SILUETY} className="wm-logo" alt="" />
           </div>
 
@@ -249,7 +260,7 @@ export default function App() {
     </section>
   );
 
-  /* ---- KONTAKT + MAPA (ikonky vedle textu; mapa vpravo) ---- */
+  /* ---- KONTAKT + MAPA ---- */
   const Contact = () => (
     <section id="kontakt" className="section">
       <div className="container grid-2 contact-grid" style={{ alignItems: "start", gap: "2.5rem" }}>
@@ -304,7 +315,7 @@ export default function App() {
     </section>
   );
 
-  /* ---- PODĚKOVÁNÍ – užší + vyšší karta, vodoznak logo-text zvýrazněný ---- */
+  /* ---- PODĚKOVÁNÍ ---- */
   const Thanks = () => (
     <section className="section">
       <div className="container thanks-wrap" style={{ display: "grid", placeItems: "center" }}>
@@ -323,7 +334,7 @@ export default function App() {
     </section>
   );
 
-  /* ---- FOOTER (centrovaný) ---- */
+  /* ---- FOOTER ---- */
   const Footer = () => (
     <footer className="footer" style={{ textAlign: "center" }}>
       <div className="container center">
