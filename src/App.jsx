@@ -16,7 +16,7 @@ const MAP_QUERY = encodeURIComponent(`${ADDRESS_LINE1}, ${ADDRESS_CITY}`);
 const MAP_EMBED = `https://www.google.com/maps?q=${MAP_QUERY}&hl=cs&z=16&output=embed`;
 const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
 
-const gradStyle = {
+const gradText = {
   background: "linear-gradient(135deg,#6aa2ff,#b57bff,#ff7ad6)",
   WebkitBackgroundClip: "text",
   backgroundClip: "text",
@@ -28,7 +28,7 @@ const IconPhone = (props) => (
   <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
     <path
       fill="currentColor"
-      d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25c1.1.36 2.3.56 3.6.56a1 1 0 011 1V20a1 1 0 01-1 1C12.3 21 3 11.7 3 1a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.2 2.5.56 3.6a1 1 0 01-.25 1L6.6 10.8z"
+      d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011-.25 11.36 11.36 0 003.6.56 1 1 0 011 1v3.5a1 1 0 01-1 1A17.5 17.5 0 012 6a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.56 3.6 1 1 0 01-.25 1z"
     />
   </svg>
 );
@@ -36,7 +36,7 @@ const IconInstagram = (props) => (
   <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
     <path
       fill="currentColor"
-      d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h10zm-5 3.8A5.2 5.2 0 1017.2 13 5.2 5.2 0 0012 7.8zm0 8.5A3.3 3.3 0 1115.3 13 3.3 3.3 0 0112 16.3zm4.7-8.9a1.2 1.2 0 111.2-1.2 1.2 1.2 0 01-1.2 1.2z"
+      d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10 2H7a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm-5 3.8A5.2 5.2 0 1112 18.2 5.2 5.2 0 0112 7.8zm0 8.5A3.3 3.3 0 1015.3 13 3.3 3.3 0 0012 16.3zM18.4 6.9a1.1 1.1 0 111.1-1.1 1.1 1.1 0 01-1.1 1.1z"
     />
   </svg>
 );
@@ -44,7 +44,16 @@ const IconFacebook = (props) => (
   <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
     <path
       fill="currentColor"
-      d="M22 12a10 10 0 10-11.6 9.9v-7H8v-3h2.4V9.5c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .2 2 .2v2.3h-1.1c-1.1 0-1.5.7-1.5 1.4V12h2.6l-.4 3h-2.2v7A10 10 0 0022 12z"
+      d="M22 12a10 10 0 10-11.6 9.9v-7H8v-3h2.4V9.6c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .2 2 .2v2.3H15c-1.1 0-1.5.7-1.5 1.4V12h2.6l-.4 3H13.5v7A10 10 0 0022 12z"
+    />
+  </svg>
+);
+/* čitelnější hodiny – jasný ciferník + ručičky */
+const IconClock = (props) => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
+    <path
+      fill="currentColor"
+      d="M12 2a10 10 0 1010 10A10.01 10.01 0 0012 2zm0 2a8 8 0 11-8 8 8 8 0 018-8zm.8 3.2h-1.6V12l4 2.4.8-1.36-3.2-1.94z"
     />
   </svg>
 );
@@ -56,25 +65,15 @@ const IconMapPin = (props) => (
     />
   </svg>
 );
-const IconClock = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
-    <path
-      fill="currentColor"
-      d="M12 2a10 10 0 1010 10A10.01 10.01 0 0012 2zm.8 5h-1.6v5l4.3 2.6.8-1.3-3.5-2.1z"
-    />
-  </svg>
-);
 
-/** ===== ŘÁDEK CEN ===== */
+/** ===== ŘÁDEK CEN (uvnitř jedné sekce bez dělení na karty) ===== */
 const PriceRow = ({ title, desc, price }) => (
-  <div className="price-block">
-    <div className="price-row">
-      <div style={{ flex: 1 }}>
-        <div className="price-title">{title}</div>
-        {desc && <div className="muted" style={{ fontSize: ".95rem" }}>{desc}</div>}
-      </div>
-      <div className="price">{price}</div>
+  <div className="price-row">
+    <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="price-title">{title}</div>
+      {desc && <div className="muted" style={{ fontSize: ".95rem" }}>{desc}</div>}
     </div>
+    <div className="price">{price}</div>
   </div>
 );
 
@@ -105,7 +104,7 @@ export default function App() {
           <div>
             <div className="hero-title">
               <h1>Kadeřnictví</h1>
-              <h1 style={gradStyle}>Vlasy od Týnky</h1>
+              <h1 style={gradText}>Vlasy od Týnky</h1>
               <h1>Mladá Boleslav</h1>
             </div>
 
@@ -122,7 +121,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s logem + odkazy */}
+          {/* Pravý sloupec – karta s logem + odkazy (glow + bílý podklad) */}
           <aside className="card center glow hero-card">
             <img
               src="/logo-text.png"
@@ -143,6 +142,7 @@ export default function App() {
               <a className="soc" href={FB_URL} target="_blank" rel="noopener noreferrer">
                 <IconFacebook /> <span className="label">Napsat na Facebooku</span>
               </a>
+              {/* Explicitní call tlačítko v kartě – ať je nepřehlédnutelné */}
               <a className="soc btn-grad" href={`tel:${PHONE_RAW}`}>
                 <IconPhone /> <span className="label">Zavolat {PHONE_DISPLAY}</span>
               </a>
@@ -199,60 +199,58 @@ export default function App() {
         </div>
       </section>
 
-      {/* CENÍK */}
+      {/* CENÍK – 3 sekce, uvnitř jen řádky bez dělení na karty */}
       <section id="cenik" className="section">
         <div className="container">
           <h2 className="h2">Ceník</h2>
 
           <div className="price-wrap wm-host" style={{ marginTop: "1rem" }}>
-            {/* vodoznak (viditelný, ale jemný) */}
+            {/* jemný vodoznak v pozadí */}
             <div className="watermark">
               <img src="/logo-text.png" alt="" aria-hidden="true" />
             </div>
 
-            {/* Střih & styling */}
-            <div className="price-block">
+            {/* Sekce 1: Střih & styling */}
+            <div className="price-block" style={{ borderTop: 0 }}>
               <div className="price-title">✂️ Střih &amp; styling</div>
             </div>
-            <PriceRow title="Dámský střih" desc="Konzultace, mytí vlasů, střih, foukaná a styling." price="od 650 Kč" />
-            <PriceRow title="Pánský střih" desc="Střih nůžkami i strojkem, suché i mokré vlasy." price="od 350 Kč" />
-            <PriceRow title="Dětský střih (do 12 let)" desc="Rychlý střih přizpůsobený dětem." price="od 250 Kč" />
-            <PriceRow title="Foukaná / styling bez střihu" desc="" price="od 400 Kč" />
+            <div style={{ padding: "0 1rem 1rem" }}>
+              <PriceRow title="Dámský střih" desc="Konzultace, mytí vlasů, střih, foukaná a styling." price="od 650 Kč" />
+              <PriceRow title="Pánský střih" desc="Střih nůžkami i strojkem, suché i mokré vlasy." price="od 350 Kč" />
+              <PriceRow title="Dětský střih (do 12 let)" desc="Rychlý střih přizpůsobený dětem." price="od 250 Kč" />
+              <PriceRow title="Foukaná / styling bez střihu" desc="" price="od 400 Kč" />
+            </div>
 
-            {/* Barvení & melír */}
+            {/* Sekce 2: Barvení & melír */}
             <div className="price-block">
               <div className="price-title">🎨 Barvení &amp; melír</div>
             </div>
-            <PriceRow
-              title="Barvení / tónování"
-              desc="Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu."
-              price="od 1 350 Kč"
-            />
-            <PriceRow
-              title="Melír klasický"
-              desc="Melírování pramenů, střih, foukaná a styling."
-              price="od 1 850 Kč"
-            />
-            <PriceRow
-              title="Mikromelír + tónování"
-              desc="Jemné prosvětlení s doladěním odstínu, střih, foukaná a styling."
-              price="od 2 050 Kč"
-            />
+            <div style={{ padding: "0 1rem 1rem" }}>
+              <PriceRow
+                title="Barvení / tónování"
+                desc="Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu."
+                price="od 1 350 Kč"
+              />
+              <PriceRow title="Melír klasický" desc="Melírování pramenů, střih, foukaná a styling." price="od 1 850 Kč" />
+              <PriceRow
+                title="Mikromelír + tónování"
+                desc="Jemné prosvětlení s doladěním odstínu, střih, foukaná a styling."
+                price="od 2 050 Kč"
+              />
+            </div>
 
-            {/* Péče & regenerace */}
+            {/* Sekce 3: Péče & regenerace */}
             <div className="price-block">
               <div className="price-title">🌸 Péče &amp; regenerace</div>
             </div>
-            <PriceRow
-              title="B.Pur hloubkové čištění"
-              desc="Detox vlasů a pokožky, ideální jako doplněk ke střihu."
-              price="+230 Kč"
-            />
-            <PriceRow
-              title="Ki-Power Veg rekonstrukce"
-              desc="Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů."
-              price="+260 Kč"
-            />
+            <div style={{ padding: "0 1rem 1rem" }}>
+              <PriceRow title="B.Pur hloubkové čištění" desc="Detox vlasů a pokožky, ideální jako doplněk ke střihu." price="+230 Kč" />
+              <PriceRow
+                title="Ki-Power Veg rekonstrukce"
+                desc="Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů."
+                price="+260 Kč"
+              />
+            </div>
 
             <div className="note">
               Uvedené ceny jsou orientační. Konečná cena záleží na délce a hustotě vlasů a spotřebě materiálu.
@@ -262,7 +260,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* KONTAKT + MAPA */}
+      {/* KONTAKT + MAPA (mapa s glow) */}
       <section id="kontakt" className="section">
         <div className="container contact-grid grid-2">
           <div>
@@ -298,19 +296,21 @@ export default function App() {
               </div>
             </div>
 
-            <div className="k-row">
+            {/* výrazné call tlačítko i tady */}
+            <div className="k-row" style={{ marginTop: ".5rem" }}>
+              <a className="soc btn-grad" href={`tel:${PHONE_RAW}`}>
+                <IconPhone /> Zavolat {PHONE_DISPLAY}
+              </a>
               <a className="soc" href={IG_URL} target="_blank" rel="noopener noreferrer">
                 <IconInstagram /> Instagram
               </a>
               <a className="soc" href={FB_URL} target="_blank" rel="noopener noreferrer">
                 <IconFacebook /> Facebook
               </a>
-              <a className="soc btn-grad" href={`tel:${PHONE_RAW}`}>
-                <IconPhone /> Zavolat {PHONE_DISPLAY}
-              </a>
             </div>
           </div>
 
+          {/* Mapa (glow + bílý podklad) */}
           <div className="map-wrap glow">
             <div className="map-card">
               <iframe
