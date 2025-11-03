@@ -1,7 +1,7 @@
 // App.jsx
 import React from "react";
 
-/** ===== ZÁKLADNÍ KONSTANTY ===== */
+/** ===== KONSTANTY ===== */
 const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
 const FB_URL = "https://www.facebook.com/vlasyodtynky/";
 const PHONE_RAW = "725882820";
@@ -24,57 +24,49 @@ const gradStyle = {
 };
 
 /** ===== SVG IKONY (inline) ===== */
-const IconPhone = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" {...props}>
-    <path
-      fill="currentColor"
-      d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25c1.1.36 2.3.56 3.6.56a1 1 0 011 1V20a1 1 0 01-1 1C12.3 21 3 11.7 3 1a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.2 2.5.56 3.6a1 1 0 01-.25 1L6.6 10.8z"
-    />
+const IconPhone = (p) => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" {...p}>
+    <path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25c1.1.36 2.3.56 3.6.56a1 1 0 011 1V20a1 1 0 01-1 1C12.3 21 3 11.7 3 1a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.2 2.5.56 3.6a1 1 0 01-.25 1L6.6 10.8z" />
   </svg>
 );
-const IconInstagram = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" {...props}>
-    <path
-      fill="currentColor"
-      d="M12 2.2c3 0 3.3 0 4.5.1 1.2.1 2 .2 2.7.5.7.3 1.3.6 1.9 1.2.6.6.9 1.2 1.2 1.9.3.7.4 1.5.5 2.7.1 1.2.1 1.5.1 4.5s0 3.3-.1 4.5c-.1 1.2-.2 2-.5 2.7-.3.7-.6 1.3-1.2 1.9-.6.6-1.2.9-1.9 1.2-.7.3-1.5.4-2.7.5-1.2.1-1.5.1-4.5.1s-3.3 0-4.5-.1c-1.1-.1-1.7-.2-2.1-.4-.5-.2-.8-.4-1.1-.8-.3-.3-.6-.6-1.1-.8-.4-.2-1-.3-2.1-.4-1.1-.1-1.4-.1-4.4-.1zm0 5.1a4.7 4.7 0 110 9.4 4.7 4.7 0 010-9.4zm6.4-1.3a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4z"
-    />
+const IconInstagram = (p) => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" {...p}>
+    <path fill="currentColor" d="M12 2.2c3 0 3.3 0 4.5.1 1.2.1 2 .2 2.7.5.7.3 1.3.6 1.9 1.2.6.6.9 1.2 1.2 1.9.3.7.4 1.5.5 2.7.1 1.2.1 1.5.1 4.5s0 3.3-.1 4.5c-.1 1.2-.2 2-.5 2.7-.3.7-.6 1.3-1.2 1.9-.6.6-1.2.9-1.9 1.2-.7.3-1.5.4-2.7.5-1.2.1-1.5.1-4.5.1s-3.3 0-4.5-.1c-1.1-.1-1.7-.2-2.1-.4-.5-.2-.8-.4-1.1-.8-.3-.3-.6-.6-1.1-.8-.4-.2-1-.3-2.1-.4-1.1-.1-1.4-.1-4.4-.1zm0 5.1a4.7 4.7 0 110 9.4 4.7 4.7 0 010-9.4zm6.4-1.3a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4z" />
   </svg>
 );
-const IconFacebook = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" {...props}>
-    <path
-      fill="currentColor"
-      d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .2 2 .2v2.3h-1.1c-1.1 0-1.5.7-1.5 1.4V12h2.6l-.4 2.9h-2.2v7A10 10 0 0022 12z"
-    />
+const IconFacebook = (p) => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" {...p}>
+    <path fill="currentColor" d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .2 2 .2v2.3h-1.1c-1.1 0-1.5.7-1.5 1.4V12h2.6l-.4 2.9h-2.2v7A10 10 0 0022 12z" />
   </svg>
 );
-const IconMapPin = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" {...props}>
-    <path
-      fill="currentColor"
-      d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"
-    />
+const IconMapPin = (p) => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" {...p}>
+    <path fill="currentColor" d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
   </svg>
 );
-const IconClock = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" {...props}>
-    <path
-      fill="currentColor"
-      d="M12 2a10 10 0 1010 10A10.01 10.01 0 0012 2zm.8 5h-1.6v5l4.3 2.6.8-1.3-3.5-2.1z"
-    />
+const IconClock = (p) => (
+  <svg viewBox="0 0 24 24" width="1em" height="1em" {...p}>
+    <path fill="currentColor" d="M12 2a10 10 0 1010 10A10.01 10.01 0 0012 2zm.8 5h-1.6v5l4.3 2.6.8-1.3-3.5-2.1z" />
   </svg>
 );
 
-/** ===== ŘÁDEK CENY ===== */
-const PriceRow = ({ title, desc, price }) => (
-  <div className="price-block">
-    <div className="price-row">
-      <div style={{ flex: 1 }}>
-        <div className="price-title">{title}</div>
-        {desc && <div className="muted" style={{ fontSize: ".95rem" }}>{desc}</div>}
-      </div>
-      <div className="price">{price}</div>
-    </div>
+/** ===== KOMPAKTNÍ CENÍK ===== */
+const PriceListSection = ({ title, items }) => (
+  <div className="price-block" style={{ borderTop: 0 }}>
+    <h3 className="price-title" style={{ marginBottom: ".35rem" }}>{title}</h3>
+    <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+      {items.map((it, i) => (
+        <li key={i} style={{ padding: ".55rem 0", borderTop: i ? "1px solid rgba(15,23,42,.16)" : "0" }}>
+          <div style={{ display: "flex", gap: "0.75rem", justifyContent: "space-between", alignItems: "baseline" }}>
+            <div style={{ flex: 1 }}>
+              <div className="price-title" style={{ fontWeight: 700, fontSize: "1rem", margin: 0 }}>{it.title}</div>
+              {it.desc && <div className="muted" style={{ fontSize: ".92rem" }}>{it.desc}</div>}
+            </div>
+            <div className="price" style={{ whiteSpace: "nowrap", fontWeight: 800 }}>{it.price}</div>
+          </div>
+        </li>
+      ))}
+    </ul>
   </div>
 );
 
@@ -82,7 +74,7 @@ const PriceRow = ({ title, desc, price }) => (
 export default function App() {
   return (
     <div>
-      {/* ===== NAVBAR ===== */}
+      {/* NAVBAR */}
       <header className="navbar">
         <div className="navbar-inner container">
           <a href="#hero" className="brand">
@@ -98,10 +90,10 @@ export default function App() {
         </div>
       </header>
 
-      {/* ===== HERO ===== */}
+      {/* HERO */}
       <section id="hero" className="hero section">
         <div className="container hero-grid">
-          {/* Levý sloupec */}
+          {/* levá část */}
           <div>
             <div className="hero-title">
               <h1>Kadeřnictví</h1>
@@ -122,12 +114,13 @@ export default function App() {
             </div>
           </div>
 
-          {/* Pravý sloupec – karta s glow okolo a bílým pozadím */}
+          {/* pravá karta (glow okolo, bílé uvnitř) */}
           <aside className="card center glow hero-card">
             <img
               src="/logo-text.png"
               alt="Vlasy od Týnky (textové logo)"
               className="hero-logo"
+              style={{ maxWidth: "210px" }} // o kousek větší logo
             />
             <div className="muted" style={{ marginTop: ".25rem" }}>
               kadeřnictví · Mladá Boleslav
@@ -151,7 +144,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ===== SLUŽBY ===== */}
+      {/* SLUŽBY */}
       <section id="sluzby" className="section">
         <div className="container">
           <h2 className="h2">Kadeřnické služby v Mladé Boleslavi</h2>
@@ -184,7 +177,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ===== O MNĚ ===== */}
+      {/* O MNĚ */}
       <section id="o-mne" className="section">
         <div className="container">
           <h2 className="h2">O mně</h2>
@@ -199,71 +192,41 @@ export default function App() {
         </div>
       </section>
 
-      {/* ===== CENÍK ===== */}
+      {/* CENÍK (kompaktní 3 sekce) */}
       <section id="cenik" className="section">
         <div className="container">
           <h2 className="h2">Ceník</h2>
 
           <div className="price-wrap wm-host" style={{ marginTop: "1rem" }}>
-            {/* vodotisk */}
             <div className="watermark" aria-hidden="true">
               <img src="/logo-text.png" alt="" />
             </div>
 
-            {/* --- Skupina: Střih & styling --- */}
-            <div className="price-block wm-content" style={{ borderTop: 0 }}>
-              <h3 className="price-title">✂️ Střih &amp; styling</h3>
-            </div>
-            <PriceRow
-              title="Dámský střih"
-              desc="Konzultace, mytí vlasů, střih, foukaná a styling."
-              price="od 650 Kč"
-            />
-            <PriceRow
-              title="Pánský střih"
-              desc="Střih nůžkami i strojkem, suché i mokré vlasy."
-              price="od 350 Kč"
-            />
-            <PriceRow
-              title="Dětský střih (do 12 let)"
-              desc="Rychlý střih přizpůsobený dětem."
-              price="od 250 Kč"
-            />
-            <PriceRow title="Foukaná / styling bez střihu" desc="" price="od 400 Kč" />
-
-            {/* --- Skupina: Barvení & melír --- */}
-            <div className="price-block wm-content">
-              <h3 className="price-title">🎨 Barvení &amp; melír</h3>
-            </div>
-            <PriceRow
-              title="Barvení / tónování"
-              desc="Kompletní barvení nebo tónování vlasů, včetně střihu, foukané a stylingu."
-              price="od 1 350 Kč"
-            />
-            <PriceRow
-              title="Melír klasický"
-              desc="Melírování pramenů, střih, foukaná a styling."
-              price="od 1 850 Kč"
-            />
-            <PriceRow
-              title="Mikromelír + tónování"
-              desc="Jemné prosvětlení s doladěním odstínu, střih, foukaná a styling."
-              price="od 2 050 Kč"
+            <PriceListSection
+              title="✂️ Střih &amp; styling"
+              items={[
+                { title: "Dámský střih", desc: "Konzultace, mytí, střih, foukaná a styling.", price: "od 650 Kč" },
+                { title: "Pánský střih", desc: "Střih nůžkami i strojkem, suché i mokré vlasy.", price: "od 350 Kč" },
+                { title: "Dětský střih (do 12 let)", desc: "Rychlý střih přizpůsobený dětem.", price: "od 250 Kč" },
+                { title: "Foukaná / styling bez střihu", desc: "", price: "od 400 Kč" },
+              ]}
             />
 
-            {/* --- Skupina: Péče & regenerace --- */}
-            <div className="price-block wm-content">
-              <h3 className="price-title">🌸 Péče &amp; regenerace</h3>
-            </div>
-            <PriceRow
-              title="B.Pur hloubkové čištění"
-              desc="Detox vlasů a pokožky, ideální jako doplněk ke střihu."
-              price="+230 Kč"
+            <PriceListSection
+              title="🎨 Barvení &amp; melír"
+              items={[
+                { title: "Barvení / tónování", desc: "Kompletní barvení nebo tónování, včetně střihu a foukané.", price: "od 1 350 Kč" },
+                { title: "Melír klasický", desc: "Melírování pramenů, střih, foukaná a styling.", price: "od 1 850 Kč" },
+                { title: "Mikromelír + tónování", desc: "Jemné prosvětlení s doladěním odstínu.", price: "od 2 050 Kč" },
+              ]}
             />
-            <PriceRow
-              title="Ki-Power Veg rekonstrukce"
-              desc="Intenzivní výživa po barvení a melíru, obnovuje strukturu a sílu vlasů."
-              price="+260 Kč"
+
+            <PriceListSection
+              title="🌸 Péče &amp; regenerace"
+              items={[
+                { title: "B.Pur hloubkové čištění", desc: "Detox vlasů a pokožky, ideální ke střihu.", price: "+230 Kč" },
+                { title: "Ki-Power Veg rekonstrukce", desc: "Intenzivní výživa po barvení a melíru.", price: "+260 Kč" },
+              ]}
             />
 
             <div className="note wm-content">
@@ -274,7 +237,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ===== KONTAKT + MAPA ===== */}
+      {/* KONTAKT + MAPA */}
       <section id="kontakt" className="section">
         <div className="container contact-grid grid-2">
           <div>
@@ -318,12 +281,11 @@ export default function App() {
                 <IconFacebook /> Facebook
               </a>
               <a className="soc btn-grad" href={`tel:${PHONE_RAW}`}>
-                <IconPhone /> Zavolat {PHONE_DISPLAY}
+                <IconPhone /> {PHONE_DISPLAY}
               </a>
             </div>
           </div>
 
-          {/* Mapa */}
           <div className="map-wrap glow">
             <div className="map-card">
               <iframe
@@ -338,7 +300,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ===== PODĚKOVÁNÍ ===== */}
+      {/* PODĚKOVÁNÍ */}
       <section className="section">
         <div className="container thanks">
           <div className="card center wm-host">
@@ -355,7 +317,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ===== FOOTER ===== */}
+      {/* FOOTER */}
       <footer className="footer">
         <div className="container footer-inner">
           <a href={IG_URL} target="_blank" rel="noopener noreferrer">
