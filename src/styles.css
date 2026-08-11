@@ -16,15 +16,18 @@
 }
 
 *{box-sizing:border-box}
+html{
+  background:
+    radial-gradient(68rem 42rem at -10% -8%, rgba(106,162,255,.30), transparent 64%),
+    radial-gradient(54rem 34rem at 48% 4%, rgba(255,255,255,.88), transparent 72%),
+    radial-gradient(58rem 40rem at 108% 16%, rgba(181,123,255,.20), transparent 70%),
+    radial-gradient(60rem 42rem at 102% 74%, rgba(255,122,214,.16), transparent 72%),
+    radial-gradient(50rem 34rem at -8% 92%, rgba(255,122,214,.12), transparent 72%),
+    linear-gradient(135deg, #edf6ff 0%, #fff8fd 36%, #fffafd 56%, #f3ecff 100%);
+  background-attachment:fixed;
+}
 html,body{
   margin:0;
-  background:
-    radial-gradient(75rem 42rem at -12% -8%, rgba(106,162,255,.30), transparent 62%),
-    radial-gradient(58rem 36rem at 46% 8%, rgba(255,245,252,.94), transparent 70%),
-    radial-gradient(48rem 36rem at 104% 18%, rgba(181,123,255,.20), transparent 68%),
-    radial-gradient(55rem 36rem at 96% 88%, rgba(255,122,214,.18), transparent 70%),
-    radial-gradient(44rem 30rem at 0% 94%, rgba(255,122,214,.13), transparent 70%),
-    linear-gradient(135deg, #eef6ff 0%, #fff7fc 44%, #fffafd 58%, #f3ecff 100%);
   color:var(--text);
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji";
   overflow-x:hidden;
@@ -33,6 +36,7 @@ html,body{
 body{
   position:relative;
   min-height:100vh;
+  background:transparent;
 }
 body::before{
   content:"";
@@ -41,12 +45,28 @@ body::before{
   z-index:-2;
   pointer-events:none;
   background:
+    radial-gradient(46rem 26rem at 2% 4%, rgba(106,162,255,.18), transparent 72%),
+    radial-gradient(42rem 24rem at 96% 10%, rgba(181,123,255,.13), transparent 72%),
+    radial-gradient(42rem 26rem at 92% 88%, rgba(255,122,214,.12), transparent 72%),
     radial-gradient(circle at 7% 8%, rgba(255,255,255,.94) 0 3px, transparent 4px),
     radial-gradient(circle at 92% 13%, rgba(255,255,255,.70) 0 2px, transparent 3px),
     radial-gradient(circle at 18% 60%, rgba(255,255,255,.62) 0 2px, transparent 3px),
     radial-gradient(circle at 76% 88%, rgba(255,255,255,.68) 0 2px, transparent 3px),
     radial-gradient(36rem 16rem at 52% 44%, rgba(255,255,255,.36), transparent 72%);
 }
+body::after{
+  content:"";
+  position:fixed;
+  inset:-12rem;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.78;
+  background:
+    linear-gradient(118deg, transparent 10%, rgba(255,255,255,.42) 10.08%, rgba(255,255,255,.42) 10.24%, transparent 10.34%),
+    linear-gradient(154deg, transparent 24%, rgba(181,123,255,.13) 24.08%, rgba(181,123,255,.13) 24.22%, transparent 24.32%),
+    linear-gradient(25deg, transparent 70%, rgba(255,122,214,.12) 70.1%, rgba(255,122,214,.12) 70.24%, transparent 70.34%);
+}
+#root{position:relative;z-index:0}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 
@@ -58,7 +78,7 @@ a{color:inherit;text-decoration:none}
 .section-tint{
   position:relative;
   margin-block:.5rem;
-  border-block:1px solid rgba(181,123,255,.10);
+  border-block:1px solid rgba(181,123,255,.08);
   overflow:hidden;
 }
 .section-tint::before{
@@ -75,22 +95,22 @@ a{color:inherit;text-decoration:none}
   height:18rem;
   z-index:-1;
   pointer-events:none;
-  border:1px solid rgba(255,255,255,.42);
-  border-left-color:rgba(181,123,255,.12);
+  border:1px solid rgba(255,255,255,.24);
+  border-left-color:rgba(181,123,255,.08);
   border-radius:50%;
   transform:rotate(-10deg);
 }
 .section-tint-blue::before{
   background:
-    radial-gradient(42rem 22rem at 0% 0%, rgba(106,162,255,.16), transparent 72%),
-    radial-gradient(38rem 20rem at 94% 12%, rgba(255,122,214,.10), transparent 68%),
-    linear-gradient(135deg, rgba(255,255,255,.50), rgba(181,123,255,.08) 48%, rgba(255,255,255,.34));
+    radial-gradient(42rem 22rem at 0% 0%, rgba(106,162,255,.08), transparent 74%),
+    radial-gradient(38rem 20rem at 94% 12%, rgba(255,122,214,.06), transparent 70%),
+    linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
 }
 .section-tint-pink::before{
   background:
-    radial-gradient(42rem 24rem at 8% 0%, rgba(255,122,214,.15), transparent 72%),
-    radial-gradient(36rem 22rem at 96% 20%, rgba(106,162,255,.13), transparent 70%),
-    linear-gradient(135deg, rgba(255,255,255,.48), rgba(181,123,255,.09) 52%, rgba(255,255,255,.34));
+    radial-gradient(42rem 24rem at 8% 0%, rgba(255,122,214,.08), transparent 74%),
+    radial-gradient(36rem 22rem at 96% 20%, rgba(106,162,255,.07), transparent 72%),
+    linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
 }
 
 /* =========================
@@ -132,12 +152,7 @@ a{color:inherit;text-decoration:none}
   padding-top:1.75rem;
   overflow:hidden;
   isolation:isolate;
-  background:
-    radial-gradient(46rem 30rem at 0% 0%, rgba(106,162,255,.24), transparent 70%),
-    radial-gradient(42rem 26rem at 48% 5%, rgba(255,255,255,.72), transparent 72%),
-    radial-gradient(36rem 28rem at 102% 10%, rgba(181,123,255,.18), transparent 70%),
-    radial-gradient(36rem 24rem at 100% 100%, rgba(255,122,214,.16), transparent 72%),
-    linear-gradient(135deg, rgba(246,251,255,.82), rgba(255,247,252,.80) 45%, rgba(247,240,255,.78));
+  background:transparent;
 }
 .hero::before{
   content:"";
@@ -204,7 +219,7 @@ a{color:inherit;text-decoration:none}
    ========================= */
 .card{
   position:relative;border:1px solid var(--border);
-  border-radius:var(--radius-xl);background:rgba(255,255,255,.88);
+  border-radius:var(--radius-xl);background:rgba(255,255,255,.94);
   backdrop-filter:blur(10px);
   box-shadow:var(--shadow);padding:1.25rem;
 }
@@ -219,7 +234,16 @@ a{color:inherit;text-decoration:none}
 }
 
 /* HERO pravá karta */
-.hero-card{ text-align:center }
+.hero-card{
+  text-align:center;
+  background:#fff !important;
+  border-color:rgba(15,23,42,.12);
+  backdrop-filter:none;
+  box-shadow:0 12px 30px rgba(15,23,42,.08);
+}
+.hero-card.glow::before{
+  opacity:0;
+}
 .hero-card .hero-logo{ width: 88px; margin:.25rem auto .35rem }
 
 /* CTA/ikonky v kartě */
@@ -266,9 +290,7 @@ a{color:inherit;text-decoration:none}
 
 .service{
   border:1px solid rgba(181,123,255,.18);border-radius:1.25rem;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.78)),
-    linear-gradient(135deg, rgba(106,162,255,.10), rgba(255,122,214,.10));
+  background:rgba(255,255,255,.88);
   backdrop-filter:blur(8px);
   padding:1rem;
   box-shadow:0 10px 24px rgba(106,162,255,.07)
@@ -388,9 +410,7 @@ a{color:inherit;text-decoration:none}
   align-items:center;
   border:1px solid rgba(181,123,255,.20);
   border-radius:var(--radius-xl);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.82)),
-    linear-gradient(135deg, rgba(106,162,255,.12), rgba(255,122,214,.12));
+  background:rgba(255,255,255,.90);
   box-shadow:0 14px 32px rgba(181,123,255,.10);
   padding:1.25rem;
 }
@@ -556,7 +576,9 @@ a{color:inherit;text-decoration:none}
   }
   .hero-title h1 span{max-width:100%}
   .h2{font-size:1.35rem}
+  .h2{line-height:1.18;white-space:normal}
   .hero-lead{max-width:100%;font-size:1rem;line-height:1.45}
+  .hero-card .muted{font-size:.92rem;line-height:1.4}
   .service{min-width:0}
   .booking-card{padding:1rem;border-radius:1.5rem}
 }
@@ -578,8 +600,10 @@ a{color:inherit;text-decoration:none}
   }
   .section{padding-block:2.25rem}
   .hero-grid{gap:1.35rem}
-  .hero-title h1{font-size:clamp(29px,8.8vw,35px);line-height:1.08}
+  .hero-title h1{font-size:clamp(28px,8.4vw,34px);line-height:1.08}
   .hero-title .grad{font-size:.96em}
+  .h2{font-size:1.24rem}
+  .hero-card .muted{font-size:.88rem}
   .cta-row .btn,
   .k-row .btn,
   .k-row .soc{width:100%}
