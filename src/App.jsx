@@ -1,6 +1,13 @@
 // App.jsx
 import React from "react";
 import { Clock, MapPin, Phone } from "lucide-react";
+import ukazkaPrace01 from "./assets/ukazky-prace/ukazka-prace-01.jpg";
+import ukazkaPrace02 from "./assets/ukazky-prace/ukazka-prace-02.jpg";
+import ukazkaPrace03 from "./assets/ukazky-prace/ukazka-prace-03.jpg";
+import ukazkaPrace04 from "./assets/ukazky-prace/ukazka-prace-04.jpg";
+import ukazkaPrace05 from "./assets/ukazky-prace/ukazka-prace-05.jpg";
+import ukazkaPrace06 from "./assets/ukazky-prace/ukazka-prace-06.jpg";
+import ukazkaPrace07 from "./assets/ukazky-prace/ukazka-prace-07.jpg";
 
 /** ===== KONSTANTY ===== */
 const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
@@ -23,6 +30,44 @@ const gradText = {
   backgroundClip: "text",
   color: "transparent",
 };
+
+const galleryItems = [
+  {
+    image: ukazkaPrace01,
+    alt: "Barevná proměna vlasů v salonu Vlasy od Týnky",
+    label: "Barevná proměna",
+  },
+  {
+    image: ukazkaPrace02,
+    alt: "Ukázka vlasové proměny – melír a tónování",
+    label: "Melír a tónování",
+  },
+  {
+    image: ukazkaPrace03,
+    alt: "Barevná proměna vlasů v salonu Vlasy od Týnky",
+    label: "Lesklý výsledek po péči",
+  },
+  {
+    image: ukazkaPrace04,
+    alt: "Ukázka práce Vlasy od Týnky – balayage v přirozeném odstínu",
+    label: "Balayage / baláž",
+  },
+  {
+    image: ukazkaPrace05,
+    alt: "Prosvětlené délky a tónování vlasů",
+    label: "Prosvětlené délky",
+  },
+  {
+    image: ukazkaPrace06,
+    alt: "Ukázka vlasové proměny – přirozený blond odstín",
+    label: "Přirozený blond odstín",
+  },
+  {
+    image: ukazkaPrace07,
+    alt: "Ukázka vlasové proměny – studenější tónování",
+    label: "Studenější tónování",
+  },
+];
 
 /** ===== SVG IKONY ===== */
 const IconPhone = (props) => <Phone aria-hidden="true" {...props} />;
@@ -180,15 +225,17 @@ export default function App() {
         <div className="container">
           <h2 className="h2">Ukázky práce</h2>
           <p className="muted gallery-intro">
-            Prostor pro skutečné fotografie střihů, barvení a melírů ze salonu. Až budou fotky připravené, galerie zobrazí 4–8 snímků v přehledné mřížce.
+            Výběr ukázek barev, melírů, balayage a vlasových proměn ze salonu.
           </p>
 
-          <div className="gallery-grid" aria-label="Připravovaná fotogalerie prací">
-            {/* Sem později vložte skutečné fotografie prací, například <img src="/ukazky/nazev.jpg" alt="Popis účesu" />. */}
-            {["Střih", "Barvení", "Melír", "Péče"].map((item) => (
-              <div className="gallery-placeholder" key={item}>
-                <span>{item}</span>
-              </div>
+          <div className="gallery-grid" aria-label="Fotogalerie ukázek prací">
+            {galleryItems.map((item) => (
+              <figure className="gallery-card" key={item.image}>
+                <div className="gallery-photo-wrap">
+                  <img src={item.image} alt={item.alt} loading="lazy" />
+                </div>
+                <figcaption>{item.label}</figcaption>
+              </figure>
             ))}
           </div>
         </div>
