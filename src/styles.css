@@ -19,17 +19,38 @@
 html,body{
   margin:0;
   background:
-    linear-gradient(180deg, rgba(255,248,253,.95) 0%, rgba(246,250,255,.92) 38%, rgba(255,250,254,.98) 100%),
-    radial-gradient(85% 48% at 50% 0%, rgba(106,162,255,.18), transparent 70%),
-    radial-gradient(75% 40% at 100% 32%, rgba(255,122,214,.11), transparent 72%);
+    radial-gradient(75rem 42rem at -12% -8%, rgba(106,162,255,.30), transparent 62%),
+    radial-gradient(58rem 36rem at 46% 8%, rgba(255,245,252,.94), transparent 70%),
+    radial-gradient(48rem 36rem at 104% 18%, rgba(181,123,255,.20), transparent 68%),
+    radial-gradient(55rem 36rem at 96% 88%, rgba(255,122,214,.18), transparent 70%),
+    radial-gradient(44rem 30rem at 0% 94%, rgba(255,122,214,.13), transparent 70%),
+    linear-gradient(135deg, #eef6ff 0%, #fff7fc 44%, #fffafd 58%, #f3ecff 100%);
   color:var(--text);
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji";
   overflow-x:hidden;
+  width:100%;
+}
+body{
+  position:relative;
+  min-height:100vh;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 7% 8%, rgba(255,255,255,.94) 0 3px, transparent 4px),
+    radial-gradient(circle at 92% 13%, rgba(255,255,255,.70) 0 2px, transparent 3px),
+    radial-gradient(circle at 18% 60%, rgba(255,255,255,.62) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 88%, rgba(255,255,255,.68) 0 2px, transparent 3px),
+    radial-gradient(36rem 16rem at 52% 44%, rgba(255,255,255,.36), transparent 72%);
 }
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 
-.container{max-width:72rem;margin-inline:auto;padding-inline:1.25rem;min-width:0}
+.container{width:100%;max-width:72rem;margin-inline:auto;padding-inline:1.25rem;min-width:0}
 .section{padding-block:2.75rem}
 .section-lg{padding-block:3.25rem}
 .muted{color:var(--muted)}
@@ -38,6 +59,7 @@ a{color:inherit;text-decoration:none}
   position:relative;
   margin-block:.5rem;
   border-block:1px solid rgba(181,123,255,.10);
+  overflow:hidden;
 }
 .section-tint::before{
   content:"";
@@ -45,11 +67,30 @@ a{color:inherit;text-decoration:none}
   inset:0;
   z-index:-1;
 }
+.section-tint::after{
+  content:"";
+  position:absolute;
+  inset:auto -8% -7rem auto;
+  width:34rem;
+  height:18rem;
+  z-index:-1;
+  pointer-events:none;
+  border:1px solid rgba(255,255,255,.42);
+  border-left-color:rgba(181,123,255,.12);
+  border-radius:50%;
+  transform:rotate(-10deg);
+}
 .section-tint-blue::before{
-  background:linear-gradient(135deg, rgba(106,162,255,.10), rgba(181,123,255,.08) 48%, rgba(255,255,255,.32));
+  background:
+    radial-gradient(42rem 22rem at 0% 0%, rgba(106,162,255,.16), transparent 72%),
+    radial-gradient(38rem 20rem at 94% 12%, rgba(255,122,214,.10), transparent 68%),
+    linear-gradient(135deg, rgba(255,255,255,.50), rgba(181,123,255,.08) 48%, rgba(255,255,255,.34));
 }
 .section-tint-pink::before{
-  background:linear-gradient(135deg, rgba(255,122,214,.10), rgba(181,123,255,.08) 50%, rgba(106,162,255,.08));
+  background:
+    radial-gradient(42rem 24rem at 8% 0%, rgba(255,122,214,.15), transparent 72%),
+    radial-gradient(36rem 22rem at 96% 20%, rgba(106,162,255,.13), transparent 70%),
+    linear-gradient(135deg, rgba(255,255,255,.48), rgba(181,123,255,.09) 52%, rgba(255,255,255,.34));
 }
 
 /* =========================
@@ -89,9 +130,49 @@ a{color:inherit;text-decoration:none}
 .hero{
   position:relative;
   padding-top:1.75rem;
-  background:linear-gradient(135deg, rgba(106,162,255,.13), rgba(255,255,255,.35) 42%, rgba(255,122,214,.11));
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(46rem 30rem at 0% 0%, rgba(106,162,255,.24), transparent 70%),
+    radial-gradient(42rem 26rem at 48% 5%, rgba(255,255,255,.72), transparent 72%),
+    radial-gradient(36rem 28rem at 102% 10%, rgba(181,123,255,.18), transparent 70%),
+    radial-gradient(36rem 24rem at 100% 100%, rgba(255,122,214,.16), transparent 72%),
+    linear-gradient(135deg, rgba(246,251,255,.82), rgba(255,247,252,.80) 45%, rgba(247,240,255,.78));
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-8rem -12rem -5rem -8rem;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 11% 18%, rgba(255,255,255,.90) 0 3px, transparent 4px),
+    radial-gradient(circle at 87% 12%, rgba(255,255,255,.76) 0 2px, transparent 3px),
+    radial-gradient(circle at 77% 78%, rgba(255,255,255,.70) 0 2px, transparent 3px),
+    linear-gradient(118deg, transparent 8%, rgba(255,255,255,.56) 8.15%, rgba(255,255,255,.56) 8.4%, transparent 8.55%),
+    linear-gradient(154deg, transparent 16%, rgba(255,255,255,.45) 16.1%, rgba(255,255,255,.45) 16.35%, transparent 16.5%),
+    linear-gradient(24deg, transparent 70%, rgba(255,122,214,.14) 70.15%, rgba(255,122,214,.14) 70.35%, transparent 70.5%);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  left:-10rem;
+  top:2.2rem;
+  width:42rem;
+  height:18rem;
+  z-index:-1;
+  pointer-events:none;
+  border:1.5px solid rgba(255,255,255,.56);
+  border-right-color:rgba(181,123,255,.18);
+  border-bottom-color:rgba(255,122,214,.12);
+  border-radius:50%;
+  transform:rotate(-18deg);
 }
 .hero-grid{display:grid;gap:2rem}
+.hero-grid > div,
+.hero-grid > aside{max-width:100%}
+.hero-grid,
+.hero .container{position:relative;z-index:1}
 .hero-grid > *{min-width:0}
 @media (min-width:640px){ .hero-grid{grid-template-columns:1fr 1fr;align-items:center} }
 
@@ -123,7 +204,8 @@ a{color:inherit;text-decoration:none}
    ========================= */
 .card{
   position:relative;border:1px solid var(--border);
-  border-radius:var(--radius-xl);background:rgba(255,255,255,.9);
+  border-radius:var(--radius-xl);background:rgba(255,255,255,.88);
+  backdrop-filter:blur(10px);
   box-shadow:var(--shadow);padding:1.25rem;
 }
 .center{text-align:center}
@@ -184,7 +266,11 @@ a{color:inherit;text-decoration:none}
 
 .service{
   border:1px solid rgba(181,123,255,.18);border-radius:1.25rem;
-  background:rgba(255,255,255,.88);padding:1rem;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.78)),
+    linear-gradient(135deg, rgba(106,162,255,.10), rgba(255,122,214,.10));
+  backdrop-filter:blur(8px);
+  padding:1rem;
   box-shadow:0 10px 24px rgba(106,162,255,.07)
 }
 .service .title{font-weight:700}
@@ -296,6 +382,7 @@ a{color:inherit;text-decoration:none}
 .booking-section{padding-top:1.5rem}
 .booking-card{
   position:relative;
+  overflow:hidden;
   display:grid;
   gap:1.25rem;
   align-items:center;
@@ -306,6 +393,18 @@ a{color:inherit;text-decoration:none}
     linear-gradient(135deg, rgba(106,162,255,.12), rgba(255,122,214,.12));
   box-shadow:0 14px 32px rgba(181,123,255,.10);
   padding:1.25rem;
+}
+.booking-card::before{
+  content:"";
+  position:absolute;
+  inset:-4rem -6rem auto auto;
+  width:24rem;
+  height:12rem;
+  border:1px solid rgba(255,255,255,.55);
+  border-bottom-color:rgba(255,122,214,.16);
+  border-radius:50%;
+  transform:rotate(-14deg);
+  pointer-events:none;
 }
 @media (min-width:900px){
   .booking-card{grid-template-columns:1.25fr .95fr;padding:1.5rem}
@@ -366,7 +465,7 @@ a{color:inherit;text-decoration:none}
    FOOTER
    ========================= */
 .footer{
-  background:rgba(255,250,254,.82);
+  background:rgba(255,250,254,.74);
   backdrop-filter:blur(8px);
   border-top:1px solid rgba(181,123,255,.18);
   padding:1rem 0; margin-top:1.25rem
@@ -379,6 +478,54 @@ a{color:inherit;text-decoration:none}
 .sep{ opacity:.4 }
 
 @media (max-width:640px){
+  .container{
+    max-width:100vw;
+    padding-inline:1.25rem;
+  }
+  .hero-title,
+  .hero-lead,
+  .cta-row,
+  .hero-card,
+  .h2,
+  .service,
+  .gallery-grid,
+  .price-wrap,
+  .booking-card,
+  .contact-grid,
+  .map-wrap{
+    width:100%;
+    max-width:calc(100vw - 2.5rem);
+  }
+  .hero-title h1,
+  .hero-lead,
+  .h2{
+    max-width:100%;
+  }
+  body::before{
+    opacity:.72;
+    background:
+      radial-gradient(circle at 8% 7%, rgba(255,255,255,.86) 0 2px, transparent 3px),
+      radial-gradient(circle at 90% 16%, rgba(255,255,255,.62) 0 2px, transparent 3px),
+      radial-gradient(26rem 14rem at 45% 32%, rgba(255,255,255,.30), transparent 72%);
+  }
+  .hero::before{
+    opacity:.62;
+    inset:-7rem -20rem -4rem -12rem;
+  }
+  .hero::after{
+    left:-18rem;
+    top:1rem;
+    width:32rem;
+    height:14rem;
+    opacity:.68;
+  }
+  .section-tint::after{opacity:.45}
+  .glow::before,
+  .banner-wrap::before,
+  .map-wrap.glow::before{
+    inset:-.6rem;
+    filter:blur(16px);
+  }
   .navbar-inner{
     align-items:flex-start;
     gap:.55rem;
@@ -398,6 +545,8 @@ a{color:inherit;text-decoration:none}
   }
   .hero-lead,
   .h2,
+  .hero-title h1,
+  .hero-title h1 span,
   .price-title,
   .price-row,
   .service .desc,
@@ -405,17 +554,32 @@ a{color:inherit;text-decoration:none}
     overflow-wrap:anywhere;
     word-break:normal;
   }
+  .hero-title h1 span{max-width:100%}
   .h2{font-size:1.35rem}
-  .hero-lead{max-width:100%}
+  .hero-lead{max-width:100%;font-size:1rem;line-height:1.45}
   .service{min-width:0}
   .booking-card{padding:1rem;border-radius:1.5rem}
 }
 
 @media (max-width:420px){
   .container{padding-inline:1rem}
+  .hero-title,
+  .hero-lead,
+  .cta-row,
+  .hero-card,
+  .h2,
+  .service,
+  .gallery-grid,
+  .price-wrap,
+  .booking-card,
+  .contact-grid,
+  .map-wrap{
+    max-width:calc(100vw - 2rem);
+  }
   .section{padding-block:2.25rem}
   .hero-grid{gap:1.35rem}
-  .hero-title h1{font-size:clamp(31px,10vw,38px)}
+  .hero-title h1{font-size:clamp(29px,8.8vw,35px);line-height:1.08}
+  .hero-title .grad{font-size:.96em}
   .cta-row .btn,
   .k-row .btn,
   .k-row .soc{width:100%}
