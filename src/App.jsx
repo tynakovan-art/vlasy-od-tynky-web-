@@ -1,5 +1,6 @@
 // App.jsx
 import React from "react";
+import { Clock, MapPin, Phone } from "lucide-react";
 
 /** ===== KONSTANTY ===== */
 const IG_URL = "https://www.instagram.com/vlasy_od_tynky_mb";
@@ -24,14 +25,7 @@ const gradText = {
 };
 
 /** ===== SVG IKONY ===== */
-const IconPhone = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
-    <path
-      fill="currentColor"
-      d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011-.25 11.36 11.36 0 003.6.56 1 1 0 011 1v3.5a1 1 0 01-1 1A17.5 17.5 0 012 6a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.56 3.6 1 1 0 01-.25 1z"
-    />
-  </svg>
-);
+const IconPhone = (props) => <Phone aria-hidden="true" {...props} />;
 const IconInstagram = (props) => (
   <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
     <path
@@ -48,22 +42,8 @@ const IconFacebook = (props) => (
     />
   </svg>
 );
-const IconClock = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
-    <path
-      fill="currentColor"
-      d="M12 2a10 10 0 1010 10A10.01 10.01 0 0012 2zm0 2a8 8 0 11-8 8 8 8 0 018-8zm.8 3.2h-1.6V12l4 2.4.8-1.36-3.2-1.94z"
-    />
-  </svg>
-);
-const IconMapPin = (props) => (
-  <svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" {...props}>
-    <path
-      fill="currentColor"
-      d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"
-    />
-  </svg>
-);
+const IconClock = (props) => <Clock aria-hidden="true" {...props} />;
+const IconMapPin = (props) => <MapPin aria-hidden="true" {...props} />;
 
 /** ===== ŘÁDEK CEN ===== */
 const PriceRow = ({ title, desc, price }) => (
@@ -84,7 +64,7 @@ export default function App() {
       <header className="navbar">
         <div className="navbar-inner container">
           <a href="#hero" className="brand">
-            <img src="/logo-siluety.png" alt="" />
+            <img src="/logo-siluety.png" alt="Vlasy od Týnky" />
             <span className="name">Vlasy od Týnky</span>
           </a>
           <nav className="nav">
@@ -102,9 +82,11 @@ export default function App() {
           {/* Levá část */}
           <div>
             <div className="hero-title">
-              <h1>Kadeřnictví</h1>
-              <h1 style={gradText}>Vlasy od Týnky</h1>
-              <h1>Mladá Boleslav</h1>
+              <h1>
+                <span>Kadeřnictví</span>
+                <span style={gradText}>Vlasy od Týnky</span>
+                <span>v Mladé Boleslavi</span>
+              </h1>
             </div>
 
             <p className="hero-lead">
@@ -122,7 +104,7 @@ export default function App() {
 
           {/* Pravý sloupec – karta s logem + odkazy (glow + bílý podklad) */}
 <aside className="card glow hero-card" style={{ textAlign: "center" }}>
-  <img src="/logo-text.png" alt="" className="hero-logo" />
+  <img src="/logo-text.png" alt="Logo Vlasy od Týnky" className="hero-logo" />
   <div className="muted" style={{ marginTop: ".25rem" }}>
     kadeřnictví · Mladá Boleslav
   </div>
@@ -146,7 +128,7 @@ export default function App() {
       </section>
 
       {/* SLUŽBY */}
-      <section id="sluzby" className="section">
+      <section id="sluzby" className="section section-tint section-tint-blue">
         <div className="container">
           <h2 className="h2">Kadeřnické služby v Mladé Boleslavi</h2>
           <div className="services-grid">
@@ -190,6 +172,25 @@ export default function App() {
           <p className="muted" style={{ marginTop: ".35rem" }}>
             Pracuji s <strong>Echosline</strong> – profesionální italskou vlasovou kosmetikou zaměřenou na šetrné složení a skvělé výsledky.
           </p>
+        </div>
+      </section>
+
+      {/* UKÁZKY PRÁCE */}
+      <section id="ukazky-prace" className="section section-tint section-tint-pink">
+        <div className="container">
+          <h2 className="h2">Ukázky práce</h2>
+          <p className="muted gallery-intro">
+            Prostor pro skutečné fotografie střihů, barvení a melírů ze salonu. Až budou fotky připravené, galerie zobrazí 4–8 snímků v přehledné mřížce.
+          </p>
+
+          <div className="gallery-grid" aria-label="Připravovaná fotogalerie prací">
+            {/* Sem později vložte skutečné fotografie prací, například <img src="/ukazky/nazev.jpg" alt="Popis účesu" />. */}
+            {["Střih", "Barvení", "Melír", "Péče"].map((item) => (
+              <div className="gallery-placeholder" key={item}>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
