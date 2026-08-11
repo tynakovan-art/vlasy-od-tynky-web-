@@ -103,6 +103,7 @@ export default function App() {
           <nav className="nav">
             <a href="#o-mne">O mně</a>
             <a href="#sluzby">Služby</a>
+            <a href="#ukazky-prace">Ukázky</a>
             <a href="#cenik">Ceník</a>
             <a href="#kontakt">Kontakt</a>
           </nav>
@@ -280,8 +281,35 @@ export default function App() {
             </div>
 
             <div className="note">
+              <span className="note-mark" aria-hidden="true">i</span>
               Uvedené ceny jsou orientační. Konečná cena záleží na délce a hustotě vlasů a spotřebě materiálu.
               Vše vždy předem domluvíme na místě nebo ve zprávě.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* JAK SE OBJEDNAT */}
+      <section id="objednani" className="section booking-section">
+        <div className="container">
+          <div className="booking-card glow">
+            <div>
+              <h2 className="h2">Jak se objednat</h2>
+              <p className="muted booking-copy">
+                Objednat se můžete telefonicky, přes Instagram nebo Facebook. U barvení, melíru nebo větší změny mi klidně pošlete aktuální fotku vlasů a představu výsledku – domluvíme spolu vhodný postup i orientační cenu.
+              </p>
+            </div>
+
+            <div className="booking-actions">
+              <a className="btn btn-grad" href={`tel:${PHONE_RAW}`} aria-label={`Zavolat ${PHONE_DISPLAY}`}>
+                <IconPhone /> Zavolat {PHONE_DISPLAY}
+              </a>
+              <a className="soc" href={IG_URL} target="_blank" rel="noopener noreferrer">
+                <IconInstagram /> Napsat na Instagramu
+              </a>
+              <a className="soc" href={FB_URL} target="_blank" rel="noopener noreferrer">
+                <IconFacebook /> Napsat na Facebooku
+              </a>
             </div>
           </div>
         </div>
