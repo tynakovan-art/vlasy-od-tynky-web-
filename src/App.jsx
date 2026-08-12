@@ -254,7 +254,7 @@ export default function App() {
             a vždy kladu důraz na individuální přístup a příjemnou atmosféru.
           </p>
           <p className="muted" style={{ marginTop: ".35rem" }}>
-            Nejraději tvořím přirozené odstíny, jemné melíry a účesy, které se dobře nosí i doma.
+            Nejraději tvořím přirozené odstíny, jemné melíry a dopřávám vlasům péči bez spěchu.
           </p>
           <p className="muted" style={{ marginTop: ".35rem" }}>
             Pracuji s <strong>Echosline</strong> – profesionální italskou vlasovou kosmetikou zaměřenou na šetrné složení a skvělé výsledky.
