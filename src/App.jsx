@@ -101,6 +101,27 @@ export default function App() {
   const showNextImage = () => {
     setLightboxIndex((current) => (current === null ? null : (current + 1) % galleryItems.length));
   };
+  const scrollToSection = (event, sectionId) => {
+    event.preventDefault();
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.pushState(null, "", `#${sectionId}`);
+    setActiveSection(sectionId);
+  };
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return undefined;
+
+    const timeoutId = window.setTimeout(() => {
+      const section = document.getElementById(hash);
+      if (section) section.scrollIntoView({ block: "start" });
+    }, 120);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   useEffect(() => {
     const sectionIds = ["o-mne", "sluzby", "ukazky-prace", "cenik", "kontakt"];
@@ -151,11 +172,11 @@ export default function App() {
             <span className="name">Vlasy od Týnky</span>
           </a>
           <nav className="nav">
-            <a className={activeSection === "o-mne" ? "active" : ""} href="#o-mne">O mně</a>
-            <a className={activeSection === "sluzby" ? "active" : ""} href="#sluzby">Služby</a>
-            <a className={activeSection === "ukazky-prace" ? "active" : ""} href="#ukazky-prace">Ukázky</a>
-            <a className={activeSection === "cenik" ? "active" : ""} href="#cenik">Ceník</a>
-            <a className={activeSection === "kontakt" ? "active" : ""} href="#kontakt">Kontakt</a>
+            <a className={activeSection === "o-mne" ? "active" : ""} href="#o-mne" onClick={(event) => scrollToSection(event, "o-mne")}>O mně</a>
+            <a className={activeSection === "sluzby" ? "active" : ""} href="#sluzby" onClick={(event) => scrollToSection(event, "sluzby")}>Služby</a>
+            <a className={activeSection === "ukazky-prace" ? "active" : ""} href="#ukazky-prace" onClick={(event) => scrollToSection(event, "ukazky-prace")}>Ukázky</a>
+            <a className={activeSection === "cenik" ? "active" : ""} href="#cenik" onClick={(event) => scrollToSection(event, "cenik")}>Ceník</a>
+            <a className={activeSection === "kontakt" ? "active" : ""} href="#kontakt" onClick={(event) => scrollToSection(event, "kontakt")}>Kontakt</a>
           </nav>
         </div>
       </header>
@@ -485,7 +506,7 @@ export default function App() {
 
       {lightboxIndex !== null && (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label="Zvětšená fotografie z galerie" onClick={closeLightbox}>
-          <button className="lightbox-close" type="button" onClick={closeLightbox} aria-label="Zavřít fotografii">
+          <button className="lightbox-close" type="button" onClick={closeLightbox} aria-label="Zavřít zvětšenou fotografii">
             ×
           </button>
           <button
