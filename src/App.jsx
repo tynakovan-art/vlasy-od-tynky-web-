@@ -1,5 +1,5 @@
 // App.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Clock, MapPin, Phone } from "lucide-react";
 import ukazkaPrace01 from "./assets/ukazky-prace/ukazka-prace-01.jpg";
 import ukazkaPrace02 from "./assets/ukazky-prace/ukazka-prace-02.jpg";
@@ -91,6 +91,56 @@ const PriceRow = ({ title, desc, price }) => (
 
 /** ===== APP ===== */
 export default function App() {
+  const [activeSection, setActiveSection] = useState("hero");
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const closeLightbox = () => setLightboxIndex(null);
+  const showPreviousImage = () => {
+    setLightboxIndex((current) => (current === null ? null : (current + galleryItems.length - 1) % galleryItems.length));
+  };
+  const showNextImage = () => {
+    setLightboxIndex((current) => (current === null ? null : (current + 1) % galleryItems.length));
+  };
+
+  useEffect(() => {
+    const sectionIds = ["o-mne", "sluzby", "ukazky-prace", "cenik", "kontakt"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-35% 0px -45% 0px", threshold: [0.12, 0.28, 0.45] }
+    );
+
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") showPreviousImage();
+      if (event.key === "ArrowRight") showNextImage();
+    };
+
+    document.body.classList.add("modal-open");
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.classList.remove("modal-open");
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [lightboxIndex]);
+
   return (
     <div>
       {/* NAVBAR */}
@@ -101,11 +151,11 @@ export default function App() {
             <span className="name">Vlasy od Týnky</span>
           </a>
           <nav className="nav">
-            <a href="#o-mne">O mně</a>
-            <a href="#sluzby">Služby</a>
-            <a href="#ukazky-prace">Ukázky</a>
-            <a href="#cenik">Ceník</a>
-            <a href="#kontakt">Kontakt</a>
+            <a className={activeSection === "o-mne" ? "active" : ""} href="#o-mne">O mně</a>
+            <a className={activeSection === "sluzby" ? "active" : ""} href="#sluzby">Služby</a>
+            <a className={activeSection === "ukazky-prace" ? "active" : ""} href="#ukazky-prace">Ukázky</a>
+            <a className={activeSection === "cenik" ? "active" : ""} href="#cenik">Ceník</a>
+            <a className={activeSection === "kontakt" ? "active" : ""} href="#kontakt">Kontakt</a>
           </nav>
         </div>
       </header>
@@ -204,6 +254,9 @@ export default function App() {
             a vždy kladu důraz na individuální přístup a příjemnou atmosféru.
           </p>
           <p className="muted" style={{ marginTop: ".35rem" }}>
+            Nejraději tvořím přirozené odstíny, jemné melíry a účesy, které se dobře nosí i doma.
+          </p>
+          <p className="muted" style={{ marginTop: ".35rem" }}>
             Pracuji s <strong>Echosline</strong> – profesionální italskou vlasovou kosmetikou zaměřenou na šetrné složení a skvělé výsledky.
           </p>
         </div>
@@ -220,7 +273,14 @@ export default function App() {
           <div className="gallery-grid" aria-label="Fotogalerie ukázek prací">
             {galleryItems.map((item, index) => (
               <figure className="gallery-card" key={item.image}>
-                <img src={item.image} alt={item.alt} loading={index < 2 ? "eager" : "lazy"} />
+                <button
+                  className="gallery-button"
+                  type="button"
+                  onClick={() => setLightboxIndex(index)}
+                  aria-label={`Zvětšit fotografii: ${item.alt}`}
+                >
+                  <img src={item.image} alt={item.alt} loading={index < 2 ? "eager" : "lazy"} />
+                </button>
               </figure>
             ))}
           </div>
@@ -310,6 +370,9 @@ export default function App() {
               <a className="soc" href={FB_URL} target="_blank" rel="noopener noreferrer">
                 <IconFacebook /> Napsat na Facebooku
               </a>
+              <a className="soc" href={MAP_URL} target="_blank" rel="noopener noreferrer">
+                <IconMapPin /> Najít na Google Maps
+              </a>
             </div>
           </div>
         </div>
@@ -361,6 +424,9 @@ export default function App() {
               </a>
               <a className="soc" href={FB_URL} target="_blank" rel="noopener noreferrer">
                 <IconFacebook /> Facebook
+              </a>
+              <a className="soc" href={MAP_URL} target="_blank" rel="noopener noreferrer">
+                <IconMapPin /> Google Maps
               </a>
             </div>
           </div>
@@ -416,6 +482,42 @@ export default function App() {
           <span className="muted">© {new Date().getFullYear()} Vlasy od Týnky</span>
         </div>
       </footer>
+
+      {lightboxIndex !== null && (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label="Zvětšená fotografie z galerie" onClick={closeLightbox}>
+          <button className="lightbox-close" type="button" onClick={closeLightbox} aria-label="Zavřít fotografii">
+            ×
+          </button>
+          <button
+            className="lightbox-nav lightbox-prev"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              showPreviousImage();
+            }}
+            aria-label="Předchozí fotografie"
+          >
+            ‹
+          </button>
+          <img
+            className="lightbox-image"
+            src={galleryItems[lightboxIndex].image}
+            alt={galleryItems[lightboxIndex].alt}
+            onClick={(event) => event.stopPropagation()}
+          />
+          <button
+            className="lightbox-nav lightbox-next"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              showNextImage();
+            }}
+            aria-label="Další fotografie"
+          >
+            ›
+          </button>
+        </div>
+      )}
     </div>
   );
 }
